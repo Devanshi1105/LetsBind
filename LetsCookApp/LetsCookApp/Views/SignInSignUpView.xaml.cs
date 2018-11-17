@@ -18,7 +18,9 @@ namespace LetsCookApp.Views
 
         private void Create_Clicked(object sender, EventArgs e)
         {
-             Navigation.PushAsync(new SignUpView());
+             
+            //FullName = BirthDay = Ocupation = Email = UserName = Password = MobilePhone = AboutMe = "";
+            Navigation.PushAsync(new SignUpView());
         }
 
         private void HomeMaster_Clicked(object sender, EventArgs e)
@@ -27,6 +29,8 @@ namespace LetsCookApp.Views
         }
         private void Signin_Clicked(object sender, EventArgs e)
         {
+            var viewmodel = App.AppSetup.LoginViewModel;
+            viewmodel.UserName = viewmodel.Password = "";
             Navigation.PushAsync(new SignInView());
         }
     }

@@ -38,7 +38,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="50"/>
                     </Grid.RowDefinitions>
-                    <local:CustomEntryRegular Grid.Column="0" Grid.Row="0" TextColor="Black" Text="{Binding UserName}" Placeholder="Username" PlaceholderColor="Gray" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" />
+                    <local:CustomEntryRegular Grid.Column="0" Grid.Row="0" TextColor="Black" Text="{Binding UserName, Mode=TwoWay}" Placeholder="Username" PlaceholderColor="Gray" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" />
                     
                     <BoxView Grid.Column="0" Grid.Row="1" HeightRequest="1" BackgroundColor="Black" HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
                     <local:CustomEntryRegular Grid.Column="0" Grid.Row="2" IsPassword="True" TextColor="Black" Text="{Binding Password}" Placeholder="Password" PlaceholderColor="Gray" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand"/>

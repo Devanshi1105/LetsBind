@@ -37,6 +37,13 @@ namespace LetsCookApp.Views
         {
             Navigation.PushAsync(new SignInView());
         }
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            var viewmodel = App.AppSetup.SignUpViewModel;
+            viewmodel.FullName = viewmodel.FirstName = viewmodel.BirthDay = viewmodel.Ocupation = viewmodel.Email = viewmodel.UserName = viewmodel.Password = viewmodel.MobilePhone = viewmodel.AboutMe = "";
+            
+        }
 
         private void Close_Tapped(object sender, EventArgs e)
         {

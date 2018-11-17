@@ -254,7 +254,7 @@ namespace LetsCookApp.ViewModels
                             {
                                 UserDialogs.Instance.HideLoading();
                                 UserDialogs.Instance.Alert(SignupResponse.Message, "OK");
-
+                                FullName = BirthDay = Ocupation = Email = UserName = Password = MobilePhone = AboutMe = "";
                               App.Current.MainPage.Navigation.PushAsync(new SignInView());
                             }
                             else

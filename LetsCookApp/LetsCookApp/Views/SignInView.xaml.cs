@@ -21,7 +21,15 @@ namespace LetsCookApp.Views
         {
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
-            BindingContext = App.AppSetup.LoginViewModel;
+            var viewmodel= App.AppSetup.LoginViewModel;
+            BindingContext = viewmodel;
+            
+        }
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            var viewmodel = App.AppSetup.LoginViewModel;
+            viewmodel.UserName = viewmodel.Password = "";
         }
 
         private void CreateAccount_Tapped(object sender, EventArgs e)
