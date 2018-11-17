@@ -1,8 +1,10 @@
 ﻿using Acr.UserDialogs;
 using LetsCookApp.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -14,10 +16,28 @@ namespace LetsCookApp.ViewModels
 
         public LoginViewModel()
         {
-            
-           
+                   
            
         }
+        private static readonly HttpClient _Client = new HttpClient();
+        async Task<HttpResponseMessage> Request(HttpMethod pMethod, string pUrl, string pJsonContent)
+        {
+            var httpRequestMessage = new HttpRequestMessage();
+            httpRequestMessage.Method = pMethod;
+            httpRequestMessage.RequestUri = new Uri(pUrl);
+
+            switch (pMethod.Method)
+            {
+                case "POST":
+                    HttpContent httpContent = new StringContent(pJsonContent, Encoding.UTF8, "application/json");
+                    httpRequestMessage.Content = httpContent;
+                    break;
+
+            }
+            return await _Client.SendAsync(httpRequestMessage);
+        }
+
+
         public Command LoginCommand { get { return new Command(LoginCommandExecution); } }
         private async void LoginCommandExecution()
         {
@@ -29,41 +49,42 @@ namespace LetsCookApp.ViewModels
             
             else
             {
-               var  LoginRequest = new LoginRequest
+                var LoginRequest = new LoginRequest
                 {
-                    email = UserName,
-                    password = Password
+                    Email = UserName,//"ksantosh.kundkar12@gmail.com",// UserName,
+                    Password =Password// "123456"// Password
                 };
 
+               
                 await Task.Run(() =>
                 {
                     UserDialogs.Instance.ShowLoading("Requesting..");
-                    //userManager.Login(LoginRequest, () =>
-                    //{
-                    //   var LoginResponse = userManager.LoginResponse;
-                    //    Device.BeginInvokeOnMainThread(() =>
-                    //    {
-                    //        if (LoginResponse.ErrorCode == 201)
-                    //        {
-                    //            UserDialogs.Instance.HideLoading();
-                    //            App.Current.MainPage = new Views.HomeView();
-                    //        }
-                    //        else
-                    //        {
-                    //            UserDialogs.Instance.Alert("Error", LoginResponse.ErrorMessage, "OK");
-                    //        }
-                    //    });
-                    //    RaisePropertyChanged(() => LoginResponse);
-                    //    UserDialogs.Instance.HideLoading();
-                    //},
-                    //   (requestFailedReason) =>
-                    //   {
-                    //       UserDialogs.Instance.HideLoading();
-                    //   });
+                    userManager.Login(LoginRequest, () =>
+                    {
+                        var LoginResponse = userManager.LoginResponse;
+                        Device.BeginInvokeOnMainThread(() =>
+                        {
+                            if (LoginResponse.StatusCode == 202)
+                            {
+                                App.AppSetup.HomeViewModel.UserData = LoginResponse.UserData;
+                                UserDialogs.Instance.HideLoading();
+                                App.Current.MainPage = new Views.HomeView();
+                            }
+                            else
+                            {
+                                UserDialogs.Instance.Alert("Error", LoginResponse.Message, "OK");
+                            }
+                        });
+                       // RaisePropertyChanged(() => LoginResponse);
+                        UserDialogs.Instance.HideLoading();
+                    },
+                       (requestFailedReason) =>
+                       {
+                           UserDialogs.Instance.HideLoading();
+                       });
                 });
 
-                UserDialogs.Instance.HideLoading();
-                App.Current.MainPage = new Views.HomeView();
+
             }
         }
         public void GetAllCategory()
@@ -113,4 +134,9 @@ namespace LetsCookApp.ViewModels
 
 
     }
+
+    
+   
 }
+
+

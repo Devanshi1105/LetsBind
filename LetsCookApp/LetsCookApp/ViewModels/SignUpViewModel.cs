@@ -63,10 +63,10 @@ namespace LetsCookApp.ViewModels
             set { mobilePhone = value; RaisePropertyChanged(() => MobilePhone); }
         }
         private string phoneNumber ;
-        public string Mobile
+        public string PhoneNumber
         {
             get { return phoneNumber; }
-            set { phoneNumber = value; RaisePropertyChanged(() => Mobile); }
+            set { phoneNumber = value; RaisePropertyChanged(() => PhoneNumber); }
         }
         
         private string add1 ;
@@ -166,6 +166,7 @@ namespace LetsCookApp.ViewModels
         }
 
 
+        
 
 
 
@@ -177,7 +178,7 @@ namespace LetsCookApp.ViewModels
         private bool Validate()
         {
             bool val = false;
-            if (string.IsNullOrEmpty(FullName))
+            if (string.IsNullOrEmpty(FirstName))
             {
                 UserDialogs.Instance.Alert("FullName is Required");
                 val = false;
@@ -187,9 +188,9 @@ namespace LetsCookApp.ViewModels
                 UserDialogs.Instance.Alert("BirthDay is Required");
                 val = false;
             }
-            else if (string.IsNullOrEmpty(Gender))
+            else if (string.IsNullOrEmpty(Email))
             {
-                UserDialogs.Instance.Alert("Gender is Required");
+                UserDialogs.Instance.Alert("Email is Required");
                 val = false;
             }
             else if (string.IsNullOrEmpty(UserName))
@@ -205,16 +206,8 @@ namespace LetsCookApp.ViewModels
                 UserDialogs.Instance.Alert("Password is Required");
                 val = false;
             }
-            else if (string.IsNullOrEmpty(occupation))
-            {
-                UserDialogs.Instance.Alert("occupation is Required");
-                val = false;
-            }
-            else if (string.IsNullOrEmpty(Mobile))
-            {
-                UserDialogs.Instance.Alert("Mobile is Required");
-                val = false;
-            }
+            
+            
             else
             {
                 val = true;
@@ -229,41 +222,56 @@ namespace LetsCookApp.ViewModels
         {
             if (Validate() == true)
             {
-                //var SignupRequest = new SignupRequest
-                //{
-                //    email = UserName,
-                //    password = Password
-                //};
+                var SignupRequest = new SignupRequest
+                {
+                    Address1 = Add1,
+                    Address2 = Add2, 
+                    City = City,
+                    Country = Country,
+                    Email = Email,
+                    FirstName = FirstName,
+                    Hobbies = Hobbies,
+                    LastName = LastName,
+                    UserName = UserName,
+                    MobileNumber = MobilePhone,
+                    Password = Password,
+                    PhoneNumber = PhoneNumber,
+                    Postcode = postCode,
+                    State = State,
+                    Picture = picture,
+                    DateOfBirth = BirthDay
+                };
 
-                //await Task.Run(() =>
-                //{
-                //    UserDialogs.Instance.ShowLoading("Requesting..");
-                //    userManager.SignUp(SignupRequest, () =>
-                //    {
-                //        var SignupResponse = userManager.SignupResponse;
-                //        Device.BeginInvokeOnMainThread(() =>
-                //        {
-                //            if (SignupResponse.ErrorCode == 201)
-                //            {
-                //                UserDialogs.Instance.HideLoading();
-                //                App.Current.MainPage.Navigation.PushAsync(new CategoriesView());
-                //            }
-                //            else
-                //            {
-                //                UserDialogs.Instance.Alert("Error", SignupResponse.ErrorMessage, "OK");
-                //            }
-                //        });
-                //        RaisePropertyChanged(() => SignupResponse);
-                //        UserDialogs.Instance.HideLoading();
-                //    },
-                //       (requestFailedReason) =>
-                //       {
-                //           UserDialogs.Instance.HideLoading();
-                //       });
-                //});
+                await Task.Run(() =>
+                {
+                    UserDialogs.Instance.ShowLoading("Requesting..");
+                    userManager.SignUp(SignupRequest, () =>
+                    {
+                        var SignupResponse = userManager.SignupResponse;
+                        Device.BeginInvokeOnMainThread(() =>
+                        {
+                            if (SignupResponse.StatusCode == 200)
+                            {
+                                UserDialogs.Instance.HideLoading();
+                                UserDialogs.Instance.Alert(SignupResponse.Message, "OK");
 
-                UserDialogs.Instance.HideLoading();
-                App.Current.MainPage.Navigation.PushAsync(new CategoriesView());
+                              App.Current.MainPage.Navigation.PushAsync(new SignInView());
+                            }
+                            else
+                            {
+                                UserDialogs.Instance.Alert("Error", SignupResponse.Message, "OK");
+                            }
+                        });
+                       
+                        UserDialogs.Instance.HideLoading();
+                    },
+                       (requestFailedReason) =>
+                       {
+                           UserDialogs.Instance.HideLoading();
+                       });
+                });
+
+              
             }
             
         }

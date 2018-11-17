@@ -16,11 +16,30 @@ namespace LetsCookApp.Managers.ApiProvider
         public ApiProvider()
         {
             HttpClientHandler handler = new HttpClientHandler();
-            _httpClient = new HttpClient(new NativeMessageHandler());
+            _httpClient = new HttpClient();
             TimeSpan ts = TimeSpan.FromMilliseconds(100000);
             _httpClient.Timeout = ts;
         }
         private readonly HttpClient _httpClient;
+
+        async Task<HttpResponseMessage> Request(HttpMethod pMethod, string pUrl, string pJsonContent)
+        {
+            var httpRequestMessage = new HttpRequestMessage();
+            httpRequestMessage.Method = pMethod;
+            httpRequestMessage.RequestUri = new Uri(pUrl);
+
+            switch (pMethod.Method)
+            {
+                case "POST":
+                    HttpContent httpContent = new StringContent(pJsonContent, Encoding.UTF8, "application/json");
+                    httpRequestMessage.Content = httpContent;
+                    break;
+
+            }
+            return await _httpClient.SendAsync(httpRequestMessage);
+        }
+
+
 
         public ApiResult<T> Get<T>(string url, Dictionary<string, string> headers = null)
         {
@@ -73,33 +92,21 @@ namespace LetsCookApp.Managers.ApiProvider
             HttpResponseMessage result = null;
             try
             {
-                lock (_httpClient)
-                {
-                    if (headers != null)
-                    {
-                        AddHeadersToClient(headers);
-                       
-                    }
-                    var c = JsonConvert.SerializeObject(body);
-                    Debug.WriteLine(c);
 
-                    result = _httpClient.PostAsync(url, new StringContent(JsonConvert.SerializeObject(body), Encoding.UTF8, "application/json")).Result;
-                    if (headers != null)
-                    {
-                        RemoveHeadersFromClient(headers);
-                    }
-                }
-
-                var rawResult = result.Content.ReadAsStringAsync().Result;
+                var json = JsonConvert.SerializeObject(body);
+                var response = await Request(HttpMethod.Post, url, json);
+               
+                var rawResult = await response.Content.ReadAsStringAsync();
                 try
                 {
-                    var deserialized = JsonConvert.DeserializeObject<T>(rawResult.ToString());
-                    return new ApiResult<T>(rawResult.ToString(), (int)result.StatusCode, deserialized);
+                    var deserialized = JsonConvert.DeserializeObject<T>(rawResult);
+                    return new ApiResult<T>(rawResult, (int)response.StatusCode, deserialized);
                 }
-                catch (Exception e)
+                catch (Exception ex)
                 {
-                    return new ApiResult<T>(rawResult.ToString(), 501, Activator.CreateInstance<T>());
+                    return new ApiResult<T>(rawResult, 501, Activator.CreateInstance<T>());
                 }
+
             }
             catch (Exception ex)
             {

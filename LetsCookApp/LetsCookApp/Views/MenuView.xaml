@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
               xmlns:local="clr-namespace:LetsCookApp.CustomViews;assembly=LetsCookApp"
-             x:Class="LetsCookApp.Views.MenuView" Title="Menu" BackgroundColor="#e74c3c">
+              xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
+                         x:Class="LetsCookApp.Views.MenuView" Title="Menu" BackgroundColor="#e74c3c">
 
     <StackLayout x:Name="MainStack"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
 
@@ -25,13 +26,13 @@
 
                 </Grid.RowDefinitions>
 
+              <controls:CircleImage x:Name="imgphoto" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" BorderColor="Red" BorderThickness="1" Source="{Binding UserData.PhotoURL}" Aspect="AspectFill" HeightRequest="70" WidthRequest="70" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
 
-                <Image  Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Source="man.png" Aspect="AspectFit" HeightRequest="70" WidthRequest="70" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
-
+            
                 <StackLayout Orientation="Vertical" Grid.Row="0" Grid.RowSpan="2" Grid.Column="1"  HeightRequest="50" HorizontalOptions="StartAndExpand"  Spacing="0" VerticalOptions="CenterAndExpand" >
-                    <local:CustomLabelRegular Text="Santosh" TextColor="#e74c3c" FontSize="15" FontAttributes ="Bold"  HorizontalOptions="StartAndExpand" VerticalOptions="Center">
+                    <local:CustomLabelRegular Text="{Binding UserData.UserName}" TextColor="#e74c3c" FontSize="15" FontAttributes ="Bold"  HorizontalOptions="StartAndExpand" VerticalOptions="Center">
                     </local:CustomLabelRegular>
-                    <local:CustomLabelRegular Text="santosh@gmail.com" TextColor="Black" FontSize="12"    HorizontalOptions="StartAndExpand" VerticalOptions="Center">
+                    <local:CustomLabelRegular Text="{Binding UserData.EmailId}" TextColor="Black" FontSize="12"    HorizontalOptions="StartAndExpand" VerticalOptions="Center">
                     </local:CustomLabelRegular>
 
                 </StackLayout>

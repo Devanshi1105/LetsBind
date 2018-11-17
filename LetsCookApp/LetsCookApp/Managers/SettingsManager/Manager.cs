@@ -3,8 +3,6 @@ using LetsCookApp.Managers.ApiProvider;
 using LetsCookApp.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace LetsCookApp.Managers.SettingsManager
@@ -70,18 +68,19 @@ namespace LetsCookApp.Managers.SettingsManager
             }
         }
 
-        public async void Login(LoginRequest commonRequest, Action success, Action<LoginResponse> failed)
+        public async void Login(LoginRequest request, Action success, Action<BaseResponseModel> failed)
         {
+            var pp = request;
             bool IsNetwork = true;//await DependencyService.Get<IMediaService>().CheckNewworkConnectivity();
             if (IsNetwork)
             {
+               
+                var url = string.Format("{0}login.php", _settingsManager.ApiHost);
 
-                var url = string.Format("{0}Login.php", _settingsManager.ApiHost);
-
-                await Task.Run(async () =>
+                await Task.Factory.StartNew(() =>
                 {
-                    Dictionary<string, string> head = GetHeaders();
-                    var result = _apiProvider.Get<LoginResponse>(url, null);
+                   
+                    var result = _apiProvider.Post<LoginResponse, LoginRequest>(url, request).Result;
                     if (result.IsSuccessful)
                     {
                         if (success != null)
@@ -102,7 +101,8 @@ namespace LetsCookApp.Managers.SettingsManager
             }
         }
 
-        public async void SignUp(SignupRequest commonRequest, Action success, Action<SignupResponse> failed)
+
+        public async void SignUp(SignupRequest signupRequest, Action success, Action<SignupResponse> failed)
         {
             bool IsNetwork = true;//await DependencyService.Get<IMediaService>().CheckNewworkConnectivity();
             if (IsNetwork)
@@ -110,10 +110,10 @@ namespace LetsCookApp.Managers.SettingsManager
 
                 var url = string.Format("{0}register.php", _settingsManager.ApiHost);
 
-                await Task.Run(async () =>
+                await Task.Factory.StartNew(() =>
                 {
-                    Dictionary<string, string> head = GetHeaders();
-                    var result = _apiProvider.Get<SignupResponse>(url, null);
+
+                    var result = _apiProvider.Post<SignupResponse, SignupRequest>(url, signupRequest).Result;
                     if (result.IsSuccessful)
                     {
                         if (success != null)

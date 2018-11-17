@@ -11,7 +11,7 @@ namespace LetsCookApp.Managers.SettingsManager
     {
         void getAllCategory(CommonRequest commonRequest, Action success, Action<CategoryResponse> failed);
 
-        void Login(LoginRequest commonRequest, Action success, Action<LoginResponse> failed);
+        void Login(LoginRequest request, Action success, Action<BaseResponseModel> failed);
         void SignUp(SignupRequest commonRequest, Action success, Action<SignupResponse> failed);
 
         CategoryResponse CategoryResponse { get; }

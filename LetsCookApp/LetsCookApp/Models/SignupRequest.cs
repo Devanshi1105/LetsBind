@@ -8,21 +8,23 @@ namespace LetsCookApp.Models
 {
    public class SignupRequest
     {
-        public string email { get; set; }
-        public string Member_Name { get; set; }
-        public string password { get; set; }
+        public string Email { get; set; }
+        public string UserName { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string Mobile_Phone { get; set; }
-        public string phone_number { get; set; }
-        public string Add1 { get; set; }
-        public string Add2 { get; set; }
+        public string Password { get; set; }
+        public string MobileNumber { get; set; }
+        public string PhoneNumber { get; set; }
+        public string Address1 { get; set; }
+        public string Address2 { get; set; }
+        public string Address3 { get; set; }
         public string City { get; set; }
-        public string state { get; set; }
+        public string State { get; set; }
         public string Country { get; set; }
         public string Postcode { get; set; }
         public string Hobbies { get; set; }
         public string Picture { get; set; }
+        public string DateOfBirth { get; set; }
     }
     public class SignupResponse : BaseResponseModel
     {

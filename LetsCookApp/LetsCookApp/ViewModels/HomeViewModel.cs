@@ -1,4 +1,5 @@
 ﻿//using LetsCookApp.Views;
+using LetsCookApp.Models;
 using LetsCookApp.Views;
 using System;
 using System.Collections.Generic;
@@ -33,6 +34,19 @@ namespace LetsCookApp.ViewModels
         }
 
         #region Set Properties
+
+        private UserData userData;
+
+        public UserData UserData
+        {
+            get { return userData; }
+            set { userData = value;
+                RaisePropertyChanged(() => UserData);
+            }
+        }
+
+
+
 
         private bool _isMenuListPresented;
         public bool IsMenuListPresented

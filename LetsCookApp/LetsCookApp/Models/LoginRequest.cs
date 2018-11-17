@@ -8,21 +8,27 @@ namespace LetsCookApp.Models
 {
     public class LoginRequest
     {
-        public string email { get; set; }
-        public string password { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
     }
 
     public class LoginResponse: BaseResponseModel
     {
-        public virtual bool Succeeded { get; set; }
-       
-
+        public UserData UserData { get; set; }
+    }
+    public class UserData
+    {
+        public string UserId { get; set; }
+        public string UserName { get; set; }
+        public string EmailId { get; set; }
+        public string PhotoURL { get; set; }
     }
 
     public class BaseResponseModel
     {
-        public virtual int ErrorCode { get; set; }
-        public virtual string ErrorMessage { get; set; }
+        public virtual string Message { get; set; }
+        public virtual int StatusCode { get; set; }
+        public virtual bool Success { get; set; }
     }
 
 

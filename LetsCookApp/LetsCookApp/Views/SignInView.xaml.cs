@@ -3,9 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Net.Http;
+using System.Net.Http.Headers;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Newtonsoft.Json;
+using System.Net;
+using System.IO;
+using ModernHttpClient;
 
 namespace LetsCookApp.Views
 {
@@ -21,18 +26,19 @@ namespace LetsCookApp.Views
 
         private void CreateAccount_Tapped(object sender, EventArgs e)
         {
-             Navigation.PushAsync(new SignUpView());
+            Navigation.PushAsync(new SignUpView());
         }
-        private void SignIn_Clicked(object sender, EventArgs e)
+        private void ForgotPassword_Tapped(object sender, EventArgs e)
         {
-             App.Current.MainPage = new Views.HomeView();
-          
+           // Navigation.PushAsync(new ForgotPasswordView());
         }
+       
+       
         private void Close_Tapped(object sender, EventArgs e)
         {
             Navigation.PopToRootAsync();
         }
-
-
+       
     }
+   
 }
