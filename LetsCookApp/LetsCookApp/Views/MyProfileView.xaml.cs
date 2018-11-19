@@ -23,7 +23,7 @@ namespace LetsCookApp.Views
             TLine.IsVisible = grdTimeline.IsVisible = true;
             ALine.IsVisible = FLine.IsVisible = GLine.IsVisible = false;
             grdAboutme.IsVisible = listFriends.IsVisible = grdGallery.IsVisible = false;
-
+            BindingContext = App.AppSetup.HomeViewModel;
 
         }
 
@@ -33,7 +33,7 @@ namespace LetsCookApp.Views
         }
         private void Timeline_Tapped(object sender, EventArgs e)
         {
-            TLine.IsVisible =grdTimeline.IsVisible= true;
+            TLine.IsVisible =grdTimeline.IsVisible= imgArrow.IsVisible = true;
             ALine.IsVisible = FLine.IsVisible = GLine.IsVisible = false;
             grdAboutme.IsVisible = listFriends.IsVisible = grdGallery.IsVisible = false;
         }
@@ -41,12 +41,12 @@ namespace LetsCookApp.Views
         {
             ALine.IsVisible =grdAboutme.IsVisible= true;
             TLine.IsVisible = FLine.IsVisible = GLine.IsVisible = false;
-            grdTimeline.IsVisible = listFriends.IsVisible = grdGallery.IsVisible = false;
+            grdTimeline.IsVisible = listFriends.IsVisible = grdGallery.IsVisible = imgArrow.IsVisible= false;
 
         }
         private void Friends_Tapped(object sender, EventArgs e)
         {
-            FLine.IsVisible = listFriends.IsVisible= true;
+            FLine.IsVisible = listFriends.IsVisible= imgArrow.IsVisible = true;
             TLine.IsVisible = ALine.IsVisible = GLine.IsVisible = false;
             grdTimeline.IsVisible = grdAboutme.IsVisible = grdGallery.IsVisible = false;
             List<SubCategory> _listAvailableAward = new List<SubCategory>()
@@ -60,7 +60,7 @@ namespace LetsCookApp.Views
         }
         private void Gallery_Tapped(object sender, EventArgs e)
         {
-            GLine.IsVisible =grdGallery.IsVisible= true;
+            GLine.IsVisible =grdGallery.IsVisible= imgArrow.IsVisible = true;
             TLine.IsVisible = FLine.IsVisible = ALine.IsVisible = false;
             grdTimeline.IsVisible = listFriends.IsVisible = grdAboutme.IsVisible = false;
         }

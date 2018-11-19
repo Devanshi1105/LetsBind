@@ -25,6 +25,18 @@ namespace LetsCookApp
            SimpleIoc.Default.Register<IApiProvider, ApiProvider>();
             SimpleIoc.Default.Register<IManager, Manager>();
         }
+
+        public void Clear()
+        {
+            SimpleIoc.Default.Unregister<LoginViewModel>();
+            //SimpleIoc.Default.Unregister<HomeViewModel>();
+            SimpleIoc.Default.Unregister<SignUpViewModel>();
+
+            SimpleIoc.Default.Register<LoginViewModel>();
+          
+            SimpleIoc.Default.Register<SignUpViewModel>();
+
+        }
         public LoginViewModel LoginViewModel
         {
             get

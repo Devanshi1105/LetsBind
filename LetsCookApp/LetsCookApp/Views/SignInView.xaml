@@ -47,6 +47,9 @@
             <local:CustomButtonRegular  Text="SIGN IN" TextColor="White" FontSize="18"  BorderRadius="5" BackgroundColor="#e74c3c" HorizontalOptions="FillAndExpand" VerticalOptions="Center"  Margin="12,10,12,20" Command="{Binding LoginCommand}"/>
             <ContentView  HorizontalOptions="Center" VerticalOptions="Start">
                 <local:CustomLabelRegular Text="Forgot Password?" TextColor="White" FontSize="20"   HorizontalOptions="Center" VerticalOptions="Center"/>
+              <ContentView.GestureRecognizers>
+                <TapGestureRecognizer Tapped="ForgotPassword_Tapped" />
+              </ContentView.GestureRecognizers>
             </ContentView>
         </StackLayout>
     </ScrollView>

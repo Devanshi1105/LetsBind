@@ -26,6 +26,7 @@ namespace LetsCookApp.Views
             TakePicture = new Command(async () => await TakePictureAsync());
             SelectPicture = new Command(async () => await SelectPictureAsync());
             BindingContext = App.AppSetup.SignUpViewModel;
+            imgPlus.IsVisible = true;
         }
 
         private void Create_Clicked(object sender, EventArgs e)
@@ -37,12 +38,14 @@ namespace LetsCookApp.Views
         {
             Navigation.PushAsync(new SignInView());
         }
+
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
             var viewmodel = App.AppSetup.SignUpViewModel;
-            viewmodel.FullName = viewmodel.FirstName = viewmodel.BirthDay = viewmodel.Ocupation = viewmodel.Email = viewmodel.UserName = viewmodel.Password = viewmodel.MobilePhone = viewmodel.AboutMe = "";
-            
+            viewmodel.FullName = viewmodel.FirstName = viewmodel.DateOfBirth = viewmodel.Ocupation = viewmodel.Email = viewmodel.UserName = viewmodel.Password = viewmodel.MobileNumber = viewmodel.AboutMe = "";
+            viewmodel.Address1 = viewmodel.Address2 = viewmodel.Address3 = viewmodel.City = viewmodel.State = viewmodel.Country = viewmodel.Postcode = viewmodel.Gender = viewmodel.Hobbies = viewmodel.PhoneNumber = "";
+
         }
 
         private void Close_Tapped(object sender, EventArgs e)
@@ -70,15 +73,15 @@ namespace LetsCookApp.Views
 
                 if (file == null)
                     return;
-
-
-
-                await DisplayAlert("File Location", file.Path, "OK");
-
+                var stream = file.GetStream();
+                var bytes = new byte[stream.Length];
+                await stream.ReadAsync(bytes, 0, (int)stream.Length);
+                App.AppSetup.SignUpViewModel.ImageBase64 = System.Convert.ToBase64String(bytes);
                 imgphoto.Source = ImageSource.FromStream(() =>
                 {
-                    var stream = file.GetStream();
+                     stream = file.GetStream();
                     file.Dispose();
+                    imgPlus.IsVisible = false;
                     return stream;
                 });
 
@@ -100,29 +103,25 @@ namespace LetsCookApp.Views
 
             if (file == null)
                 return;
+            // imgPlus.IsVisible = false;
+            var stream = file.GetStream();
+            var bytes = new byte[stream.Length];
+            await stream.ReadAsync(bytes, 0, (int)stream.Length);
+            App.AppSetup.SignUpViewModel.ImageBase64=  System.Convert.ToBase64String(bytes);
 
             imgphoto.Source = ImageSource.FromStream(() =>
             {
-                var stream = file.GetStream();
+                 stream = file.GetStream();
+
+
                 file.Dispose();
+               
                 return stream;
             });
+
         }
 
-        private string imageBase64;
-        public string ImageBase64
-        {
-            get { return this.imageBase64; }
-            set
-            {
-                if (Equals(value, this.imageBase64))
-                {
-                    return;
-                }
-                this.imageBase64 = value;
-                // RaisePropertyChanged(() => ImageBase64);
-            }
-        }
+       
         private ImageSource picture;
         public ImageSource Picture
         {

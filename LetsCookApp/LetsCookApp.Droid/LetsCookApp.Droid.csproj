@@ -509,6 +509,8 @@
     <AndroidResource Include="Resources\drawable-hdpi\drp.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\drp.png" />
     <AndroidResource Include="Resources\xml\file_paths.xml" />
+    <AndroidResource Include="Resources\drawable\Imgplus.png" />
+    <AndroidResource Include="Resources\drawable\uploadArrow.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

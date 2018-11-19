@@ -82,12 +82,69 @@ namespace LetsCookApp.ViewModels
                        (requestFailedReason) =>
                        {
                            UserDialogs.Instance.HideLoading();
+                           UserDialogs.Instance.Alert("Error", requestFailedReason.Message, "OK");
                        });
                 });
 
 
             }
         }
+
+
+        public Command ForgetCommand { get { return new Command(ForgetCommandExecution); } }
+        private async void ForgetCommandExecution()
+        {
+            if (string.IsNullOrEmpty(EmailId))
+            {
+                UserDialogs.Instance.Alert("EmailId is Required");
+                return;
+            }
+
+            else
+            {
+                var LoginRequest = new LoginRequest
+                {
+                    Email = EmailId,//"ksantosh.kundkar12@gmail.com",// UserName,
+                   
+                };
+
+
+                await Task.Run(() =>
+                {
+                    UserDialogs.Instance.ShowLoading("Requesting..");
+                    userManager.ForgetPassword(LoginRequest, () =>
+                    {
+                        var LoginResponse = userManager.LoginResponse;
+                        Device.BeginInvokeOnMainThread(() =>
+                        {
+                            if (LoginResponse.StatusCode == 202)
+                            {
+                              
+                                EmailId = "";
+                                UserDialogs.Instance.HideLoading();
+                                UserDialogs.Instance.Alert("Success", LoginResponse.Message, "OK");
+                                //Pop
+                            }
+                            else
+                            {
+                                UserDialogs.Instance.Alert("Error", LoginResponse.Message, "OK");
+                            }
+                        });
+                        // RaisePropertyChanged(() => LoginResponse);
+                        UserDialogs.Instance.HideLoading();
+                    },
+                       (requestFailedReason) =>
+                       {
+                           UserDialogs.Instance.HideLoading();
+                           UserDialogs.Instance.Alert("Error", requestFailedReason.Message, "OK");
+                       });
+                });
+
+
+            }
+        }
+
+
         public void GetAllCategory()
         {
             CommonRequest obj = new CommonRequest();

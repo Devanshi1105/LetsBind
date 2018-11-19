@@ -83,6 +83,9 @@
     <Compile Include="Views\DishView.xaml.cs">
       <DependentUpon>DishView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ForgotPasswordView.xaml.cs">
+      <DependentUpon>ForgotPasswordView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\HelpMeView.xaml.cs">
       <DependentUpon>HelpMeView.xaml</DependentUpon>
     </Compile>
@@ -315,6 +318,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Views\ShareAppView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\ForgotPasswordView.xaml">
+      <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>

@@ -38,7 +38,7 @@ namespace LetsCookApp.Views
         }
         private void ForgotPassword_Tapped(object sender, EventArgs e)
         {
-           // Navigation.PushAsync(new ForgotPasswordView());
+          Navigation.PushAsync(new ForgotPasswordView());
         }
        
        
@@ -46,6 +46,7 @@ namespace LetsCookApp.Views
         {
             Navigation.PopToRootAsync();
         }
+
        
     }
    

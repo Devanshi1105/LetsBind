@@ -78,7 +78,11 @@ namespace LetsCookApp.Views
             {
                 ((MasterDetailPage)App.Current.MainPage).Detail.Navigation.PushAsync(new ShareAppView());
             }
-
+            else if (menu.TargetType == typeof(SignInSignUpView))
+            {
+                App.AppSetup.Clear();
+                App.Current.MainPage = new NavigationPage(new Views.SignInSignUpView());
+            }
             else if (menu.TargetType == typeof(Nullable))
             {
                 App.Current.MainPage = new NavigationPage(new Views.SignInSignUpView());

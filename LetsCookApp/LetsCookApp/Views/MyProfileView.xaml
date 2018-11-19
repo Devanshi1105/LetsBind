@@ -4,7 +4,17 @@
               xmlns:local="clr-namespace:LetsCookApp.CustomViews;assembly=LetsCookApp"
              x:Class="LetsCookApp.Views.MyProfileView">
 
-  <StackLayout x:Name="MainStack" HorizontalOptions="FillAndExpand" BackgroundColor="#f8fcfd" VerticalOptions="FillAndExpand">
+  <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="*"/>
+
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="*"/>
+      <RowDefinition Height="50"/>
+    </Grid.RowDefinitions>
+
+    <StackLayout Grid.Row="0" Grid.Column="0" x:Name="MainStack" HorizontalOptions="FillAndExpand" BackgroundColor="#f8fcfd" VerticalOptions="FillAndExpand">
         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start" BackgroundColor="Black">
             <ContentView HorizontalOptions="Start" VerticalOptions="Center" Padding="10,10">
                 <Image Source="menu" HorizontalOptions="Center" HeightRequest="25" WidthRequest="25" VerticalOptions="Center"/>
@@ -20,12 +30,12 @@
 
 
         <StackLayout Orientation="Vertical" HeightRequest="110"  Padding="10,10" HorizontalOptions="FillAndExpand" BackgroundColor="#e74c3c" Spacing="0" VerticalOptions="StartAndExpand" Margin="10">
-            <Image x:Name="whtlock" Source="man.png" Aspect="AspectFit" HeightRequest="100" WidthRequest="100" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+            <Image x:Name="whtlock"  Source="{Binding UserData.PhotoURL}" Aspect="AspectFit" HeightRequest="100" WidthRequest="100" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
 
         </StackLayout>
 
         <StackLayout Orientation="Vertical"  HeightRequest="50" HorizontalOptions="CenterAndExpand"  Spacing="0"  VerticalOptions="FillAndExpand" >
-            <local:CustomLabelRegular Text="Santosh Kundkar" TextColor="Black" FontSize="25" FontAttributes ="Bold"  HorizontalOptions="Center" VerticalOptions="Center">
+            <local:CustomLabelRegular Text="{Binding UserData.UserName}" TextColor="Black" FontSize="25" FontAttributes ="Bold"  HorizontalOptions="Center" VerticalOptions="Center">
             </local:CustomLabelRegular>
             <local:CustomLabelRegular Text="Team Lead" TextColor="Black" FontSize="15"    HorizontalOptions="Center" VerticalOptions="Center">
             </local:CustomLabelRegular>
@@ -222,4 +232,6 @@
 
     </StackLayout>
 
+    <Image x:Name="imgArrow" Grid.Row="0" WidthRequest="50" HeightRequest="50" Grid.Column="0" Source="uploadArrow.png" VerticalOptions="End" HorizontalOptions="End" Margin="0,0,15,15" />
+  </Grid>
 </ContentPage>

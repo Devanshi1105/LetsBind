@@ -28,6 +28,9 @@
 
         <ContentView Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2"  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
             <local:CustomLabelRegular Text="Forgot Password?" TextColor="White" FontSize="20"   HorizontalOptions="Center" VerticalOptions="Center"/>
+          <ContentView.GestureRecognizers>
+            <TapGestureRecognizer Tapped="ForgotPassword_Tapped" />
+          </ContentView.GestureRecognizers>
         </ContentView>
     </Grid>
 </ContentPage>

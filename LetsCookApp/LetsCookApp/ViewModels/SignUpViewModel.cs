@@ -31,12 +31,15 @@ namespace LetsCookApp.ViewModels
             get { return email; }
             set { email = value; RaisePropertyChanged(() => Email); }
         }
-        private string memberName ;
-        public string MemberName
+       
+
+        private string firstName;
+        public string FirstName
         {
-            get { return memberName; }
-            set { memberName = value; RaisePropertyChanged(() => MemberName); }
+            get { return firstName; }
+            set { firstName = value; RaisePropertyChanged(() => FirstName); }
         }
+
 
         private string password ;
         public string Password
@@ -44,23 +47,18 @@ namespace LetsCookApp.ViewModels
             get { return password; }
             set { password = value; RaisePropertyChanged(() => Password); }
         }
-        private string firstName ;
-        public string FirstName
-        {
-            get { return firstName; }
-            set { firstName = value; RaisePropertyChanged(() => FirstName); }
-        }
+       
         private string lastName ;
         public string LastName
         {
             get { return lastName; }
             set { lastName = value; RaisePropertyChanged(() => LastName); }
         }
-        private string mobilePhone ;
-        public string MobilePhone
+        private string mobileNumber;
+        public string MobileNumber
         {
-            get { return mobilePhone; }
-            set { mobilePhone = value; RaisePropertyChanged(() => MobilePhone); }
+            get { return mobileNumber; }
+            set { mobileNumber = value; RaisePropertyChanged(() => MobileNumber); }
         }
         private string phoneNumber ;
         public string PhoneNumber
@@ -69,17 +67,23 @@ namespace LetsCookApp.ViewModels
             set { phoneNumber = value; RaisePropertyChanged(() => PhoneNumber); }
         }
         
-        private string add1 ;
-        public string Add1
+        private string address1;
+        public string Address1
         {
-            get { return add1; }
-            set { add1 = value; RaisePropertyChanged(() => Add1); }
+            get { return address1; }
+            set { address1 = value; RaisePropertyChanged(() => Address1); }
         }
-        private string add2 ;
-        public string Add2
+        private string address2;
+        public string Address2
         {
-            get { return add2; }
-            set { add2 = value; RaisePropertyChanged(() => Add2); }
+            get { return address2; }
+            set { address2 = value; RaisePropertyChanged(() => Address2); }
+        }
+        private string address3;
+        public string Address3
+        {
+            get { return address3; }
+            set { address3 = value; RaisePropertyChanged(() => Address3); }
         }
         private string city ;
         public string City
@@ -102,10 +106,10 @@ namespace LetsCookApp.ViewModels
         }
         
         private string postCode ;
-        public string PostCode
+        public string Postcode
         {
             get { return postCode; }
-            set { postCode = value; RaisePropertyChanged(() => PostCode); }
+            set { postCode = value; RaisePropertyChanged(() => Postcode); }
         }
         private string hobbies ;
         public string Hobbies
@@ -129,11 +133,11 @@ namespace LetsCookApp.ViewModels
             }
         }
 
-        private string birthDate;
-        public string BirthDay
+        private string dateOfBirth;
+        public string DateOfBirth
         {
-            get { return birthDate; }
-            set { birthDate = value; RaisePropertyChanged(() => BirthDay); }
+            get { return dateOfBirth; }
+            set { dateOfBirth = value; RaisePropertyChanged(() => DateOfBirth); }
         }
         private string userName;
         public string UserName
@@ -165,8 +169,21 @@ namespace LetsCookApp.ViewModels
             set { gender = value; RaisePropertyChanged(() => Gender); }
         }
 
+        private string imageBase64;
+        public string ImageBase64
+        {
+            get { return this.imageBase64; }
+            set
+            {
+                if (Equals(value, this.imageBase64))
+                {
+                    return;
+                }
+                this.imageBase64 = value;
+                RaisePropertyChanged(() => ImageBase64);
+            }
+        }
 
-        
 
 
 
@@ -178,14 +195,44 @@ namespace LetsCookApp.ViewModels
         private bool Validate()
         {
             bool val = false;
+            if (string.IsNullOrEmpty(UserName))
+            {
+                UserDialogs.Instance.Alert("Username is Required");
+                val = false;
+            }
             if (string.IsNullOrEmpty(FirstName))
             {
                 UserDialogs.Instance.Alert("FullName is Required");
                 val = false;
             }
-            else if (string.IsNullOrEmpty(BirthDay))
+            if (string.IsNullOrEmpty(LastName))
+            {
+                UserDialogs.Instance.Alert("LastName is Required");
+                val = false;
+            }
+            if (string.IsNullOrEmpty(Gender))
+            {
+                UserDialogs.Instance.Alert("Gender is Required");
+                val = false;
+            }
+            else if (string.IsNullOrEmpty(DateOfBirth))
             {
                 UserDialogs.Instance.Alert("BirthDay is Required");
+                val = false;
+            }
+            else if (string.IsNullOrEmpty(Password))
+            {
+                UserDialogs.Instance.Alert("Password is Required");
+                val = false;
+            }
+            else if (string.IsNullOrEmpty(MobileNumber))
+            {
+                UserDialogs.Instance.Alert("MobileNumber is Required");
+                val = false;
+            }
+            else if (string.IsNullOrEmpty(PhoneNumber))
+            {
+                UserDialogs.Instance.Alert("PhoneNumber is Required");
                 val = false;
             }
             else if (string.IsNullOrEmpty(Email))
@@ -193,20 +240,21 @@ namespace LetsCookApp.ViewModels
                 UserDialogs.Instance.Alert("Email is Required");
                 val = false;
             }
-            else if (string.IsNullOrEmpty(UserName))
+            else if (string.IsNullOrEmpty(Address1))
             {
-                UserDialogs.Instance.Alert("Username is Required");
+                UserDialogs.Instance.Alert("Address1 is Required");
                 val = false;
             }
-            
-           
-            
-            else if (string.IsNullOrEmpty(Password))
+            else if (string.IsNullOrEmpty(City))
             {
-                UserDialogs.Instance.Alert("Password is Required");
+                UserDialogs.Instance.Alert("City is Required");
                 val = false;
             }
-            
+            else if (string.IsNullOrEmpty(Postcode))
+            {
+                UserDialogs.Instance.Alert("PostCode is Required");
+                val = false;
+            }
             
             else
             {
@@ -224,8 +272,10 @@ namespace LetsCookApp.ViewModels
             {
                 var SignupRequest = new SignupRequest
                 {
-                    Address1 = Add1,
-                    Address2 = Add2, 
+                    Address1 = Address1,
+                    Address2 = Address2,
+                    Address3 = Address3,
+                    State = State,
                     City = City,
                     Country = Country,
                     Email = Email,
@@ -233,13 +283,14 @@ namespace LetsCookApp.ViewModels
                     Hobbies = Hobbies,
                     LastName = LastName,
                     UserName = UserName,
-                    MobileNumber = MobilePhone,
+                    MobileNumber = MobileNumber,
                     Password = Password,
                     PhoneNumber = PhoneNumber,
                     Postcode = postCode,
-                    State = State,
-                    Picture = picture,
-                    DateOfBirth = BirthDay
+                    Picture = ImageBase64,
+
+                    DateOfBirth = DateOfBirth,
+                     Gender=Gender
                 };
 
                 await Task.Run(() =>
@@ -254,7 +305,8 @@ namespace LetsCookApp.ViewModels
                             {
                                 UserDialogs.Instance.HideLoading();
                                 UserDialogs.Instance.Alert(SignupResponse.Message, "OK");
-                                FullName = BirthDay = Ocupation = Email = UserName = Password = MobilePhone = AboutMe = "";
+                                FullName = DateOfBirth = Ocupation = Email = UserName = Password = MobileNumber = AboutMe = "";
+                                Address1 = Address2 = Address3 = City = State = Country = Postcode = Gender = Hobbies =PhoneNumber= "";
                               App.Current.MainPage.Navigation.PushAsync(new SignInView());
                             }
                             else

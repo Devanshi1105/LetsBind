@@ -28,7 +28,7 @@ namespace LetsCookApp.ViewModels
                 new Menu {Title = "About the App",imagesource="About.png", TargetType = typeof(AboutUsView)},
                 new Menu {Title = "Settings", imagesource="Settings.png", TargetType = typeof(SettingsView)},
                 new Menu {Title = "ShareApp", imagesource="ShareApp.png", TargetType = typeof(ShareAppView)},
-                new Menu {Title = "Signout", imagesource="logout.png", TargetType = typeof(ShareAppView)},
+                new Menu {Title = "Signout", imagesource="logout.png", TargetType = typeof(SignInSignUpView)},
             };
             RaisePropertyChanged(() => MenuItemList);
         }

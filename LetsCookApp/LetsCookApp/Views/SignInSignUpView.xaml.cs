@@ -14,6 +14,9 @@ namespace LetsCookApp.Views
         {
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
+            var viewmodel = App.AppSetup.LoginViewModel;
+            BindingContext = viewmodel;
+
         }
 
         private void Create_Clicked(object sender, EventArgs e)
@@ -33,5 +36,10 @@ namespace LetsCookApp.Views
             viewmodel.UserName = viewmodel.Password = "";
             Navigation.PushAsync(new SignInView());
         }
+        private void ForgotPassword_Tapped(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new ForgotPasswordView());
+        }
+
     }
 }

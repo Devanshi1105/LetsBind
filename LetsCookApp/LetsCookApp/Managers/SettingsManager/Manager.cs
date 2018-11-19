@@ -101,6 +101,39 @@ namespace LetsCookApp.Managers.SettingsManager
             }
         }
 
+        public async void ForgetPassword(LoginRequest request, Action success, Action<BaseResponseModel> failed)
+        {
+            var pp = request;
+            bool IsNetwork = true;//await DependencyService.Get<IMediaService>().CheckNewworkConnectivity();
+            if (IsNetwork)
+            {
+
+                var url = string.Format("{0}forgotpassword.php", _settingsManager.ApiHost);
+
+                await Task.Factory.StartNew(() =>
+                {
+
+                    var result = _apiProvider.Post<LoginResponse, LoginRequest>(url, request).Result;
+                    if (result.IsSuccessful)
+                    {
+                        if (success != null)
+                        {
+                            loginResponse = result.Result;
+                            success.Invoke();
+                        }
+                    }
+                    else
+                    {
+                        failed.Invoke(result.Result);
+                    }
+                });
+            }
+            else
+            {
+                UserDialogs.Instance.HideLoading(); UserDialogs.Instance.Alert(error, null, "OK");
+            }
+        }
+
 
         public async void SignUp(SignupRequest signupRequest, Action success, Action<SignupResponse> failed)
         {
