@@ -37,6 +37,9 @@
             <StackLayout Grid.Column="0"  Grid.Row="0" Orientation="Horizontal" HorizontalOptions="StartAndExpand" Spacing="5" VerticalOptions="StartAndExpand" Margin="5" >
                 <Image  Source="profile1.png" Aspect="AspectFit" HeightRequest="25" WidthRequest="25" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
                 <local:CustomLabelRegular Text="My Profile Settings" TextColor="Black" FontSize="16"  HorizontalOptions="StartAndExpand" VerticalOptions="Center">
+                  <local:CustomLabelRegular.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="MyProfileSettings_Tapped"/>
+                  </local:CustomLabelRegular.GestureRecognizers>
                 </local:CustomLabelRegular>
 
             </StackLayout>

@@ -15,23 +15,23 @@ namespace LetsCookApp.ViewModels
     {
 
         #region Constructor
-       
+
         public SignUpViewModel()
         {
             FinishCommand = new Command(() => FinishCommandExecute());
         }
 
-       
+
         #endregion
 
         #region Property
-        private string email ;
+        private string email;
         public string Email
         {
             get { return email; }
             set { email = value; RaisePropertyChanged(() => Email); }
         }
-       
+
 
         private string firstName;
         public string FirstName
@@ -41,14 +41,26 @@ namespace LetsCookApp.ViewModels
         }
 
 
-        private string password ;
+        private string password;
         public string Password
         {
             get { return password; }
             set { password = value; RaisePropertyChanged(() => Password); }
         }
-       
-        private string lastName ;
+
+        private string retypePassword;
+        public string RetypePassword
+        {
+            get { return retypePassword; }
+            set
+            {
+
+                retypePassword = value;
+                RaisePropertyChanged(() => RetypePassword);
+            }
+        }
+
+        private string lastName;
         public string LastName
         {
             get { return lastName; }
@@ -60,13 +72,13 @@ namespace LetsCookApp.ViewModels
             get { return mobileNumber; }
             set { mobileNumber = value; RaisePropertyChanged(() => MobileNumber); }
         }
-        private string phoneNumber ;
+        private string phoneNumber;
         public string PhoneNumber
         {
             get { return phoneNumber; }
             set { phoneNumber = value; RaisePropertyChanged(() => PhoneNumber); }
         }
-        
+
         private string address1;
         public string Address1
         {
@@ -85,33 +97,33 @@ namespace LetsCookApp.ViewModels
             get { return address3; }
             set { address3 = value; RaisePropertyChanged(() => Address3); }
         }
-        private string city ;
+        private string city;
         public string City
         {
             get { return city; }
             set { city = value; RaisePropertyChanged(() => City); }
         }
 
-        private string state ;
+        private string state;
         public string State
         {
             get { return state; }
             set { state = value; RaisePropertyChanged(() => State); }
         }
-        private string country ;
+        private string country;
         public string Country
         {
             get { return country; }
             set { country = value; RaisePropertyChanged(() => Country); }
         }
-        
-        private string postCode ;
+
+        private string postCode;
         public string Postcode
         {
             get { return postCode; }
             set { postCode = value; RaisePropertyChanged(() => Postcode); }
         }
-        private string hobbies ;
+        private string hobbies;
         public string Hobbies
         {
             get { return hobbies; }
@@ -128,8 +140,21 @@ namespace LetsCookApp.ViewModels
         public string FullName
         {
             get { return fullName; }
-            set { fullName = value;
+            set
+            {
+                fullName = value;
                 RaisePropertyChanged(() => FullName);
+            }
+        }
+
+        private int userid;
+        public int UserId
+        {
+            get { return userid; }
+            set
+            {
+                userid = value;
+                RaisePropertyChanged(() => UserId);
             }
         }
 
@@ -143,7 +168,9 @@ namespace LetsCookApp.ViewModels
         public string UserName
         {
             get { return userName; }
-            set { userName = value; RaisePropertyChanged(() => UserName);
+            set
+            {
+                userName = value; RaisePropertyChanged(() => UserName);
             }
         }
 
@@ -151,7 +178,9 @@ namespace LetsCookApp.ViewModels
         public string Ocupation
         {
             get { return occupation; }
-            set { occupation = value; RaisePropertyChanged(() => Ocupation);
+            set
+            {
+                occupation = value; RaisePropertyChanged(() => Ocupation);
             }
         }
         private string aboutMe;
@@ -167,6 +196,53 @@ namespace LetsCookApp.ViewModels
         {
             get { return gender; }
             set { gender = value; RaisePropertyChanged(() => Gender); }
+        }
+
+        private string title;
+        public string Title
+        {
+            get { return title; }
+            set
+            {
+                title = value;
+                if (value == "Sign in")
+                {
+                    IsEnable = true;
+                    BtnText = "FINISH";
+                }
+                else
+                {
+                    IsEnable = false;
+                    BtnText = "UPDATE";
+                }
+                RaisePropertyChanged(() => Title);
+            }
+        }
+
+        private string btnText;
+        public string BtnText
+        {
+            get { return btnText; }
+            set
+            {
+                btnText = value;
+                if (value == "Sign in")
+                {
+                    IsEnable = true;
+                }
+                else
+                {
+                    IsEnable = false;
+                }
+                RaisePropertyChanged(() => BtnText);
+            }
+        }
+
+        private bool isenable;
+        public bool IsEnable
+        {
+            get { return isenable; }
+            set { isenable = value; RaisePropertyChanged(() => IsEnable); }
         }
 
         private string imageBase64;
@@ -200,62 +276,69 @@ namespace LetsCookApp.ViewModels
                 UserDialogs.Instance.Alert("Username is Required");
                 val = false;
             }
-            if (string.IsNullOrEmpty(FirstName))
+           else if (string.IsNullOrEmpty(FirstName))
             {
                 UserDialogs.Instance.Alert("FullName is Required");
                 val = false;
             }
-            if (string.IsNullOrEmpty(LastName))
+            else if (string.IsNullOrEmpty(LastName))
             {
                 UserDialogs.Instance.Alert("LastName is Required");
                 val = false;
             }
-            if (string.IsNullOrEmpty(Gender))
+            else if (string.IsNullOrEmpty(Gender))
             {
-                UserDialogs.Instance.Alert("Gender is Required");
+                UserDialogs.Instance.Alert("Gender is Required.");
                 val = false;
             }
             else if (string.IsNullOrEmpty(DateOfBirth))
             {
-                UserDialogs.Instance.Alert("BirthDay is Required");
+                UserDialogs.Instance.Alert("BirthDay is Required.");
                 val = false;
             }
             else if (string.IsNullOrEmpty(Password))
             {
-                UserDialogs.Instance.Alert("Password is Required");
+                UserDialogs.Instance.Alert("Password is Required.");
                 val = false;
             }
+            else if (Password != RetypePassword)
+            {
+                UserDialogs.Instance.Alert("Password and retype-password should be equal.");
+                val = false;
+            }
+
+
             else if (string.IsNullOrEmpty(MobileNumber))
             {
-                UserDialogs.Instance.Alert("MobileNumber is Required");
+                UserDialogs.Instance.Alert("MobileNumber is Required.");
                 val = false;
             }
             else if (string.IsNullOrEmpty(PhoneNumber))
             {
-                UserDialogs.Instance.Alert("PhoneNumber is Required");
+                UserDialogs.Instance.Alert("PhoneNumber is Required.");
                 val = false;
             }
             else if (string.IsNullOrEmpty(Email))
             {
-                UserDialogs.Instance.Alert("Email is Required");
+                UserDialogs.Instance.Alert("Email is Required.");
                 val = false;
             }
             else if (string.IsNullOrEmpty(Address1))
             {
-                UserDialogs.Instance.Alert("Address1 is Required");
+                UserDialogs.Instance.Alert("Address1 is Required.");
                 val = false;
             }
             else if (string.IsNullOrEmpty(City))
             {
-                UserDialogs.Instance.Alert("City is Required");
+                UserDialogs.Instance.Alert("City is Required.");
                 val = false;
             }
             else if (string.IsNullOrEmpty(Postcode))
             {
-                UserDialogs.Instance.Alert("PostCode is Required");
+                UserDialogs.Instance.Alert("PostCode is Required.");
                 val = false;
             }
-            
+
             else
             {
                 val = true;
@@ -290,46 +373,85 @@ namespace LetsCookApp.ViewModels
                     Picture = ImageBase64,
 
                     DateOfBirth = DateOfBirth,
-                     Gender=Gender
+                    Gender = Gender
                 };
+
+
 
                 await Task.Run(() =>
                 {
                     UserDialogs.Instance.ShowLoading("Requesting..");
-                    userManager.SignUp(SignupRequest, () =>
+                    if (BtnText == "UPDATE")
                     {
-                        var SignupResponse = userManager.SignupResponse;
-                        Device.BeginInvokeOnMainThread(() =>
+                        SignupRequest.UserId = UserId;
+                        userManager.SignUpUpdate(SignupRequest, () =>
                         {
-                            if (SignupResponse.StatusCode == 200)
+                            var SignupResponse = userManager.SignupResponse;
+                            Device.BeginInvokeOnMainThread(() =>
                             {
-                                UserDialogs.Instance.HideLoading();
-                                UserDialogs.Instance.Alert(SignupResponse.Message, "OK");
-                                FullName = DateOfBirth = Ocupation = Email = UserName = Password = MobileNumber = AboutMe = "";
-                                Address1 = Address2 = Address3 = City = State = Country = Postcode = Gender = Hobbies =PhoneNumber= "";
-                              App.Current.MainPage.Navigation.PushAsync(new SignInView());
-                            }
-                            else
+                                if (SignupResponse.StatusCode == 200)
+                                {
+                                    UserDialogs.Instance.HideLoading();
+                                    UserDialogs.Instance.Alert(SignupResponse.Message);
+                                    FullName = DateOfBirth = Ocupation = Email = UserName = Password = MobileNumber = AboutMe = "";
+                                    Address1 = Address2 = Address3 = City = State = Country = Postcode = Gender = Hobbies = PhoneNumber = "";
+                                    App.Current.MainPage.Navigation.PushAsync(new SignInView());
+                                }
+                                else
+                                {
+                                    UserDialogs.Instance.Alert(SignupResponse.Message, "Error",  "OK");
+                                }
+                            });
+
+                            UserDialogs.Instance.HideLoading();
+                        },
+                     (requestFailedReason) =>
+                     {
+                         UserDialogs.Instance.Alert(requestFailedReason.Message, "Error", "OK");
+                         UserDialogs.Instance.HideLoading();
+                     });
+
+                    }
+
+                    else
+                    {
+                        userManager.SignUp(SignupRequest, () =>
+                        {
+                            var SignupResponse = userManager.SignupResponse;
+                            Device.BeginInvokeOnMainThread(() =>
                             {
-                                UserDialogs.Instance.Alert("Error", SignupResponse.Message, "OK");
-                            }
-                        });
-                       
-                        UserDialogs.Instance.HideLoading();
-                    },
-                       (requestFailedReason) =>
-                       {
-                           UserDialogs.Instance.HideLoading();
-                       });
+                                if (SignupResponse.StatusCode == 200)
+                                {
+                                    UserDialogs.Instance.HideLoading();
+                                    UserDialogs.Instance.Alert(SignupResponse.Message);
+                                    FullName = DateOfBirth = Ocupation = Email = UserName = Password = MobileNumber = AboutMe = "";
+                                    Address1 = Address2 = Address3 = City = State = Country = Postcode = Gender = Hobbies = PhoneNumber = "";
+                                    App.Current.MainPage.Navigation.PushAsync(new SignInView());
+                                }
+                                else
+                                {
+                                    UserDialogs.Instance.Alert(SignupResponse.Message, "Error", "OK");
+                                }
+                            });
+
+                            UserDialogs.Instance.HideLoading();
+                        },
+                      (requestFailedReason) =>
+                      {
+                          UserDialogs.Instance.Alert(requestFailedReason.Message, "Error", "OK");
+                          UserDialogs.Instance.HideLoading();
+                      });
+
+                    }
+
                 });
 
-              
+
+                #endregion
+
+
+
             }
-            
         }
-        #endregion
-
-
-
     }
 }

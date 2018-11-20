@@ -21,8 +21,9 @@ namespace LetsCookApp.Views
 
         private void Create_Clicked(object sender, EventArgs e)
         {
-             
+
             //FullName = BirthDay = Ocupation = Email = UserName = Password = MobilePhone = AboutMe = "";
+            App.AppSetup.SignUpViewModel.Title = "Sign in";
             Navigation.PushAsync(new SignUpView());
         }
 

@@ -1,4 +1,5 @@
-﻿using Plugin.Media;
+﻿
+using Plugin.Media;
 using Plugin.Media.Abstractions;
 using System;
 using System.Collections.Generic;
@@ -48,9 +49,9 @@ namespace LetsCookApp.Views
 
         }
 
-        private void Close_Tapped(object sender, EventArgs e)
+        private async void Close_Tapped(object sender, EventArgs e)
         {
-            Navigation.PopToRootAsync();
+            await Navigation.PopAsync();
         }
 
 
@@ -79,7 +80,7 @@ namespace LetsCookApp.Views
                 App.AppSetup.SignUpViewModel.ImageBase64 = System.Convert.ToBase64String(bytes);
                 imgphoto.Source = ImageSource.FromStream(() =>
                 {
-                     stream = file.GetStream();
+                    stream = file.GetStream();
                     file.Dispose();
                     imgPlus.IsVisible = false;
                     return stream;
@@ -107,21 +108,21 @@ namespace LetsCookApp.Views
             var stream = file.GetStream();
             var bytes = new byte[stream.Length];
             await stream.ReadAsync(bytes, 0, (int)stream.Length);
-            App.AppSetup.SignUpViewModel.ImageBase64=  System.Convert.ToBase64String(bytes);
+            App.AppSetup.SignUpViewModel.ImageBase64 = System.Convert.ToBase64String(bytes);
 
             imgphoto.Source = ImageSource.FromStream(() =>
             {
-                 stream = file.GetStream();
+                stream = file.GetStream();
 
 
                 file.Dispose();
-               
+
                 return stream;
             });
 
         }
 
-       
+
         private ImageSource picture;
         public ImageSource Picture
         {

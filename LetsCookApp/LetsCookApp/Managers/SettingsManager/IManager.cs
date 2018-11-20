@@ -15,6 +15,7 @@ namespace LetsCookApp.Managers.SettingsManager
         void ForgetPassword(LoginRequest request, Action success, Action<BaseResponseModel> failed);
 
         void SignUp(SignupRequest commonRequest, Action success, Action<SignupResponse> failed);
+        void SignUpUpdate(SignupRequest commonRequest, Action success, Action<SignupResponse> failed);
 
         CategoryResponse CategoryResponse { get; }
         LoginResponse LoginResponse { get; }

@@ -167,6 +167,38 @@ namespace LetsCookApp.Managers.SettingsManager
             }
         }
 
+        public async void SignUpUpdate(SignupRequest signupRequest, Action success, Action<SignupResponse> failed)
+        {
+            bool IsNetwork = true;//await DependencyService.Get<IMediaService>().CheckNewworkConnectivity();
+            if (IsNetwork)
+            {
+
+                var url = string.Format("{0}Update.php", _settingsManager.ApiHost);
+
+                await Task.Factory.StartNew(() =>
+                {
+
+                    var result = _apiProvider.Post<SignupResponse, SignupRequest>(url, signupRequest).Result;
+                    if (result.IsSuccessful)
+                    {
+                        if (success != null)
+                        {
+                            signupResponse = result.Result;
+                            success.Invoke();
+                        }
+                    }
+                    else
+                    {
+                        failed.Invoke(result.Result);
+                    }
+                });
+            }
+            else
+            {
+                UserDialogs.Instance.HideLoading(); UserDialogs.Instance.Alert(error, null, "OK");
+            }
+        }
+
 
     }
 }

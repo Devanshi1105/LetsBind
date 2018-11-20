@@ -25,5 +25,10 @@ namespace LetsCookApp.Views
 
             Rg.Plugins.Popup.Services.PopupNavigation.PushAsync(page);
         }
+        private async void MyProfileSettings_Tapped(object sender, EventArgs e)
+        {
+            App.AppSetup.SignUpViewModel.Title = "Profile Setting";
+            await Navigation.PushAsync(new SignUpView());
+        }
     }
 }

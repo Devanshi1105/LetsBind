@@ -73,7 +73,7 @@ namespace LetsCookApp.ViewModels
                             }
                             else
                             {
-                                UserDialogs.Instance.Alert("Error", LoginResponse.Message, "OK");
+                                UserDialogs.Instance.Alert( LoginResponse.Message, "Error", "OK");
                             }
                         });
                        // RaisePropertyChanged(() => LoginResponse);
@@ -82,7 +82,7 @@ namespace LetsCookApp.ViewModels
                        (requestFailedReason) =>
                        {
                            UserDialogs.Instance.HideLoading();
-                           UserDialogs.Instance.Alert("Error", requestFailedReason.Message, "OK");
+                           UserDialogs.Instance.Alert( requestFailedReason.Message, "Error", "OK");
                        });
                 });
 
@@ -122,12 +122,12 @@ namespace LetsCookApp.ViewModels
                               
                                 EmailId = "";
                                 UserDialogs.Instance.HideLoading();
-                                UserDialogs.Instance.Alert("Success", LoginResponse.Message, "OK");
+                                UserDialogs.Instance.Alert(LoginResponse.Message, "Success", "OK");
                                 //Pop
                             }
                             else
                             {
-                                UserDialogs.Instance.Alert("Error", LoginResponse.Message, "OK");
+                                UserDialogs.Instance.Alert(LoginResponse.Message, "Error", "OK");
                             }
                         });
                         // RaisePropertyChanged(() => LoginResponse);
@@ -136,7 +136,7 @@ namespace LetsCookApp.ViewModels
                        (requestFailedReason) =>
                        {
                            UserDialogs.Instance.HideLoading();
-                           UserDialogs.Instance.Alert("Error", requestFailedReason.Message, "OK");
+                           UserDialogs.Instance.Alert( requestFailedReason.Message, "Error", "OK");
                        });
                 });
 
