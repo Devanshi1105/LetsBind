@@ -216,6 +216,7 @@ namespace LetsCookApp.ViewModels
                     BtnText = "UPDATE";
                 }
                 RaisePropertyChanged(() => Title);
+                RaisePropertyChanged(() => BtnText);
             }
         }
 
@@ -351,6 +352,7 @@ namespace LetsCookApp.ViewModels
         public ICommand FinishCommand { get; private set; }
         private async void FinishCommandExecute()
         {
+           
             if (Validate() == true)
             {
                 var SignupRequest = new SignupRequest
@@ -453,5 +455,59 @@ namespace LetsCookApp.ViewModels
 
             }
         }
+
+        public void GetProfile()
+        {
+            
+            LoginRequest obj = new LoginRequest();
+            obj.Email = Email;
+            obj.Password = Password;
+            UserDialogs.Instance.ShowLoading("Requesting..");
+            userManager.getProfile(obj, async () =>
+            {
+                var userProfileResponse = userManager.ProfileResponse;
+
+                if (userProfileResponse.StatusCode == 202)
+                {
+                    var udata = userProfileResponse.UserData;
+                    Address1 = udata.Address1;
+                    Address2 = udata.Address2;
+                    Address3 = udata.Address3;
+                    State = udata.State;
+                    City = udata.City;
+                    Country = udata.Country;
+                    Email = udata.EmailId;
+                    FirstName = udata.FirstName;
+                    Hobbies = udata.Hobbies;
+                    LastName = udata.LastName;
+                    UserName = udata.UserName;
+                    MobileNumber = udata.MobileNumber;
+                    Password = udata.Password;
+                    PhoneNumber = udata.PhoneNumber;
+                    Postcode = udata.Postcode;
+                    Picture = udata.PhotoURL;
+
+                    DateOfBirth = udata.DateOfBirth;
+                    Gender = udata.Gender;
+                    Xamarin.Forms.Device.BeginInvokeOnMainThread(async () =>
+                    {
+                        UserDialogs.Instance.HideLoading();
+                        ((MasterDetailPage)App.Current.MainPage).Detail.Navigation.PushAsync(new SignUpView());
+
+                    });
+
+                   
+                }
+            },
+             (requestFailedReason) =>
+             {
+                 Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
+                 {
+                     //  UserDialogs.Instance.Alert(requestFailedReason.Message, null, "OK");
+                      UserDialogs.Instance.HideLoading();
+                 });
+             });
+        }
+
     }
 }

@@ -215,6 +215,7 @@
     <Compile Include="MainApplication.cs" />
     <Compile Include="Renderer\CustomButtonBoldRenderer.cs" />
     <Compile Include="Renderer\CustomButtonRegularRenderer.cs" />
+    <Compile Include="Renderer\CustomDatePickerRenderer.cs" />
     <Compile Include="Renderer\CustomEntryRegularRenderer.cs" />
     <Compile Include="Renderer\CustomImageGalleryRenderer.cs" />
     <Compile Include="Renderer\CustomLabelBoldRenderer.cs" />
@@ -511,6 +512,10 @@
     <AndroidResource Include="Resources\xml\file_paths.xml" />
     <AndroidResource Include="Resources\drawable\Imgplus.png" />
     <AndroidResource Include="Resources\drawable\uploadArrow.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\loginarrow.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\loginarrow.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\loginarrow.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\loginarrow.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

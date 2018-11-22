@@ -90,6 +90,7 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="Renderer\CustomDatePickerRenderer.cs" />
     <Compile Include="Renderer\CustomPickerRenderer.cs" />
     <Compile Include="Renderer\PlaceholderEditorRenderer.cs" />
     <None Include="app.config" />

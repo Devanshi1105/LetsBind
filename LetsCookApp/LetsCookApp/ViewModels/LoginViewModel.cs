@@ -51,8 +51,8 @@ namespace LetsCookApp.ViewModels
             {
                 var LoginRequest = new LoginRequest
                 {
-                    Email = UserName,//"ksantosh.kundkar12@gmail.com",// UserName,
-                    Password =Password// "123456"// Password
+                    Email = "ksantosh.kundkar12@gmail.com",// UserName,
+                    Password ="123456"// Password
                 };
 
                
@@ -66,7 +66,9 @@ namespace LetsCookApp.ViewModels
                         {
                             if (LoginResponse.StatusCode == 202)
                             {
-                                App.AppSetup.HomeViewModel.UserData = LoginResponse.UserData;
+                                // App.AppSetup.HomeViewModel.UserData = LoginResponse.UserData;
+                                App.AppSetup.SignUpViewModel.Email = EmailId;
+                                App.AppSetup.SignUpViewModel.Password = Password;
                                 UserName = Password = "";
                                 UserDialogs.Instance.HideLoading();
                                 App.Current.MainPage = new Views.HomeView();

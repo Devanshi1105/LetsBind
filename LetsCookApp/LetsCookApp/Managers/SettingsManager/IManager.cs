@@ -10,7 +10,7 @@ namespace LetsCookApp.Managers.SettingsManager
     public interface IManager
     {
         void getAllCategory(CommonRequest commonRequest, Action success, Action<CategoryResponse> failed);
-
+        void getProfile(LoginRequest commonRequest, Action success, Action<ProfileResponse> failed);
         void Login(LoginRequest request, Action success, Action<BaseResponseModel> failed);
         void ForgetPassword(LoginRequest request, Action success, Action<BaseResponseModel> failed);
 
@@ -20,5 +20,6 @@ namespace LetsCookApp.Managers.SettingsManager
         CategoryResponse CategoryResponse { get; }
         LoginResponse LoginResponse { get; }
         SignupResponse SignupResponse { get; }
+        ProfileResponse ProfileResponse { get; }
     }
 }

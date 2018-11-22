@@ -13,6 +13,8 @@ namespace LetsCookApp.Managers.SettingsManager
         private readonly ISettingsManager _settingsManager;
 
         public CategoryResponse CategoryResponse { get { return categoryResponse; } }
+
+        public ProfileResponse ProfileResponse { get { return profileResponse; } } 
         public LoginResponse LoginResponse { get { return loginResponse; } }
 
         public SignupResponse SignupResponse { get { return signupResponse; } }
@@ -34,6 +36,7 @@ namespace LetsCookApp.Managers.SettingsManager
         #endregion
         string error = "Please Check Internet Connection.";
         private CategoryResponse categoryResponse { get; set; }
+        private ProfileResponse profileResponse { get; set; }
         private LoginResponse loginResponse { get; set; }
         private SignupResponse signupResponse { get; set; }
         public async void  getAllCategory(CommonRequest commonRequest, Action success, Action<CategoryResponse> failed)
@@ -68,6 +71,39 @@ namespace LetsCookApp.Managers.SettingsManager
             }
         }
 
+        public async void getProfile(LoginRequest commonRequest, Action success, Action<ProfileResponse> failed)
+        {
+            bool IsNetwork = true;//await DependencyService.Get<IMediaService>().CheckNewworkConnectivity();
+            if (IsNetwork)
+            {
+                commonRequest.Email = "ksantosh.kundkar12@gmail.com";
+                commonRequest.Password = "123456";
+                string para = "email=" + commonRequest.Email + "&password=" + commonRequest.Password;
+                var url = string.Format("{0}profile.php?"+para, _settingsManager.ApiHost);
+
+                await Task.Run(() =>
+                {
+                    Dictionary<string, string> head = GetHeaders();
+                    var result = _apiProvider.Get<ProfileResponse>(url, null);
+                    if (result.IsSuccessful)
+                    {
+                        if (success != null)
+                        {
+                            profileResponse = result.Result;
+                            success.Invoke();
+                        }
+                    }
+                    else
+                    {
+                        failed.Invoke(result.Result);
+                    }
+                });
+            }
+            else
+            {
+                UserDialogs.Instance.HideLoading(); UserDialogs.Instance.Alert(error, null, "OK");
+            }
+        }
         public async void Login(LoginRequest request, Action success, Action<BaseResponseModel> failed)
         {
             var pp = request;
@@ -173,7 +209,7 @@ namespace LetsCookApp.Managers.SettingsManager
             if (IsNetwork)
             {
 
-                var url = string.Format("{0}Update.php", _settingsManager.ApiHost);
+                var url = string.Format("{0}profile.php", _settingsManager.ApiHost);
 
                 await Task.Factory.StartNew(() =>
                 {

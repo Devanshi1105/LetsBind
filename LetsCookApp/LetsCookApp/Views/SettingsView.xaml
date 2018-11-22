@@ -100,9 +100,7 @@
    <StackLayout VerticalOptions="StartAndExpand" Padding="35,0,0,0"
                  HorizontalOptions="FillAndExpand">
              <local:CustomPicker HorizontalOptions="FillAndExpand"
-                     HeightRequest="40" 
-                                  WidthRequest="200" 
-                     Image="drp"
+                     HeightRequest="40"   WidthRequest="200"   Image="drp"
                      Title="Pick an Item">
                       <local:CustomPicker.Items>
                         <x:String>Helvetica</x:String> 

@@ -41,6 +41,7 @@
     <Compile Include="CustomViews\CustomButtonBold.cs" />
     <Compile Include="CustomViews\CustomButtonLight.cs" />
     <Compile Include="CustomViews\CustomButtonRegular.cs" />
+    <Compile Include="CustomViews\CustomDatePicker.cs" />
     <Compile Include="CustomViews\CustomEntryLightBlue.cs" />
     <Compile Include="CustomViews\CustomEntryRegular.cs" />
     <Compile Include="CustomViews\CustomImageGallery.cs" />
@@ -66,6 +67,7 @@
     <Compile Include="Models\CategoryResponse.cs" />
     <Compile Include="Models\CommonRequest.cs" />
     <Compile Include="Models\LoginRequest.cs" />
+    <Compile Include="Models\ProfileResponse.cs" />
     <Compile Include="Models\SignupRequest.cs" />
     <Compile Include="ViewModels\SignUpViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

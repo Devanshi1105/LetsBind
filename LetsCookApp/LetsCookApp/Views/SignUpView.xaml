@@ -100,7 +100,7 @@ Tapped="TapGestureRecognizer_Tapped_1" NumberOfTapsRequired="1"/>
 
 
                         <local:CustomEntryRegular WidthRequest="200" 
-TextColor="Black" Placeholder="UserName" Text="{Binding UserName}" 
+TextColor="Black" Placeholder="User Name" Text="{Binding UserName}" 
 PlaceholderColor="Gray" HorizontalTextAlignment="Center" 
 HorizontalOptions="CenterAndExpand" VerticalOptions="Center" 
 Margin="0,10,0,0" IsEnabled="{Binding IsEnable}"/>
@@ -141,13 +141,13 @@ RowSpacing="0.3" ColumnSpacing="0">
 
                             <local:CustomEntryRegular Grid.Column="0" 
 Grid.Row="0" BackgroundColor="#e8e7e6" TextColor="Black" 
-Placeholder="FirstName" PlaceholderColor="Gray" 
+Placeholder="First Name" PlaceholderColor="Gray" 
 HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" 
 Text="{Binding FirstName}" />
 
                             <local:CustomEntryRegular Grid.Column="0" 
 Grid.Row="1" BackgroundColor="#e8e7e6" TextColor="Black" 
-Placeholder="LastName" PlaceholderColor="Gray" 
+Placeholder="Last Name" PlaceholderColor="Gray" 
 HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" 
 Text="{Binding LastName}" />
 
@@ -161,10 +161,10 @@ Text="{Binding Gender}" Margin="0,0.3,0,0"/>
 Grid.Row="3" BackgroundColor="#e8e7e6"   HorizontalOptions="FillAndExpand" 
                            Spacing="10" Orientation="Horizontal" >
                             
- <local:CustomLabelRegular Text="DateOfBirth"  TextColor="Black" FontSize="16"  HorizontalTextAlignment="Center"     HorizontalOptions="StartAndExpand" VerticalOptions="FillAndExpand">
+ <local:CustomLabelRegular Text="DateOfBirth"  TextColor="Gray" FontSize="16"  HorizontalTextAlignment="Center"     HorizontalOptions="StartAndExpand" VerticalOptions="Center">
                 </local:CustomLabelRegular>
                             
-                            <DatePicker TextColor="Black" HorizontalOptions="StartAndExpand" VerticalOptions="FillAndExpand" />
+                            <local:CustomDatePicker HasBorder="False" TextColor="Black" HorizontalOptions="StartAndExpand" VerticalOptions="FillAndExpand"    WidthRequest="200"/>
 
                           </StackLayout>
                             <local:CustomEntryRegular Grid.Column="0" 
@@ -181,13 +181,13 @@ Text="{Binding RetypePassword}" Margin="0,0.3,0,0"/>
 
                             <local:CustomEntryRegular Grid.Column="0" 
 Grid.Row="6" BackgroundColor="#e8e7e6" TextColor="Black" 
-Placeholder="MobileNumber" PlaceholderColor="Gray" 
+Placeholder="Mobile Number" PlaceholderColor="Gray" 
 HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" 
 Text="{Binding MobileNumber}" />
 
                             <local:CustomEntryRegular Grid.Column="0" 
 Grid.Row="7" BackgroundColor="#e8e7e6" TextColor="Black" 
-Placeholder="PhoneNumber" PlaceholderColor="Gray" 
+Placeholder="Phone Number" PlaceholderColor="Gray" 
 HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" 
 Text="{Binding PhoneNumber}" />
 
@@ -233,13 +233,35 @@ Placeholder="State" PlaceholderColor="Gray"
 HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" 
 Text="{Binding State}" Margin="0,0.3,0,0"/>
 
-                            <local:CustomEntryRegular Grid.Column="0" 
+                            <!--<local:CustomEntryRegular Grid.Column="0" 
 Grid.Row="15" BackgroundColor="#e8e7e6" TextColor="Black" 
 Placeholder="Country" PlaceholderColor="Gray" 
 HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" 
-Text="{Binding Country}" />
-
-                            <local:PlaceholderEditor Grid.Column="0" 
+Text="{Binding Country}" />-->
+                          <StackLayout Grid.Row="15" Grid.Column="0"  HorizontalOptions="FillAndExpand" BackgroundColor="#e8e7e6" VerticalOptions="FillAndExpand">
+                            <local:CustomPicker TextColor="Black"
+  HorizontalOptions="FillAndExpand"  BackgroundColor="#e8e7e6"
+                       HeightRequest="40" VerticalOptions="CenterAndExpand"   WidthRequest="200" Margin="0,0,10,0"   Image="loginarrow"
+                       Title="Pick an Item">
+                              <local:CustomPicker.Items>
+                                <x:String>Afghanistan</x:String>
+                                <x:String>land Islands</x:String>
+                                <x:String>Albania</x:String>
+                              <x:String>American Samoa</x:String>
+                              <x:String>AndorrA</x:String>  
+                            <x:String>Angola</x:String>
+                               <x:String>Anguilla</x:String>
+                              <x:String>Antarctica</x:String>
+                              <x:String>Antigua and Barbuda</x:String>  
+                            <x:String>Argentina</x:String>
+                             <x:String>Armenia</x:String>
+                              <x:String>Australia</x:String>
+                              <x:String>Bahamas</x:String>  
+                           
+                              </local:CustomPicker.Items>
+                            </local:CustomPicker>
+                          </StackLayout>
+                          <local:PlaceholderEditor Grid.Column="0" 
 Grid.Row="16" BackgroundColor="#e8e7e6" TextColor="Black" 
 Placeholder="Hobbies" PlaceholderColor="Gray" 
 HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" 
@@ -252,8 +274,8 @@ HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
 Text="{Binding AboutMe}"/>
                         </Grid>
 
-                        <local:CustomButtonRegular Text="Finish" 
-TextColor="White" FontSize="18" BorderRadius="5" 
+                        <local:CustomButtonRegular Text="{Binding 
+BtnText}"  TextColor="White" FontSize="18" BorderRadius="5" 
 BackgroundColor="#e74c3c" HorizontalOptions="FillAndExpand" 
 VerticalOptions="Center" Margin="12,10,12,20" Command="{Binding 
 FinishCommand}" />
