@@ -19,17 +19,18 @@ namespace LetsCookApp.Views
 
         }
 
-        private void Create_Clicked(object sender, EventArgs e)
+        private async void Create_Clicked(object sender, EventArgs e)
         {
-
-            //FullName = BirthDay = Ocupation = Email = UserName = Password = MobilePhone = AboutMe = "";
+            App.AppSetup.SignUpViewModel.IsEn = true;
             App.AppSetup.SignUpViewModel.Title = "Sign in";
-            Navigation.PushAsync(new SignUpView());
+            App.AppSetup.SignUpViewModel.BtnText = "FINISH";
+            App.AppSetup.SignUpViewModel.Picture = "man.png";
+            await Navigation.PushAsync(new SignUpView());
         }
 
         private void HomeMaster_Clicked(object sender, EventArgs e)
         {
-             Navigation.PushAsync(new HomeView());
+            Navigation.PushAsync(new HomeView());
         }
         private void Signin_Clicked(object sender, EventArgs e)
         {

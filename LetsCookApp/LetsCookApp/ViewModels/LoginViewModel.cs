@@ -51,8 +51,8 @@ namespace LetsCookApp.ViewModels
             {
                 var LoginRequest = new LoginRequest
                 {
-                    Email = "ksantosh.kundkar12@gmail.com",// UserName,
-                    Password ="123456"// Password
+                    Email =  EmailId,
+                    Password = Password
                 };
 
                

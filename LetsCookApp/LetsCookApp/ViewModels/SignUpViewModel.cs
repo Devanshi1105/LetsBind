@@ -4,6 +4,8 @@ using LetsCookApp.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -205,18 +207,8 @@ namespace LetsCookApp.ViewModels
             set
             {
                 title = value;
-                if (value == "Sign in")
-                {
-                    IsEnable = true;
-                    BtnText = "FINISH";
-                }
-                else
-                {
-                    IsEnable = false;
-                    BtnText = "UPDATE";
-                }
+
                 RaisePropertyChanged(() => Title);
-                RaisePropertyChanged(() => BtnText);
             }
         }
 
@@ -227,23 +219,15 @@ namespace LetsCookApp.ViewModels
             set
             {
                 btnText = value;
-                if (value == "Sign in")
-                {
-                    IsEnable = true;
-                }
-                else
-                {
-                    IsEnable = false;
-                }
                 RaisePropertyChanged(() => BtnText);
             }
         }
 
         private bool isenable;
-        public bool IsEnable
+        public bool IsEn
         {
             get { return isenable; }
-            set { isenable = value; RaisePropertyChanged(() => IsEnable); }
+            set { isenable = value; RaisePropertyChanged(() => IsEn); }
         }
 
         private string imageBase64;
@@ -277,7 +261,7 @@ namespace LetsCookApp.ViewModels
                 UserDialogs.Instance.Alert("Username is Required");
                 val = false;
             }
-           else if (string.IsNullOrEmpty(FirstName))
+            else if (string.IsNullOrEmpty(FirstName))
             {
                 UserDialogs.Instance.Alert("FullName is Required");
                 val = false;
@@ -352,7 +336,7 @@ namespace LetsCookApp.ViewModels
         public ICommand FinishCommand { get; private set; }
         private async void FinishCommandExecute()
         {
-           
+
             if (Validate() == true)
             {
                 var SignupRequest = new SignupRequest
@@ -373,7 +357,6 @@ namespace LetsCookApp.ViewModels
                     PhoneNumber = PhoneNumber,
                     Postcode = postCode,
                     Picture = ImageBase64,
-
                     DateOfBirth = DateOfBirth,
                     Gender = Gender
                 };
@@ -401,7 +384,7 @@ namespace LetsCookApp.ViewModels
                                 }
                                 else
                                 {
-                                    UserDialogs.Instance.Alert(SignupResponse.Message, "Error",  "OK");
+                                    UserDialogs.Instance.Alert(SignupResponse.Message, "Error", "OK");
                                 }
                             });
 
@@ -458,7 +441,7 @@ namespace LetsCookApp.ViewModels
 
         public void GetProfile()
         {
-            
+
             LoginRequest obj = new LoginRequest();
             obj.Email = Email;
             obj.Password = Password;
@@ -486,9 +469,12 @@ namespace LetsCookApp.ViewModels
                     PhoneNumber = udata.PhoneNumber;
                     Postcode = udata.Postcode;
                     Picture = udata.PhotoURL;
-
                     DateOfBirth = udata.DateOfBirth;
                     Gender = udata.Gender;
+                    if (!string.IsNullOrEmpty(udata.PhotoURL))
+                    {
+                        ImageBase64 = await GetImageAsBase64Url(udata.PhotoURL);
+                    }
                     Xamarin.Forms.Device.BeginInvokeOnMainThread(async () =>
                     {
                         UserDialogs.Instance.HideLoading();
@@ -496,7 +482,7 @@ namespace LetsCookApp.ViewModels
 
                     });
 
-                   
+
                 }
             },
              (requestFailedReason) =>
@@ -504,9 +490,19 @@ namespace LetsCookApp.ViewModels
                  Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
                  {
                      //  UserDialogs.Instance.Alert(requestFailedReason.Message, null, "OK");
-                      UserDialogs.Instance.HideLoading();
+                     UserDialogs.Instance.HideLoading();
                  });
              });
+        }
+        public async static Task<string> GetImageAsBase64Url(string url)
+        {
+            var credentials = new NetworkCredential();
+            using (var handler = new HttpClientHandler { Credentials = credentials })
+            using (var client = new HttpClient(handler))
+            {
+                var bytes = await client.GetByteArrayAsync(url);
+                return Convert.ToBase64String(bytes);
+            }
         }
 
     }

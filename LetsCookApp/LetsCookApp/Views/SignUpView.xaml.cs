@@ -147,5 +147,20 @@ namespace LetsCookApp.Views
                 TakePicture.Execute(null);
             }
         }
+
+        private void drpcountry_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            App.AppSetup.SignUpViewModel.Country = drpcountry.Items[drpcountry.SelectedIndex];
+        }
+
+        private void drpgender_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            App.AppSetup.SignUpViewModel.Gender = drpgender.Items[drpgender.SelectedIndex];
+        }
+
+        private void dobpickar_DateSelected(object sender, DateChangedEventArgs e)
+        {
+            App.AppSetup.SignUpViewModel.DateOfBirth = dobpickar.Date.ToString();
+        }
     }
 }

@@ -76,8 +76,8 @@ namespace LetsCookApp.Managers.SettingsManager
             bool IsNetwork = true;//await DependencyService.Get<IMediaService>().CheckNewworkConnectivity();
             if (IsNetwork)
             {
-                commonRequest.Email = "ksantosh.kundkar12@gmail.com";
-                commonRequest.Password = "123456";
+                //commonRequest.Email = "ksantosh.kundkar12@gmail.com";
+                //commonRequest.Password = "123456";
                 string para = "email=" + commonRequest.Email + "&password=" + commonRequest.Password;
                 var url = string.Format("{0}profile.php?"+para, _settingsManager.ApiHost);
 
