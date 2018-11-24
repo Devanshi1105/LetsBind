@@ -225,6 +225,7 @@
     <Compile Include="Renderer\CustomListViewCellRenderer.cs" />
     <Compile Include="Renderer\CustomPickerRenderer.cs" />
     <Compile Include="Renderer\CustomRoundedContentViewRenderer.cs" />
+    <Compile Include="Renderer\NullableDatePickerRenderer.cs" />
     <Compile Include="Renderer\PlacehoderEditorRenderer.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

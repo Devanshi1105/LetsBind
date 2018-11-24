@@ -1,4 +1,5 @@
 ﻿
+using Acr.UserDialogs;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
 using System;
@@ -28,6 +29,12 @@ namespace LetsCookApp.Views
             SelectPicture = new Command(async () => await SelectPictureAsync());
             BindingContext = App.AppSetup.SignUpViewModel;
             imgPlus.IsVisible = true;
+            var lst = App.AppSetup.SignUpViewModel.GetCountry();
+            foreach (var item in lst.country)
+            {
+                drpcountry.Items.Add(item.name);
+            }
+           
         }
 
         private void Create_Clicked(object sender, EventArgs e)
@@ -162,5 +169,114 @@ namespace LetsCookApp.Views
         {
             App.AppSetup.SignUpViewModel.DateOfBirth = dobpickar.Date.ToString();
         }
+
+
+        private bool Validate()
+        {
+            var vm = App.AppSetup.SignUpViewModel;
+            bool val = false;
+            if (string.IsNullOrEmpty(vm.UserName))
+            {
+                UserDialogs.Instance.Alert("Username is Required");
+                entUserName.Focus();
+                val = false;
+            }
+            else if (string.IsNullOrEmpty(vm.FirstName))
+            {
+                UserDialogs.Instance.Alert("FullName is Required");
+                entFirstName.Focus();
+                val = false;
+            }
+            else if (string.IsNullOrEmpty(vm.LastName))
+            {
+                UserDialogs.Instance.Alert("LastName is Required");
+                entLastName.Focus();
+                val = false;
+            }
+            else if (string.IsNullOrEmpty(vm.Gender))
+            {
+                UserDialogs.Instance.Alert("Gender is Required.");
+                drpgender.Focus();
+                val = false;
+            }
+            else if (string.IsNullOrEmpty(vm.DateOfBirth))
+            {
+                UserDialogs.Instance.Alert("Date of birth is Required.");
+                dobpickar.Focus();
+                val = false;
+            }
+            else if (DateTime.Parse(vm.DateOfBirth).AddYears(18).Date >= DateTime.Now.Date)
+            {
+                UserDialogs.Instance.Alert("Date of birth should be gretter than 15 years.");
+                dobpickar.Focus();
+                val = false;
+            }
+            else if (string.IsNullOrEmpty(vm.Password))
+            {
+                UserDialogs.Instance.Alert("Password is Required.");
+                entPassword.Focus();
+                val = false;
+            }
+            else if (vm.Password != vm.RetypePassword)
+            {
+                UserDialogs.Instance.Alert("Password and retype-password should be equal.");
+                entRetypePassword.Focus();
+                val = false;
+            }
+            else if (string.IsNullOrEmpty(vm.MobileNumber))
+            {
+                UserDialogs.Instance.Alert("MobileNumber is Required.");
+                entMobileNumber.Focus();
+                val = false;
+            }
+            else if (string.IsNullOrEmpty(vm.PhoneNumber))
+            {
+                UserDialogs.Instance.Alert("PhoneNumber is Required.");
+                entPhoneNumber.Focus();
+                val = false;
+            }
+            else if (string.IsNullOrEmpty(vm.Email))
+            {
+                UserDialogs.Instance.Alert("Email is Required.");
+                entEmail.Focus();
+                val = false;
+            }
+            else if (string.IsNullOrEmpty(vm.Address1))
+            {
+                UserDialogs.Instance.Alert("Address1 is Required.");
+                entAddress1.Focus();
+                val = false;
+            }
+            else if (string.IsNullOrEmpty(vm.City))
+            {
+                UserDialogs.Instance.Alert("City is Required.");
+                entCity.Focus();
+                val = false;
+            }
+            else if (string.IsNullOrEmpty(vm.Postcode))
+            {
+                UserDialogs.Instance.Alert("Postcode is Required.");
+                entPostcode.Focus();
+                val = false;
+            }
+
+            else
+            {
+                val = true;
+            }
+            return val;
+        }
+
+        private void btntext_Clicked(object sender, EventArgs e)
+        {
+            if (Validate())
+            {
+                App.AppSetup.SignUpViewModel.FinishCommand.Execute(null);
+            }
+        }
+
+
+
+
     }
 }

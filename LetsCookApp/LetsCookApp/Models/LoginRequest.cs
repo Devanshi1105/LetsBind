@@ -14,7 +14,7 @@ namespace LetsCookApp.Models
 
     public class LoginResponse: BaseResponseModel
     {
-       // public UserData UserData { get; set; }
+        public UserData UserData { get; set; }
     }
     public class UserData
     {

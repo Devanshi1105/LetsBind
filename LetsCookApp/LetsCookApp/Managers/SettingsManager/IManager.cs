@@ -17,9 +17,13 @@ namespace LetsCookApp.Managers.SettingsManager
         void SignUp(SignupRequest commonRequest, Action success, Action<SignupResponse> failed);
         void SignUpUpdate(SignupRequest commonRequest, Action success, Action<SignupResponse> failed);
 
+        void getCountry(CommonRequest commonRequest, Action success);
+
+
         CategoryResponse CategoryResponse { get; }
         LoginResponse LoginResponse { get; }
         SignupResponse SignupResponse { get; }
         ProfileResponse ProfileResponse { get; }
+        CountryResponse CountryResponse { get; }
     }
 }

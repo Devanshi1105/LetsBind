@@ -3,6 +3,7 @@ using LetsCookApp.Models;
 using LetsCookApp.Views;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -20,7 +21,9 @@ namespace LetsCookApp.ViewModels
 
         public SignUpViewModel()
         {
+            CountryResponse = new CountryResponse();
             FinishCommand = new Command(() => FinishCommandExecute());
+          //  GetCountry();
         }
 
 
@@ -494,6 +497,49 @@ namespace LetsCookApp.ViewModels
                  });
              });
         }
+
+        private ObservableCollection<Country> lstCountry;
+        public ObservableCollection<Country> LstCountry
+        {
+            get { return lstCountry; }
+            set
+            {
+                lstCountry = value;
+                RaisePropertyChanged(() => LstCountry);
+            }
+        }
+
+        private CountryResponse countryResponse;
+
+        public CountryResponse CountryResponse
+        {
+            get { return countryResponse; }
+            set { countryResponse = value;
+                RaisePropertyChanged(() => CountryResponse);
+            }
+        }
+
+
+        public CountryResponse GetCountry()
+        {
+            CommonRequest obj = new CommonRequest();
+
+            UserDialogs.Instance.ShowLoading("Requesting..");
+            userManager.getCountry(obj,  () =>
+            {
+                 CountryResponse = userManager.CountryResponse;
+                //LstCountry = new ObservableCollection<Models.Country>();
+                //foreach (var item in userCountryResponse.country)
+                //{
+                //    LstCountry.Add(item);
+                //}
+                
+
+            });
+
+            return CountryResponse;
+        }
+
         public async static Task<string> GetImageAsBase64Url(string url)
         {
             var credentials = new NetworkCredential();

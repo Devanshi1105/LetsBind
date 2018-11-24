@@ -56,6 +56,7 @@
     <Compile Include="CustomViews\CustomRatingView.cs" />
     <Compile Include="CustomViews\CustomRoundedContentView.cs" />
     <Compile Include="CustomViews\CustomWebView.cs" />
+    <Compile Include="CustomViews\NullableDatePicker.cs" />
     <Compile Include="CustomViews\PlaceholderEditor.cs" />
     <Compile Include="Managers\ApiProvider\ApiProvider.cs" />
     <Compile Include="Managers\ApiProvider\IApiProvider.cs" />
@@ -66,6 +67,7 @@
     <Compile Include="Models\ApiResult.cs" />
     <Compile Include="Models\CategoryResponse.cs" />
     <Compile Include="Models\CommonRequest.cs" />
+    <Compile Include="Models\CountryResponse.cs" />
     <Compile Include="Models\LoginRequest.cs" />
     <Compile Include="Models\ProfileResponse.cs" />
     <Compile Include="Models\SignupRequest.cs" />

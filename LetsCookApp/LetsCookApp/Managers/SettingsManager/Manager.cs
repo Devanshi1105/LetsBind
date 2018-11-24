@@ -19,7 +19,7 @@ namespace LetsCookApp.Managers.SettingsManager
 
         public SignupResponse SignupResponse { get { return signupResponse; } }
 
-
+        public CountryResponse CountryResponse { get { return countryResponse; } }
         public Manager(IApiProvider apiProvider, ISettingsManager settingsManager)
         {
             _apiProvider = apiProvider;
@@ -37,6 +37,9 @@ namespace LetsCookApp.Managers.SettingsManager
         string error = "Please Check Internet Connection.";
         private CategoryResponse categoryResponse { get; set; }
         private ProfileResponse profileResponse { get; set; }
+        private CountryResponse countryResponse { get; set; }
+
+
         private LoginResponse loginResponse { get; set; }
         private SignupResponse signupResponse { get; set; }
         public async void  getAllCategory(CommonRequest commonRequest, Action success, Action<CategoryResponse> failed)
@@ -104,6 +107,39 @@ namespace LetsCookApp.Managers.SettingsManager
                 UserDialogs.Instance.HideLoading(); UserDialogs.Instance.Alert(error, null, "OK");
             }
         }
+
+        public async void getCountry(CommonRequest commonRequest, Action success)
+        {
+            bool IsNetwork = true;//await DependencyService.Get<IMediaService>().CheckNewworkConnectivity();
+            if (IsNetwork)
+            {
+               
+                var url = string.Format("{0}country.php?" , _settingsManager.ApiHost);
+
+                await Task.Run(() =>
+                {
+                    Dictionary<string, string> head = GetHeaders();
+                    var result = _apiProvider.Get<CountryResponse>(url, null);
+                    if (result.IsSuccessful)
+                    {
+                        if (success != null)
+                        {
+                            countryResponse = result.Result;
+                            success.Invoke();
+                        }
+                    }
+                    //else
+                    //{
+                    //    failed.Invoke(result.Result);
+                    //}
+                });
+            }
+            else
+            {
+                UserDialogs.Instance.HideLoading(); UserDialogs.Instance.Alert(error, null, "OK");
+            }
+        }
+
         public async void Login(LoginRequest request, Action success, Action<BaseResponseModel> failed)
         {
             var pp = request;
