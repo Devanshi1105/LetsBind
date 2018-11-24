@@ -29,12 +29,12 @@ namespace LetsCookApp.Views
             SelectPicture = new Command(async () => await SelectPictureAsync());
             BindingContext = App.AppSetup.SignUpViewModel;
             imgPlus.IsVisible = true;
-            var lst = App.AppSetup.SignUpViewModel.GetCountry();
+            var lst = App.AppSetup.SignUpViewModel.CountryResponse;
             foreach (var item in lst.country)
             {
                 drpcountry.Items.Add(item.name);
             }
-           
+
         }
 
         private void Create_Clicked(object sender, EventArgs e)

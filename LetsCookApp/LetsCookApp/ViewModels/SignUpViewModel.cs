@@ -23,7 +23,7 @@ namespace LetsCookApp.ViewModels
         {
             CountryResponse = new CountryResponse();
             FinishCommand = new Command(() => FinishCommandExecute());
-          //  GetCountry();
+           // GetCountry();
         }
 
 
@@ -476,7 +476,7 @@ namespace LetsCookApp.ViewModels
                     Gender = udata.Gender;
                     if (!string.IsNullOrEmpty(udata.PhotoURL))
                     {
-                        ImageBase64 = await GetImageAsBase64Url(udata.PhotoURL);
+                     //   ImageBase64 = await GetImageAsBase64Url(udata.PhotoURL);
                     }
                     Xamarin.Forms.Device.BeginInvokeOnMainThread(async () =>
                     {
@@ -533,8 +533,8 @@ namespace LetsCookApp.ViewModels
                 //{
                 //    LstCountry.Add(item);
                 //}
-                
 
+                UserDialogs.Instance.HideLoading();
             });
 
             return CountryResponse;

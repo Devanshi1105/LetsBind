@@ -53,7 +53,7 @@ namespace LetsCookApp.Managers.SettingsManager
                 await Task.Run(async () =>
                 {
                     Dictionary<string, string> head = GetHeaders();
-                    var result =  _apiProvider.Get<CategoryResponse>(url,  null);
+                    var result =  _apiProvider.Get<CategoryResponse, CommonRequest>(url,  null).Result;
                     if (result.IsSuccessful)
                     {
                         if (success != null)
@@ -79,15 +79,15 @@ namespace LetsCookApp.Managers.SettingsManager
             bool IsNetwork = true;//await DependencyService.Get<IMediaService>().CheckNewworkConnectivity();
             if (IsNetwork)
             {
-                //commonRequest.Email = "ksantosh.kundkar12@gmail.com";
-                //commonRequest.Password = "123456";
+                commonRequest.Email = "ksantosh.kundkar12@gmail.com";
+                commonRequest.Password = "123456";
                 string para = "email=" + commonRequest.Email + "&password=" + commonRequest.Password;
                 var url = string.Format("{0}profile.php?"+para, _settingsManager.ApiHost);
 
                 await Task.Run(() =>
                 {
                     Dictionary<string, string> head = GetHeaders();
-                    var result = _apiProvider.Get<ProfileResponse>(url, null);
+                    var result = _apiProvider.Get<ProfileResponse,LoginRequest >(url, null).Result;
                     if (result.IsSuccessful)
                     {
                         if (success != null)
@@ -119,7 +119,7 @@ namespace LetsCookApp.Managers.SettingsManager
                 await Task.Run(() =>
                 {
                     Dictionary<string, string> head = GetHeaders();
-                    var result = _apiProvider.Get<CountryResponse>(url, null);
+                    var result = _apiProvider.Get<CountryResponse,CommonRequest>(url, null).Result;
                     if (result.IsSuccessful)
                     {
                         if (success != null)

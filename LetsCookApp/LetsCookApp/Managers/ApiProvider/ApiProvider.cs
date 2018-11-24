@@ -34,51 +34,17 @@ namespace LetsCookApp.Managers.ApiProvider
                     HttpContent httpContent = new StringContent(pJsonContent, Encoding.UTF8, "application/json");
                     httpRequestMessage.Content = httpContent;
                     break;
-
+                case "GET":
+                    //HttpContent httpContentGet = new StringContent(pJsonContent, Encoding.UTF8, "application/json");
+                    //httpRequestMessage.Content = httpContentGet;
+                    break;
             }
             return await _httpClient.SendAsync(httpRequestMessage);
         }
 
 
 
-        public ApiResult<T> Get<T>(string url, Dictionary<string, string> headers = null)
-        {
-            HttpResponseMessage result = null;
-            try
-            {
-                lock (_httpClient)
-                {
-                    if (headers != null)
-                    {
-                        AddHeadersToClient(headers);
-                    }
-                    result = _httpClient.GetAsync(url).Result;
-                    if (headers != null)
-                    {
-                        RemoveHeadersFromClient(headers);
-                    }
-                }
-
-                var rawResult = result.Content.ReadAsStringAsync().Result;
-
-                try
-                {
-                    var deserialized = JsonConvert.DeserializeObject<T>(rawResult);
-                    return new ApiResult<T>(rawResult, (int)result.StatusCode, deserialized);
-                }
-                catch (Exception ex)
-                {
-                    return new ApiResult<T>(rawResult, 501, Activator.CreateInstance<T>());
-                }
-
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine("Error Message is :-" + e.Message);
-            }
-
-            return new ApiResult<T>(null, null != result ? (int)result.StatusCode : 0, default(T));
-        }
+      
 
         /// <summary>
         /// Post to the specified url the body.
@@ -115,6 +81,34 @@ namespace LetsCookApp.Managers.ApiProvider
             return new ApiResult<T>(null, null != result ? (int)result.StatusCode : 0, default(T));
         }
 
+
+        public async Task<ApiResult<T>> Get<T, TR>(string url, TR body, Dictionary<string, string> headers = null)
+        {
+            HttpResponseMessage result = null;
+            try
+            {
+
+              
+                var response = await Request(HttpMethod.Get, url, null);
+
+                var rawResult = await response.Content.ReadAsStringAsync();
+                try
+                {
+                    var deserialized = JsonConvert.DeserializeObject<T>(rawResult);
+                    return new ApiResult<T>(rawResult, (int)response.StatusCode, deserialized);
+                }
+                catch (Exception ex)
+                {
+                    return new ApiResult<T>(rawResult, 501, Activator.CreateInstance<T>());
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Error Message is :-" + ex.Message);
+            }
+            return new ApiResult<T>(null, null != result ? (int)result.StatusCode : 0, default(T));
+        }
         public ApiResult<T> Delete<T>(string url, Dictionary<string, string> headers = null)
         {
             HttpResponseMessage result = null;
