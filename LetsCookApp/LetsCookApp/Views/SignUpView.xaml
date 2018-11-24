@@ -129,7 +129,7 @@ Text="{Binding LastName}" x:Name="entLastName"  />
                             <StackLayout  Grid.Column="0" Grid.Row="4" VerticalOptions="FillAndExpand" BackgroundColor="#e8e7e6"   HorizontalOptions="FillAndExpand" 
                            Spacing="10" Orientation="Horizontal" >
 
-                                <local:CustomLabelRegular Text="DateOfBirth"  TextColor="Gray" FontSize="18"  HorizontalTextAlignment="Center"     HorizontalOptions="StartAndExpand" VerticalOptions="Center"/>
+                                <local:CustomLabelRegular Margin="5,0,0,0" Text="Date of birth"  TextColor="Gray" FontSize="18"  HorizontalTextAlignment="Center"     HorizontalOptions="StartAndExpand" VerticalOptions="Center"/>
                                 <!--<local:CustomDatePicker HasBorder="False" TextColor="Black" HorizontalOptions="StartAndExpand" VerticalOptions="FillAndExpand"    WidthRequest="200" x:Name="dobpickar" DateSelected="dobpickar_DateSelected"/>-->
                                 <local:NullableDatePicker   TextColor="Black" HorizontalOptions="StartAndExpand" VerticalOptions="FillAndExpand"    WidthRequest="200" x:Name="dobpickar" DateSelected="dobpickar_DateSelected" />
 

@@ -70,6 +70,7 @@
     <Compile Include="Models\CountryResponse.cs" />
     <Compile Include="Models\LoginRequest.cs" />
     <Compile Include="Models\ProfileResponse.cs" />
+    <Compile Include="Models\ProfileUpdateRequest.cs" />
     <Compile Include="Models\SignupRequest.cs" />
     <Compile Include="ViewModels\SignUpViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -110,6 +111,9 @@
     </Compile>
     <Compile Include="Views\PopularReceipesView.xaml.cs">
       <DependentUpon>PopularReceipesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProfileSetting.xaml.cs">
+      <DependentUpon>ProfileSetting.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SearchView.xaml.cs">
       <DependentUpon>SearchView.xaml</DependentUpon>
@@ -328,6 +332,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Views\ForgotPasswordView.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\ProfileSetting.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>

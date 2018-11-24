@@ -26,7 +26,7 @@ namespace LetsCookApp.Models
         public string Picture { get; set; }
         public string DateOfBirth { get; set; }
         public string Gender { get; set; }
-        public int UserId { get; set; }
+        public string UserId { get; set; }
     }
     public class SignupResponse : BaseResponseModel
     {

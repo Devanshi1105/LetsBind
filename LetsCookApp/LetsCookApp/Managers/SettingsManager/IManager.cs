@@ -10,12 +10,12 @@ namespace LetsCookApp.Managers.SettingsManager
     public interface IManager
     {
         void getAllCategory(CommonRequest commonRequest, Action success, Action<CategoryResponse> failed);
-        void getProfile(LoginRequest commonRequest, Action success, Action<ProfileResponse> failed);
+        void getProfile(GetProfileRequest commonRequest, Action success, Action<ProfileResponse> failed);
         void Login(LoginRequest request, Action success, Action<BaseResponseModel> failed);
         void ForgetPassword(LoginRequest request, Action success, Action<BaseResponseModel> failed);
 
         void SignUp(SignupRequest commonRequest, Action success, Action<SignupResponse> failed);
-        void SignUpUpdate(SignupRequest commonRequest, Action success, Action<SignupResponse> failed);
+        void SignUpUpdate(ProfileUpdateRequest commonRequest, Action success, Action<SignupResponse> failed);
 
         void getCountry(CommonRequest commonRequest, Action success);
 

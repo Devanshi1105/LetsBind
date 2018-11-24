@@ -74,14 +74,14 @@ namespace LetsCookApp.Managers.SettingsManager
             }
         }
 
-        public async void getProfile(LoginRequest commonRequest, Action success, Action<ProfileResponse> failed)
+        public async void getProfile(GetProfileRequest commonRequest, Action success, Action<ProfileResponse> failed)
         {
             bool IsNetwork = true;//await DependencyService.Get<IMediaService>().CheckNewworkConnectivity();
             if (IsNetwork)
             {
-                commonRequest.Email = "ksantosh.kundkar12@gmail.com";
-                commonRequest.Password = "123456";
-                string para = "email=" + commonRequest.Email + "&password=" + commonRequest.Password;
+                //commonRequest.Email = "ksantosh.kundkar12@gmail.com";
+                //commonRequest.Password = "123456";
+                string para = "email=" + commonRequest.EmailId + "&userid=" + commonRequest.UserId;
                 var url = string.Format("{0}profile.php?"+para, _settingsManager.ApiHost);
 
                 await Task.Run(() =>
@@ -239,7 +239,7 @@ namespace LetsCookApp.Managers.SettingsManager
             }
         }
 
-        public async void SignUpUpdate(SignupRequest signupRequest, Action success, Action<SignupResponse> failed)
+        public async void SignUpUpdate(ProfileUpdateRequest signupRequest, Action success, Action<SignupResponse> failed)
         {
             bool IsNetwork = true;//await DependencyService.Get<IMediaService>().CheckNewworkConnectivity();
             if (IsNetwork)
@@ -250,7 +250,7 @@ namespace LetsCookApp.Managers.SettingsManager
                 await Task.Factory.StartNew(() =>
                 {
 
-                    var result = _apiProvider.Post<SignupResponse, SignupRequest>(url, signupRequest).Result;
+                    var result = _apiProvider.Post<SignupResponse, ProfileUpdateRequest>(url, signupRequest).Result;
                     if (result.IsSuccessful)
                     {
                         if (success != null)

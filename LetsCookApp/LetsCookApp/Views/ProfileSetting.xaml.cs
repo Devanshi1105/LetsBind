@@ -1,5 +1,4 @@
-﻿
-using Acr.UserDialogs;
+﻿using Acr.UserDialogs;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
 using System;
@@ -9,32 +8,48 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace LetsCookApp.Views
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SignUpView : ContentPage
+    public partial class ProfileSetting : ContentPage
     {
-        public ICommand TakePicture { get; set; }
-        public ICommand SelectPicture
-        {
-            get; set;
-        }
-        public SignUpView()
+        public ProfileSetting()
         {
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
             TakePicture = new Command(async () => await TakePictureAsync());
             SelectPicture = new Command(async () => await SelectPictureAsync());
-            BindingContext = App.AppSetup.SignUpViewModel;
+            var vm = App.AppSetup.SignUpViewModel;
+            BindingContext = vm;
             imgPlus.IsVisible = true;
+            imgphoto.Source = App.AppSetup.SignUpViewModel.PictureSource;
+           
+
             var lst = App.AppSetup.SignUpViewModel.CountryResponse;
             foreach (var item in lst.country)
             {
-                drpcountry.Items.Add(item.name);
+                drpcountry.Items.Add(item.name.ToUpper());
             }
-            imgphoto.Source = App.AppSetup.SignUpViewModel.PictureSource;
+
+            if (!string.IsNullOrEmpty(vm.Gender))
+            {
+                drpgender.SelectedIndex = drpgender.Items.IndexOf(vm.Gender.ToUpper());
+            }
+            if (!string.IsNullOrEmpty(vm.Country))
+            {
+                drpcountry.SelectedIndex = drpcountry.Items.IndexOf(vm.Country.ToUpper());
+            }
+            if (!string.IsNullOrEmpty(vm.DateOfBirth))
+            {
+                dobpickar.Date =Convert.ToDateTime(vm.DateOfBirth);
+            }
+
+
+        }
+        public ICommand TakePicture { get; set; }
+        public ICommand SelectPicture
+        {
+            get; set;
         }
 
         private void Create_Clicked(object sender, EventArgs e)
@@ -50,9 +65,9 @@ namespace LetsCookApp.Views
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
-            var viewmodel = App.AppSetup.SignUpViewModel;
-            viewmodel.FullName = viewmodel.FirstName = viewmodel.DateOfBirth = viewmodel.Ocupation = viewmodel.Email = viewmodel.UserName = viewmodel.Password = viewmodel.MobileNumber = viewmodel.AboutMe = "";
-            viewmodel.Address1 = viewmodel.Address2 = viewmodel.Address3 = viewmodel.City = viewmodel.State = viewmodel.Country = viewmodel.Postcode = viewmodel.Gender = viewmodel.Hobbies = viewmodel.PhoneNumber = "";
+            //var viewmodel = App.AppSetup.SignUpViewModel;
+            //viewmodel.FullName = viewmodel.FirstName = viewmodel.DateOfBirth = viewmodel.Ocupation = viewmodel.Email = viewmodel.UserName = viewmodel.Password = viewmodel.MobileNumber = viewmodel.AboutMe = "";
+            //viewmodel.Address1 = viewmodel.Address2 = viewmodel.Address3 = viewmodel.City = viewmodel.State = viewmodel.Country = viewmodel.Postcode = viewmodel.Gender = viewmodel.Hobbies = viewmodel.PhoneNumber = "";
 
         }
 
@@ -130,7 +145,18 @@ namespace LetsCookApp.Views
         }
 
 
-       
+        private ImageSource picture;
+        public ImageSource Picture
+        {
+            get { return picture; }
+            set
+            {
+
+                picture = value;
+                // RaisePropertyChanged(() => Picture);
+            }
+        }
+
         private async void TapGestureRecognizer_Tapped_1(object sender, EventArgs e)
         {
             var actionSheet = await DisplayActionSheet("", "Cancel", null, new string[] { "Take Picture", "Select Picture" });
@@ -200,18 +226,18 @@ namespace LetsCookApp.Views
                 dobpickar.Focus();
                 val = false;
             }
-            else if (string.IsNullOrEmpty(vm.Password))
-            {
-                UserDialogs.Instance.Alert("Password is Required.");
-                entPassword.Focus();
-                val = false;
-            }
-            else if (vm.Password != vm.RetypePassword)
-            {
-                UserDialogs.Instance.Alert("Password and retype-password should be equal.");
-                entRetypePassword.Focus();
-                val = false;
-            }
+            //else if (string.IsNullOrEmpty(vm.Password))
+            //{
+            //    UserDialogs.Instance.Alert("Password is Required.");
+            //    entPassword.Focus();
+            //    val = false;
+            //}
+            //else if (vm.Password != vm.RetypePassword)
+            //{
+            //    UserDialogs.Instance.Alert("Password and retype-password should be equal.");
+            //    entRetypePassword.Focus();
+            //    val = false;
+            //}
             else if (string.IsNullOrEmpty(vm.MobileNumber))
             {
                 UserDialogs.Instance.Alert("MobileNumber is Required.");
@@ -264,8 +290,9 @@ namespace LetsCookApp.Views
             }
         }
 
-
-
-
+        private void Menu_Tapped(object sender, EventArgs e)
+        {
+            Navigation.PopAsync();
+        }
     }
 }

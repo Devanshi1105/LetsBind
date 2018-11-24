@@ -152,8 +152,8 @@ namespace LetsCookApp.ViewModels
             }
         }
 
-        private int userid;
-        public int UserId
+        private string userid;
+        public string UserId
         {
             get { return userid; }
             set
@@ -249,6 +249,17 @@ namespace LetsCookApp.ViewModels
         }
 
 
+        private ImageSource pictureSource;
+        public ImageSource PictureSource
+        {
+            get { return pictureSource; }
+            set
+            {
+
+                pictureSource = value;
+                 RaisePropertyChanged(() => PictureSource);
+            }
+        }
 
 
 
@@ -339,9 +350,7 @@ namespace LetsCookApp.ViewModels
         public ICommand FinishCommand { get; private set; }
         private async void FinishCommandExecute()
         {
-
-            if (Validate() == true)
-            {
+ 
                 var SignupRequest = new SignupRequest
                 {
                     Address1 = Address1,
@@ -361,7 +370,8 @@ namespace LetsCookApp.ViewModels
                     Postcode = postCode,
                     Picture = ImageBase64,
                     DateOfBirth = DateOfBirth,
-                    Gender = Gender
+                    Gender = Gender,
+                   
                 };
 
 
@@ -371,8 +381,31 @@ namespace LetsCookApp.ViewModels
                     UserDialogs.Instance.ShowLoading("Requesting..");
                     if (BtnText == "UPDATE")
                     {
-                        SignupRequest.UserId = UserId;
-                        userManager.SignUpUpdate(SignupRequest, () =>
+                        var ProfileUpdateRequest = new ProfileUpdateRequest
+                        {
+                            Address1 = Address1,
+                            Address2 = Address2,
+                            Address3 = Address3,
+                            State = State,
+                            City = City,
+                            Country = Country,
+                            EmailId = Email,
+                            FirstName = FirstName,
+                            Hobbies = Hobbies,
+                            LastName = LastName,
+                            UserName = UserName,
+                            MobileNumber = MobileNumber,
+                            Password = Password,
+                            PhoneNumber = PhoneNumber,
+                            Postcode = postCode,
+                            PhotoUrl = ImageBase64,
+                            DateOfBirth = DateOfBirth,
+                            Gender = Gender,
+                             AboutMe=AboutMe,
+                              UserId = UserId
+                    };
+                        
+                        userManager.SignUpUpdate(ProfileUpdateRequest, () =>
                         {
                             var SignupResponse = userManager.SignupResponse;
                             Device.BeginInvokeOnMainThread(() =>
@@ -380,10 +413,11 @@ namespace LetsCookApp.ViewModels
                                 if (SignupResponse.StatusCode == 200)
                                 {
                                     UserDialogs.Instance.HideLoading();
-                                    UserDialogs.Instance.Alert(SignupResponse.Message);
-                                    FullName = DateOfBirth = Ocupation = Email = UserName = Password = MobileNumber = AboutMe = "";
-                                    Address1 = Address2 = Address3 = City = State = Country = Postcode = Gender = Hobbies = PhoneNumber = "";
-                                    App.Current.MainPage.Navigation.PushAsync(new SignInView());
+                                   
+                                    //FullName = DateOfBirth = Ocupation = Email = UserName = Password = MobileNumber = AboutMe = "";
+                                    //Address1 = Address2 = Address3 = City = State = Country = Postcode = Gender = Hobbies = PhoneNumber = "";
+                                    UserDialogs.Instance.Alert(SignupResponse.Message, "Error", "OK");
+                                    //App.Current.MainPage.Navigation.PushAsync(new SignInView());
                                 }
                                 else
                                 {
@@ -439,15 +473,15 @@ namespace LetsCookApp.ViewModels
 
 
 
-            }
+           
         }
 
         public void GetProfile()
         {
 
-            LoginRequest obj = new LoginRequest();
-            obj.Email = Email;
-            obj.Password = Password;
+            GetProfileRequest obj = new GetProfileRequest();
+            obj.EmailId = Email;
+            obj.UserId = UserId;
             UserDialogs.Instance.ShowLoading("Requesting..");
             userManager.getProfile(obj, async () =>
             {
@@ -476,12 +510,13 @@ namespace LetsCookApp.ViewModels
                     Gender = udata.Gender;
                     if (!string.IsNullOrEmpty(udata.PhotoURL))
                     {
-                     //   ImageBase64 = await GetImageAsBase64Url(udata.PhotoURL);
+                        PictureSource = udata.PhotoURL;
+                       ImageBase64 = await GetImageAsBase64Url(udata.PhotoURL);
                     }
                     Xamarin.Forms.Device.BeginInvokeOnMainThread(async () =>
                     {
                         UserDialogs.Instance.HideLoading();
-                        ((MasterDetailPage)App.Current.MainPage).Detail.Navigation.PushAsync(new SignUpView());
+                      await ((MasterDetailPage)App.Current.MainPage).Detail.Navigation.PushAsync(new ProfileSetting());
 
                     });
 
