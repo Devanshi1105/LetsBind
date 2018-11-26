@@ -3,6 +3,7 @@ using Plugin.Media;
 using Plugin.Media.Abstractions;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,7 +42,9 @@ namespace LetsCookApp.Views
             }
             if (!string.IsNullOrEmpty(vm.DateOfBirth))
             {
-                dobpickar.Date =Convert.ToDateTime(vm.DateOfBirth);
+                CultureInfo provider =  CultureInfo.InvariantCulture;
+                DateTime dateTime16 = DateTime.ParseExact(vm.DateOfBirth, new string[] { "dd.MM.yyyy", "dd-MM-yyyy", "dd/MM/yyyy" }, provider, DateTimeStyles.None);
+                dobpickar.Date = dateTime16;
             }
 
 
@@ -182,7 +185,7 @@ namespace LetsCookApp.Views
 
         private void dobpickar_DateSelected(object sender, DateChangedEventArgs e)
         {
-            App.AppSetup.SignUpViewModel.DateOfBirth = dobpickar.Date.ToString();
+            App.AppSetup.SignUpViewModel.DateOfBirth = dobpickar.Date.ToString("dd/MM/yyyy");
         }
 
 

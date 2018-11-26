@@ -67,8 +67,8 @@ namespace LetsCookApp.ViewModels
                             if (LoginResponse.StatusCode == 202)
                             {
                                 App.AppSetup.HomeViewModel.UserData = LoginResponse.UserData;
-                                App.AppSetup.SignUpViewModel.Email = LoginResponse.UserData.EmailId;
-                                App.AppSetup.SignUpViewModel.UserId = LoginResponse.UserData.UserId;
+                                App.AppSetup.SignUpViewModel.Email= App.AppSetup.HomeViewModel.Email = LoginResponse.UserData.EmailId;
+                                App.AppSetup.SignUpViewModel.UserId= App.AppSetup.HomeViewModel.UserId = LoginResponse.UserData.UserId;
                                 UserName = Password = "";
                                 UserDialogs.Instance.HideLoading();
                                 App.Current.MainPage = new Views.HomeView();
