@@ -512,7 +512,7 @@ namespace LetsCookApp.ViewModels
                     PhoneNumber = udata.PhoneNumber;
                     Postcode = udata.Postcode;
                     Picture = udata.PhotoURL;
-                    DateOfBirth = udata.DateOfBirth;
+                    DateOfBirth =  udata.DateOfBirth;
                     Gender = udata.Gender;
                     AboutMe = udata.AboutMe;
                     if (!string.IsNullOrEmpty(udata.PhotoURL))

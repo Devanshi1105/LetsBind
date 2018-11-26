@@ -185,7 +185,10 @@ namespace LetsCookApp.Views
 
         private void dobpickar_DateSelected(object sender, DateChangedEventArgs e)
         {
-            App.AppSetup.SignUpViewModel.DateOfBirth = dobpickar.Date.ToString("dd/MM/yyyy");
+            //CultureInfo provider = CultureInfo.InvariantCulture;
+            //DateTime dateTime16 = DateTime.ParseExact(dobpickar.Date.ToString(), new string[] { "MM.dd.yyyy", "MM-dd-yyyy", "MM/dd/yyyy" }, provider, DateTimeStyles.None);
+
+            App.AppSetup.SignUpViewModel.DateOfBirth = dobpickar.Date.ToString();
         }
 
 
