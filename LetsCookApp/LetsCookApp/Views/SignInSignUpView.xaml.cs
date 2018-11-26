@@ -22,7 +22,7 @@ namespace LetsCookApp.Views
         private async void Create_Clicked(object sender, EventArgs e)
         {
             App.AppSetup.SignUpViewModel.IsEn = true;
-            App.AppSetup.SignUpViewModel.Title = "Sign in";
+            App.AppSetup.SignUpViewModel.Title = "Signin";
             App.AppSetup.SignUpViewModel.BtnText = "FINISH";
             App.AppSetup.SignUpViewModel.Picture = "man.png";
             await Navigation.PushAsync(new SignUpView());

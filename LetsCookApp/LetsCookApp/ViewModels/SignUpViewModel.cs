@@ -36,6 +36,12 @@ namespace LetsCookApp.ViewModels
             get { return email; }
             set { email = value; RaisePropertyChanged(() => Email); }
         }
+         private string retypeEmail;
+        public string RetypeEmail
+        {
+            get { return retypeEmail; }
+            set { retypeEmail = value; RaisePropertyChanged(() => RetypeEmail); }
+        }
 
 
         private string firstName;
@@ -508,6 +514,7 @@ namespace LetsCookApp.ViewModels
                     Picture = udata.PhotoURL;
                     DateOfBirth = udata.DateOfBirth;
                     Gender = udata.Gender;
+                    AboutMe = udata.AboutMe;
                     if (!string.IsNullOrEmpty(udata.PhotoURL))
                     {
                         PictureSource = udata.PhotoURL;

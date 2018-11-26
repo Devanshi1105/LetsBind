@@ -94,6 +94,7 @@ RowSpacing="0.3" ColumnSpacing="0">
                                 <RowDefinition Height="50"/>
                                 <RowDefinition Height="50"/>
                                 <RowDefinition Height="50"/>
+                                <RowDefinition Height="50"/>
                                 <RowDefinition Height="150"/>
                                 <RowDefinition Height="150"/>
                             </Grid.RowDefinitions>
@@ -106,96 +107,105 @@ HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
 
                             <local:CustomEntryRegular Grid.Column="0" 
 Grid.Row="1" BackgroundColor="#e8e7e6" TextColor="Black" 
-Placeholder="First Name" PlaceholderColor="Gray" 
+Placeholder="Email Id" PlaceholderColor="Gray" 
 HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" 
-Text="{Binding FirstName}" x:Name="entFirstName" />
+Text="{Binding Email}"  Margin="0,0.3,0,0" IsEnabled="{Binding IsEn}" x:Name="entEmail" />
 
                             <local:CustomEntryRegular Grid.Column="0" 
 Grid.Row="2" BackgroundColor="#e8e7e6" TextColor="Black" 
-Placeholder="Last Name" PlaceholderColor="Gray" 
+Placeholder="Retype Email Id" PlaceholderColor="Gray" 
 HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" 
-Text="{Binding LastName}" x:Name="entLastName"  />
+Text="{Binding RetypeEmail}"  Margin="0,0.3,0,0" IsEnabled="{Binding IsEn}" x:Name="entRetypeEmail" />
 
-                            <StackLayout Grid.Row="3"  Grid.Column="0"  HorizontalOptions="FillAndExpand" BackgroundColor="#e8e7e6" VerticalOptions="FillAndExpand">
-                                <local:CustomPicker TextColor="Black"   HorizontalOptions="FillAndExpand"  BackgroundColor="#e8e7e6"  HeightRequest="40" VerticalOptions="CenterAndExpand"   WidthRequest="200" Margin="0,0,10,0"   Image="loginarrow" Title="Choose Gender"
-                                     x:Name="drpgender" SelectedIndexChanged="drpgender_SelectedIndexChanged">
-                                    <local:CustomPicker.Items>
-                                        <x:String>Male</x:String>
-                                        <x:String>Female</x:String>
-                                    </local:CustomPicker.Items>
-                                </local:CustomPicker>
-                            </StackLayout>
-
-                            <StackLayout  Grid.Column="0" Grid.Row="4" VerticalOptions="FillAndExpand" BackgroundColor="#e8e7e6"   HorizontalOptions="FillAndExpand" 
-                           Spacing="10" Orientation="Horizontal" >
-
-                                <local:CustomLabelRegular Margin="5,0,0,0" Text="Date of birth"  TextColor="Gray" FontSize="18"  HorizontalTextAlignment="Center"     HorizontalOptions="StartAndExpand" VerticalOptions="Center"/>
-                                <!--<local:CustomDatePicker HasBorder="False" TextColor="Black" HorizontalOptions="StartAndExpand" VerticalOptions="FillAndExpand"    WidthRequest="200" x:Name="dobpickar" DateSelected="dobpickar_DateSelected"/>-->
-                                <local:NullableDatePicker   TextColor="Black" HorizontalOptions="StartAndExpand" VerticalOptions="FillAndExpand"    WidthRequest="200" x:Name="dobpickar" DateSelected="dobpickar_DateSelected" />
-
-                            </StackLayout>
                             <local:CustomEntryRegular Grid.Column="0" 
-Grid.Row="5" BackgroundColor="#e8e7e6" TextColor="Black" 
+Grid.Row="3" BackgroundColor="#e8e7e6" TextColor="Black" 
 Placeholder="Password" PlaceholderColor="Gray" 
 HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" 
 Text="{Binding Password}" IsPassword="True" Margin="0,0.3,0,0" x:Name="entPassword" />
 
                             <local:CustomEntryRegular Grid.Column="0" 
-Grid.Row="6" BackgroundColor="#e8e7e6" TextColor="Black" 
+Grid.Row="4" BackgroundColor="#e8e7e6" TextColor="Black" 
 Placeholder="Retype Password" PlaceholderColor="Gray" 
 HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" 
 Text="{Binding RetypePassword}" IsPassword="True"  Margin="0,0.3,0,0" x:Name="entRetypePassword" />
+                            
 
                             <local:CustomEntryRegular Grid.Column="0" 
-Grid.Row="7" BackgroundColor="#e8e7e6" TextColor="Black" 
+Grid.Row="5" BackgroundColor="#e8e7e6" TextColor="Black" 
+Placeholder="First Name" PlaceholderColor="Gray" 
+HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" 
+Text="{Binding FirstName}" x:Name="entFirstName" />
+
+                            <local:CustomEntryRegular Grid.Column="0" 
+Grid.Row="6" BackgroundColor="#e8e7e6" TextColor="Black" 
+Placeholder="Last Name" PlaceholderColor="Gray" 
+HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" 
+Text="{Binding LastName}" x:Name="entLastName"  />
+
+                            <StackLayout Grid.Row="7"  Grid.Column="0"  HorizontalOptions="FillAndExpand" BackgroundColor="#e8e7e6" VerticalOptions="FillAndExpand">
+                                <local:CustomPicker TextColor="Black"   HorizontalOptions="FillAndExpand"  BackgroundColor="#e8e7e6"  HeightRequest="40" VerticalOptions="CenterAndExpand"   WidthRequest="200" Margin="0,0,10,0"   Image="loginarrow" Title="Choose Gender"
+                                     x:Name="drpgender" SelectedIndexChanged="drpgender_SelectedIndexChanged">
+                                    <local:CustomPicker.Items>
+                                        <x:String>Male</x:String>
+                                        <x:String>Female</x:String>
+                                        <x:String>Unknown</x:String>
+                                    </local:CustomPicker.Items>
+                                </local:CustomPicker>
+                            </StackLayout>
+
+                            <StackLayout  Grid.Column="0" Grid.Row="8" VerticalOptions="FillAndExpand" BackgroundColor="#e8e7e6"   HorizontalOptions="FillAndExpand" 
+                           Spacing="10" Orientation="Horizontal" >
+
+                                <local:CustomLabelRegular Margin="5,0,0,0" Text="Date of Birth"  TextColor="Gray" FontSize="18"  HorizontalTextAlignment="Center"     HorizontalOptions="StartAndExpand" VerticalOptions="Center"/>
+                                 
+                                <local:NullableDatePicker   TextColor="Black" HorizontalOptions="StartAndExpand" VerticalOptions="FillAndExpand"    WidthRequest="200" x:Name="dobpickar" DateSelected="dobpickar_DateSelected" />
+
+                            </StackLayout> 
+
+                            <local:CustomEntryRegular Grid.Column="0" 
+Grid.Row="9" BackgroundColor="#e8e7e6" TextColor="Black" 
 Placeholder="Mobile Number" PlaceholderColor="Gray" 
 HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" 
 Text="{Binding MobileNumber}" x:Name="entMobileNumber"  />
 
                             <local:CustomEntryRegular Grid.Column="0" 
-Grid.Row="8" BackgroundColor="#e8e7e6" TextColor="Black" 
+Grid.Row="10" BackgroundColor="#e8e7e6" TextColor="Black" 
 Placeholder="Phone Number" PlaceholderColor="Gray" 
 HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" 
-Text="{Binding PhoneNumber}" x:Name="entPhoneNumber" />
+Text="{Binding PhoneNumber}" x:Name="entPhoneNumber" /> 
 
                             <local:CustomEntryRegular Grid.Column="0" 
-Grid.Row="9" BackgroundColor="#e8e7e6" TextColor="Black" 
-Placeholder="Email" PlaceholderColor="Gray" 
-HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" 
-Text="{Binding Email}"  Margin="0,0.3,0,0" IsEnabled="{Binding IsEn}" x:Name="entEmail" />
-
-                            <local:CustomEntryRegular Grid.Column="0" 
-Grid.Row="10" BackgroundColor="#e8e7e6" TextColor="Black" 
+Grid.Row="11" BackgroundColor="#e8e7e6" TextColor="Black" 
 Placeholder="Address1" PlaceholderColor="Gray" 
 HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" 
 Text="{Binding Address1}" Margin="0,0.3,0,0" x:Name="entAddress1" />
 
                             <local:CustomEntryRegular Grid.Column="0" 
-Grid.Row="11" BackgroundColor="#e8e7e6" TextColor="Black" 
+Grid.Row="12" BackgroundColor="#e8e7e6" TextColor="Black" 
 Placeholder="Address2" PlaceholderColor="Gray" 
 HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" 
 Text="{Binding Address2}" x:Name="entAddress2"  />
 
                             <local:CustomEntryRegular Grid.Column="0" 
-Grid.Row="12" BackgroundColor="#e8e7e6" TextColor="Black" 
+Grid.Row="13" BackgroundColor="#e8e7e6" TextColor="Black" 
 Placeholder="Address3" PlaceholderColor="Gray" 
 HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" 
 Text="{Binding Address3}" x:Name="entAddress3" />
 
                             <local:CustomEntryRegular Grid.Column="0" 
-Grid.Row="13" BackgroundColor="#e8e7e6" TextColor="Black" 
+Grid.Row="14" BackgroundColor="#e8e7e6" TextColor="Black" 
 Placeholder="City" PlaceholderColor="Gray" 
 HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" 
 Text="{Binding City}" Margin="0,0.3,0,0" x:Name="entCity" />
 
                             <local:CustomEntryRegular Grid.Column="0" 
-Grid.Row="14" BackgroundColor="#e8e7e6" TextColor="Black" 
+Grid.Row="15" BackgroundColor="#e8e7e6" TextColor="Black" 
 Placeholder="Postcode" PlaceholderColor="Gray" 
 HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" 
 Text="{Binding Postcode}" x:Name="entPostcode" />
 
                             <local:CustomEntryRegular Grid.Column="0" 
-Grid.Row="15" BackgroundColor="#e8e7e6" TextColor="Black" 
+Grid.Row="16" BackgroundColor="#e8e7e6" TextColor="Black" 
 Placeholder="State" PlaceholderColor="Gray" 
 HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" 
 Text="{Binding State}" Margin="0,0.3,0,0" x:Name="entState" />
@@ -205,36 +215,19 @@ Grid.Row="15" BackgroundColor="#e8e7e6" TextColor="Black"
 Placeholder="Country" PlaceholderColor="Gray" 
 HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" 
 Text="{Binding Country}" />-->
-                            <StackLayout Grid.Row="16" Grid.Column="0"  HorizontalOptions="FillAndExpand" BackgroundColor="#e8e7e6" VerticalOptions="FillAndExpand">
+                            <StackLayout Grid.Row="17" Grid.Column="0"  HorizontalOptions="FillAndExpand" BackgroundColor="#e8e7e6" VerticalOptions="FillAndExpand">
                                 <local:CustomPicker TextColor="Black"  HorizontalOptions="FillAndExpand"  BackgroundColor="#e8e7e6"   HeightRequest="40" VerticalOptions="CenterAndExpand"   WidthRequest="200" Margin="0,0,10,0"   Image="loginarrow"
-                       Title="Select Country"  x:Name="drpcountry" SelectedIndexChanged="drpcountry_SelectedIndexChanged">
-                                    <!--<local:CustomPicker.Items>
-                                        <x:String>Afghanistan</x:String>
-                                        <x:String>land Islands</x:String>
-                                        <x:String>Albania</x:String>
-                                        <x:String>American Samoa</x:String>
-                                        <x:String>AndorrA</x:String>
-                                        <x:String>Angola</x:String>
-                                        <x:String>Anguilla</x:String>
-                                        <x:String>Antarctica</x:String>
-                                        <x:String>Antigua and Barbuda</x:String>
-                                        <x:String>Argentina</x:String>
-                                        <x:String>Armenia</x:String>
-                                        <x:String>Australia</x:String>
-                                        <x:String>Bahamas</x:String>
-
-                                    </local:CustomPicker.Items>-->
-                                </local:CustomPicker>
+                       Title="Select Country"  x:Name="drpcountry" SelectedIndexChanged="drpcountry_SelectedIndexChanged"/> 
                             </StackLayout>
 
                             <local:PlaceholderEditor Grid.Column="0" 
-Grid.Row="17" BackgroundColor="#e8e7e6" TextColor="Black" 
+Grid.Row="18" BackgroundColor="#e8e7e6" TextColor="Black" 
 Placeholder="Hobbies" PlaceholderColor="Gray" 
 HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" 
 Text="{Binding Hobbies}" x:Name="edtHobbies"  />
 
                             <local:PlaceholderEditor Grid.Column="0"  
-Grid.Row="18" BackgroundColor="#e8e7e6" Placeholder="About Me" 
+Grid.Row="19" BackgroundColor="#e8e7e6" Placeholder="About Me" 
 PlaceholderColor="Gray" TextColor="Black" HeightRequest="150"  
 HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" 
 Text="{Binding AboutMe}" x:Name="entAboutMe" />
