@@ -1,5 +1,6 @@
 ﻿using Acr.UserDialogs;
 using LetsCookApp.Models;
+using LetsCookApp.Views;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -125,7 +126,7 @@ namespace LetsCookApp.ViewModels
                                 EmailId = "";
                                 UserDialogs.Instance.HideLoading();
                                 UserDialogs.Instance.Alert(LoginResponse.Message, "Success", "OK");
-                                //Pop
+                                App.Current.MainPage = new NavigationPage(new SignInSignUpView());
                             }
                             else
                             {
@@ -176,7 +177,7 @@ namespace LetsCookApp.ViewModels
             }
         }
 
-        private string userName;
+        private string userName ="ksantosh.kundkar@gmail.com";
 
         public string UserName
         {
@@ -184,7 +185,7 @@ namespace LetsCookApp.ViewModels
             set { userName = value; RaisePropertyChanged(() => UserName); }
         }
 
-        private string password;
+        private string password="123456";
 
         public string Password
         {

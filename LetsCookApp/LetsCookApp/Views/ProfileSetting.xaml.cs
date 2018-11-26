@@ -196,9 +196,33 @@ namespace LetsCookApp.Views
                 entUserName.Focus();
                 val = false;
             }
+            else if (string.IsNullOrEmpty(vm.Email))
+            {
+                UserDialogs.Instance.Alert("Email is Required.");
+                entEmail.Focus();
+                val = false;
+            }
+            //else if (vm.Email != vm.RetypeEmail)
+            //{
+            //    UserDialogs.Instance.Alert("Emailid and retype-emailid should be equal.");
+            //    entRetypeEmail.Focus();
+            //    val = false;
+            //}
+            //else if (string.IsNullOrEmpty(vm.Password))
+            //{
+            //    UserDialogs.Instance.Alert("Password is Required.");
+            //    entPassword.Focus();
+            //    val = false;
+            //}
+            //else if (vm.Password != vm.RetypePassword)
+            //{
+            //    UserDialogs.Instance.Alert("Password and retype-password should be equal.");
+            //    entRetypePassword.Focus();
+            //    val = false;
+            //}
             else if (string.IsNullOrEmpty(vm.FirstName))
             {
-                UserDialogs.Instance.Alert("FullName is Required");
+                UserDialogs.Instance.Alert("FirstName is Required");
                 entFirstName.Focus();
                 val = false;
             }
@@ -226,18 +250,7 @@ namespace LetsCookApp.Views
                 dobpickar.Focus();
                 val = false;
             }
-            //else if (string.IsNullOrEmpty(vm.Password))
-            //{
-            //    UserDialogs.Instance.Alert("Password is Required.");
-            //    entPassword.Focus();
-            //    val = false;
-            //}
-            //else if (vm.Password != vm.RetypePassword)
-            //{
-            //    UserDialogs.Instance.Alert("Password and retype-password should be equal.");
-            //    entRetypePassword.Focus();
-            //    val = false;
-            //}
+
             else if (string.IsNullOrEmpty(vm.MobileNumber))
             {
                 UserDialogs.Instance.Alert("MobileNumber is Required.");
@@ -250,12 +263,7 @@ namespace LetsCookApp.Views
                 entPhoneNumber.Focus();
                 val = false;
             }
-            else if (string.IsNullOrEmpty(vm.Email))
-            {
-                UserDialogs.Instance.Alert("Email is Required.");
-                entEmail.Focus();
-                val = false;
-            }
+
             else if (string.IsNullOrEmpty(vm.Address1))
             {
                 UserDialogs.Instance.Alert("Address1 is Required.");

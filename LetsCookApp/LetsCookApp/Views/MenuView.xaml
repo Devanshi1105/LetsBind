@@ -45,7 +45,7 @@
 
 
         <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" Padding="0,5,0,0">
-            <local:CustomListView x:Name="masterMenuList" ItemsSource="{Binding MenuItemList}" ItemTapped="masterMenuList_ItemTapped" RowHeight="36" HorizontalOptions="FillAndExpand" VerticalOptions="Start" SeparatorVisibility="None" BackgroundColor="Transparent" >
+            <local:CustomListView x:Name="masterMenuList" ItemsSource="{Binding MenuItemList}" ItemTapped="masterMenuList_ItemTapped" RowHeight="36" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" SeparatorVisibility="None" BackgroundColor="Transparent" >
                 <local:CustomListView.ItemTemplate>
                     <DataTemplate>
                         <local:CustomListViewCell>
@@ -53,7 +53,7 @@
                              
                                 <StackLayout HorizontalOptions="StartAndExpand" Orientation="Horizontal" VerticalOptions="StartAndExpand" Spacing="10" Margin="15,10,5,5">
                                   <Image Source="{Binding imagesource}" Aspect="AspectFit" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="22" WidthRequest="22"/>
-                                    <local:CustomLabelRegular Text="{Binding Title}" TextColor="#ffffff" FontSize="16" FontAttributes ="Bold"   VerticalOptions="Center" HorizontalOptions="StartAndExpand" />
+                                    <local:CustomLabelRegular Text="{Binding Title}" TextColor="#ffffff" FontSize="14" FontAttributes ="Bold"   VerticalOptions="Center" HorizontalOptions="StartAndExpand" />
                                 </StackLayout>
                             </local:CustomListViewCell.View>
                         </local:CustomListViewCell>

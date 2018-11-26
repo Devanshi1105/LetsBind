@@ -15,7 +15,7 @@
                     </ContentView.GestureRecognizers>
                 </ContentView>
                 <ContentView HorizontalOptions="EndAndExpand" VerticalOptions="Center" Padding="10,10">
-                    <local:CustomLabelLight Text="Create my account" TextColor="#ffffff" FontSize="20" HorizontalOptions="EndAndExpand" VerticalOptions="Center"  />
+                    <local:CustomLabelLight Text="Create account" TextColor="#ffffff" FontSize="20" HorizontalOptions="EndAndExpand" VerticalOptions="Center"  />
                     <ContentView.GestureRecognizers>
                         <TapGestureRecognizer Tapped="CreateAccount_Tapped" />
                     </ContentView.GestureRecognizers>
