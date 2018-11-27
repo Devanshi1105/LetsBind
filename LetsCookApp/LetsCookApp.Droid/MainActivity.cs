@@ -9,6 +9,7 @@ using Android.OS;
 using ImageCircle.Forms.Plugin.Droid;
 using Plugin.CurrentActivity;
 using Plugin.Permissions;
+using FFImageLoading.Forms.Droid;
 
 namespace LetsCookApp.Droid
 {
@@ -24,6 +25,7 @@ namespace LetsCookApp.Droid
             global::Acr.UserDialogs.UserDialogs.Init(this);
             //CrossCurrentActivity.Current.Activity.ini(this, bundle);
             ImageCircleRenderer.Init();
+            CachedImageRenderer.Init();
             global::Xamarin.Forms.Forms.Init(this, bundle);
             LoadApplication(new App());
         }

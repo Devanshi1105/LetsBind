@@ -52,8 +52,8 @@ namespace LetsCookApp.ViewModels
             {
                 var LoginRequest = new LoginRequest
                 {
-                    Email = UserName,//                    "ksantosh.kundkar12@gmail.com",//UserName, 
-                    Password = Password
+                    Email = UserName,//"ksantosh.kundkar12@gmail.com",//UserName, 
+                    Password = Password// "123456",// Password
                 };
 
                
@@ -177,7 +177,7 @@ namespace LetsCookApp.ViewModels
             }
         }
 
-        private string userName ="ksantosh.kundkar@gmail.com";
+        private string userName;
 
         public string UserName
         {
@@ -185,7 +185,7 @@ namespace LetsCookApp.ViewModels
             set { userName = value; RaisePropertyChanged(() => UserName); }
         }
 
-        private string password="123456";
+        private string password;
 
         public string Password
         {
