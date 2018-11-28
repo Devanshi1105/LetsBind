@@ -24,7 +24,7 @@ namespace LetsCookApp.Views
             ALine.IsVisible = FLine.IsVisible = GLine.IsVisible = false;
             grdAboutme.IsVisible = listFriends.IsVisible = grdGallery.IsVisible = false;
             BindingContext = App.AppSetup.HomeViewModel;
-
+            App.AppSetup.HomeViewModel.GetProfile();
         }
 
         private void Menu_Tapped(object sender, EventArgs e)

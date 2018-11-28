@@ -1,9 +1,12 @@
 ﻿//using LetsCookApp.Views;
+using Acr.UserDialogs;
 using LetsCookApp.Models;
 using LetsCookApp.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -33,6 +36,242 @@ namespace LetsCookApp.ViewModels
             RaisePropertyChanged(() => MenuItemList);
         }
 
+        #region Property
+        private string email;
+        public string Email
+        {
+            get { return email; }
+            set { email = value; RaisePropertyChanged(() => Email); }
+        }
+
+
+        private string firstName;
+        public string FirstName
+        {
+            get { return firstName; }
+            set { firstName = value; RaisePropertyChanged(() => FirstName); }
+        }
+
+
+        private string password;
+        public string Password
+        {
+            get { return password; }
+            set { password = value; RaisePropertyChanged(() => Password); }
+        }
+
+        private string retypePassword;
+        public string RetypePassword
+        {
+            get { return retypePassword; }
+            set
+            {
+
+                retypePassword = value;
+                RaisePropertyChanged(() => RetypePassword);
+            }
+        }
+
+        private string lastName;
+        public string LastName
+        {
+            get { return lastName; }
+            set { lastName = value; RaisePropertyChanged(() => LastName); }
+        }
+        private string mobileNumber;
+        public string MobileNumber
+        {
+            get { return mobileNumber; }
+            set { mobileNumber = value; RaisePropertyChanged(() => MobileNumber); }
+        }
+        private string phoneNumber;
+        public string PhoneNumber
+        {
+            get { return phoneNumber; }
+            set { phoneNumber = value; RaisePropertyChanged(() => PhoneNumber); }
+        }
+
+        private string address1;
+        public string Address1
+        {
+            get { return address1; }
+            set { address1 = value; RaisePropertyChanged(() => Address1); }
+        }
+        private string address2;
+        public string Address2
+        {
+            get { return address2; }
+            set { address2 = value; RaisePropertyChanged(() => Address2); }
+        }
+        private string address3;
+        public string Address3
+        {
+            get { return address3; }
+            set { address3 = value; RaisePropertyChanged(() => Address3); }
+        }
+        private string city;
+        public string City
+        {
+            get { return city; }
+            set { city = value; RaisePropertyChanged(() => City); }
+        }
+
+        private string state;
+        public string State
+        {
+            get { return state; }
+            set { state = value; RaisePropertyChanged(() => State); }
+        }
+        private string country;
+        public string Country
+        {
+            get { return country; }
+            set { country = value; RaisePropertyChanged(() => Country); }
+        }
+
+        private string postCode;
+        public string Postcode
+        {
+            get { return postCode; }
+            set { postCode = value; RaisePropertyChanged(() => Postcode); }
+        }
+        private string hobbies;
+        public string Hobbies
+        {
+            get { return hobbies; }
+            set { hobbies = value; RaisePropertyChanged(() => Hobbies); }
+        }
+        private string picture;
+        public string Picture
+        {
+            get { return picture; }
+            set { picture = value; RaisePropertyChanged(() => Picture); }
+        }
+
+        private string fullName;
+        public string FullName
+        {
+            get { return fullName; }
+            set
+            {
+                fullName = value;
+                RaisePropertyChanged(() => FullName);
+            }
+        }
+
+        private string userid;
+        public string UserId
+        {
+            get { return userid; }
+            set
+            {
+                userid = value;
+                RaisePropertyChanged(() => UserId);
+            }
+        }
+
+        private string dateOfBirth;
+        public string DateOfBirth
+        {
+            get { return dateOfBirth; }
+            set { dateOfBirth = value; RaisePropertyChanged(() => DateOfBirth); }
+        }
+        private string userName;
+        public string UserName
+        {
+            get { return userName; }
+            set
+            {
+                userName = value; RaisePropertyChanged(() => UserName);
+            }
+        }
+
+        private string occupation;
+        public string Ocupation
+        {
+            get { return occupation; }
+            set
+            {
+                occupation = value; RaisePropertyChanged(() => Ocupation);
+            }
+        }
+        private string aboutMe;
+        public string AboutMe
+        {
+            get { return aboutMe; }
+            set { aboutMe = value; RaisePropertyChanged(() => AboutMe); }
+        }
+
+        private string gender;
+
+        public string Gender
+        {
+            get { return gender; }
+            set { gender = value; RaisePropertyChanged(() => Gender); }
+        }
+
+        private string title;
+        public string Title
+        {
+            get { return title; }
+            set
+            {
+                title = value;
+
+                RaisePropertyChanged(() => Title);
+            }
+        }
+
+        private string btnText;
+        public string BtnText
+        {
+            get { return btnText; }
+            set
+            {
+                btnText = value;
+                RaisePropertyChanged(() => BtnText);
+            }
+        }
+
+        private bool isenable;
+        public bool IsEn
+        {
+            get { return isenable; }
+            set { isenable = value; RaisePropertyChanged(() => IsEn); }
+        }
+
+        private string imageBase64;
+        public string ImageBase64
+        {
+            get { return this.imageBase64; }
+            set
+            {
+                if (Equals(value, this.imageBase64))
+                {
+                    return;
+                }
+                this.imageBase64 = value;
+                RaisePropertyChanged(() => ImageBase64);
+            }
+        }
+
+
+        private ImageSource pictureSource;
+        public ImageSource PictureSource
+        {
+            get { return pictureSource; }
+            set
+            {
+
+                pictureSource = value;
+                RaisePropertyChanged(() => PictureSource);
+            }
+        }
+
+
+
+
+        #endregion
         #region Set Properties
 
         private UserData userData;
@@ -71,6 +310,67 @@ namespace LetsCookApp.ViewModels
         }
 
         #endregion
+
+        public void GetProfile()
+        {
+
+            GetProfileRequest obj = new GetProfileRequest();
+            obj.EmailId = Email;
+            obj.UserId = UserId;
+            UserDialogs.Instance.ShowLoading("Requesting..");
+            userManager.getProfile(obj, async () =>
+            {
+                var userProfileResponse = userManager.ProfileResponse;
+
+                if (userProfileResponse.StatusCode == 202)
+                {
+                    var udata = userProfileResponse.UserData;
+                    Address1 = udata.Address1;
+                    Address2 = udata.Address2;
+                    Address3 = udata.Address3;
+                    State = udata.State;
+                    City = udata.City;
+                    Country = udata.Country;
+                    Email = udata.EmailId;
+                    FirstName = udata.FirstName;
+                    Hobbies = udata.Hobbies;
+                    LastName = udata.LastName;
+                    UserName = udata.UserName;
+                    MobileNumber = udata.MobileNumber;
+                    Password = udata.Password;
+                    PhoneNumber = udata.PhoneNumber;
+                    Postcode = udata.Postcode;
+                    Picture = udata.PhotoURL;
+                    DateOfBirth = udata.DateOfBirth;
+                    Gender = udata.Gender;
+                    if (!string.IsNullOrEmpty(udata.PhotoURL))
+                    {
+                        PictureSource = udata.PhotoURL;
+                        ImageBase64 = await GetImageAsBase64Url(udata.PhotoURL);
+                    }
+                    UserDialogs.Instance.HideLoading();
+
+                }
+            },
+             (requestFailedReason) =>
+             {
+                 Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
+                 {
+                     //  UserDialogs.Instance.Alert(requestFailedReason.Message, null, "OK");
+                     UserDialogs.Instance.HideLoading();
+                 });
+             });
+        }
+        public async static Task<string> GetImageAsBase64Url(string url)
+        {
+            var credentials = new NetworkCredential();
+            using (var handler = new HttpClientHandler { Credentials = credentials })
+            using (var client = new HttpClient(handler))
+            {
+                var bytes = await client.GetByteArrayAsync(url);
+                return Convert.ToBase64String(bytes);
+            }
+        }
     }
 
     public class Menu

@@ -422,7 +422,7 @@ namespace LetsCookApp.ViewModels
                                    
                                     //FullName = DateOfBirth = Ocupation = Email = UserName = Password = MobileNumber = AboutMe = "";
                                     //Address1 = Address2 = Address3 = City = State = Country = Postcode = Gender = Hobbies = PhoneNumber = "";
-                                    UserDialogs.Instance.Alert(SignupResponse.Message, "Error", "OK");
+                                    UserDialogs.Instance.Alert(SignupResponse.Message, "Success", "OK");
                                     //App.Current.MainPage.Navigation.PushAsync(new SignInView());
                                 }
                                 else
@@ -512,7 +512,7 @@ namespace LetsCookApp.ViewModels
                     PhoneNumber = udata.PhoneNumber;
                     Postcode = udata.Postcode;
                     Picture = udata.PhotoURL;
-                    DateOfBirth = udata.DateOfBirth;
+                    DateOfBirth =  udata.DateOfBirth;
                     Gender = udata.Gender;
                     AboutMe = udata.AboutMe;
                     if (!string.IsNullOrEmpty(udata.PhotoURL))
