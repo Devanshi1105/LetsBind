@@ -23,7 +23,10 @@ namespace LetsCookApp.Views
             NavigationPage.SetHasNavigationBar(this, false);
             var viewmodel= App.AppSetup.LoginViewModel;
             BindingContext = viewmodel;
-            
+            viewmodel.UserName = "ksantosh.kundkar12@gmail.com";
+            viewmodel.Password = "123456";
+
+
         }
         protected override void OnDisappearing()
         {

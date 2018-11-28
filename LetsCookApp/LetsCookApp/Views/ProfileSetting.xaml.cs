@@ -23,9 +23,7 @@ namespace LetsCookApp.Views
             var vm = App.AppSetup.SignUpViewModel;
             BindingContext = vm;
             imgPlus.IsVisible = true;
-            imgphoto.Source = App.AppSetup.SignUpViewModel.PictureSource;
-           
-
+            imgphoto.Source = App.AppSetup.SignUpViewModel.PictureSource; 
             var lst = App.AppSetup.SignUpViewModel.CountryResponse;
             foreach (var item in lst.country)
             {
@@ -42,9 +40,13 @@ namespace LetsCookApp.Views
             }
             if (!string.IsNullOrEmpty(vm.DateOfBirth))
             {
-                CultureInfo provider =  CultureInfo.InvariantCulture;
-                DateTime dateTime16 = DateTime.ParseExact(vm.DateOfBirth, new string[] { "dd.MM.yyyy", "dd-MM-yyyy", "dd/MM/yyyy" }, provider, DateTimeStyles.None);
-                dobpickar.Date = dateTime16;
+                lbldob.Text = vm.DateOfBirth;
+                lbldob.TextColor = Color.Black;
+            }
+            else
+            {
+                lbldob.Text = "DD/MM/YYYY";
+                lbldob.TextColor = Color.Gray;
             }
 
 
@@ -147,19 +149,7 @@ namespace LetsCookApp.Views
 
         }
 
-
-        private ImageSource picture;
-        public ImageSource Picture
-        {
-            get { return picture; }
-            set
-            {
-
-                picture = value;
-                // RaisePropertyChanged(() => Picture);
-            }
-        }
-
+ 
         private async void TapGestureRecognizer_Tapped_1(object sender, EventArgs e)
         {
             var actionSheet = await DisplayActionSheet("", "Cancel", null, new string[] { "Take Picture", "Select Picture" });
@@ -185,10 +175,17 @@ namespace LetsCookApp.Views
 
         private void dobpickar_DateSelected(object sender, DateChangedEventArgs e)
         {
-            //CultureInfo provider = CultureInfo.InvariantCulture;
-            //DateTime dateTime16 = DateTime.ParseExact(dobpickar.Date.ToString(), new string[] { "MM.dd.yyyy", "MM-dd-yyyy", "MM/dd/yyyy" }, provider, DateTimeStyles.None);
-
-            App.AppSetup.SignUpViewModel.DateOfBirth = dobpickar.Date.ToString();
+            var date = dobpickar.Date.ToString("dd/MM/yyyy");
+            if (DateTime.Parse(date).AddYears(15).Date >= DateTime.Now.Date)
+            {
+                UserDialogs.Instance.Alert("Date of birth should be gretter than 15 years.");
+                return;
+            }
+            else
+            {
+                lbldob.Text = date;
+                App.AppSetup.SignUpViewModel.DateOfBirth = date;
+            }
         }
 
 
@@ -250,12 +247,7 @@ namespace LetsCookApp.Views
                 dobpickar.Focus();
                 val = false;
             }
-            else if (DateTime.Parse(vm.DateOfBirth).AddYears(18).Date >= DateTime.Now.Date)
-            {
-                UserDialogs.Instance.Alert("Date of birth should be gretter than 15 years.");
-                dobpickar.Focus();
-                val = false;
-            }
+           
 
             else if (string.IsNullOrEmpty(vm.MobileNumber))
             {
@@ -307,6 +299,12 @@ namespace LetsCookApp.Views
         private void Menu_Tapped(object sender, EventArgs e)
         {
             Navigation.PopAsync();
+        }
+
+        
+        private void lbldob_Tapped(object sender, EventArgs e)
+        {
+            dobpickar.Focus();
         }
     }
 }
