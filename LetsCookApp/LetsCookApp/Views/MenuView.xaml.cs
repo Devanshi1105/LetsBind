@@ -18,7 +18,7 @@ namespace LetsCookApp.Views
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
             this.menuList = masterMenuList;
-            BindingContext = App.AppSetup.HomeViewModel;
+            BindingContext = App.AppSetup.HomeViewModel; 
         }
 
         private void masterMenuList_ItemTapped(object sender, ItemTappedEventArgs e)

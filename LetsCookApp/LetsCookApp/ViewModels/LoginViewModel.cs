@@ -72,6 +72,11 @@ namespace LetsCookApp.ViewModels
                                 App.AppSetup.SignUpViewModel.UserId= App.AppSetup.HomeViewModel.UserId = LoginResponse.UserData.UserId;
                                 UserName = Password = "";
                                 UserDialogs.Instance.HideLoading();
+                                App.AppSetup.HomeViewModel.PictureSource = new UriImageSource
+                                {
+                                    Uri = new Uri(App.AppSetup.HomeViewModel.UserData.PhotoURL),
+                                    CachingEnabled = true, 
+                                };
                                 App.Current.MainPage = new Views.HomeView();
                             }
                             else
