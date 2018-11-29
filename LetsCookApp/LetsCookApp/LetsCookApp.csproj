@@ -72,6 +72,7 @@
     <Compile Include="Models\ProfileResponse.cs" />
     <Compile Include="Models\ProfileUpdateRequest.cs" />
     <Compile Include="Models\SignupRequest.cs" />
+    <Compile Include="Models\SubCategoryResponse.cs" />
     <Compile Include="ViewModels\SignUpViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IDevice.cs" />

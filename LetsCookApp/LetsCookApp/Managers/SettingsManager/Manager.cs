@@ -13,6 +13,7 @@ namespace LetsCookApp.Managers.SettingsManager
         private readonly ISettingsManager _settingsManager;
 
         public CategoryResponse CategoryResponse { get { return categoryResponse; } }
+        public SubCategoryResponse SubCategoryResponse { get { return subCategoryResponse; } }
 
         public ProfileResponse ProfileResponse { get { return profileResponse; } } 
         public LoginResponse LoginResponse { get { return loginResponse; } }
@@ -36,6 +37,7 @@ namespace LetsCookApp.Managers.SettingsManager
         #endregion
         string error = "Please Check Internet Connection.";
         private CategoryResponse categoryResponse { get; set; }
+        private SubCategoryResponse subCategoryResponse { get; set; }
         private ProfileResponse profileResponse { get; set; }
         private CountryResponse countryResponse { get; set; }
 
@@ -59,6 +61,38 @@ namespace LetsCookApp.Managers.SettingsManager
                         if (success != null)
                         {
                             categoryResponse = result.Result;
+                            success.Invoke();
+                        }
+                    }
+                    else
+                    {
+                        failed.Invoke(result.Result);
+                    }
+                });
+            }
+            else
+            {
+                UserDialogs.Instance.HideLoading(); UserDialogs.Instance.Alert(error, null, "OK");
+            }
+        }
+
+        public async void getSubCategory(CommonRequest commonRequest, Action success, Action<SubCategoryResponse> failed)
+        {
+            bool IsNetwork = true;//await DependencyService.Get<IMediaService>().CheckNewworkConnectivity();
+            if (IsNetwork)
+            {
+
+                var url = string.Format("{0}getRecipesByCat.php?catId=1", _settingsManager.ApiHost);
+
+                await Task.Run(() =>
+                {
+                    Dictionary<string, string> head = GetHeaders();
+                    var result = _apiProvider.Get<SubCategoryResponse, CommonRequest>(url, null).Result;
+                    if (result.IsSuccessful)
+                    {
+                        if (success != null)
+                        {
+                            subCategoryResponse = result.Result;
                             success.Invoke();
                         }
                     }

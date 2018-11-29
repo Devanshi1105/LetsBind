@@ -70,25 +70,21 @@ namespace LetsCookApp.ViewModels
                             App.AppSetup.SignUpViewModel.Email = App.AppSetup.HomeViewModel.Email = LoginResponse.UserData.EmailId;
                             App.AppSetup.SignUpViewModel.UserId = App.AppSetup.HomeViewModel.UserId = LoginResponse.UserData.UserId;
                             UserName = Password = "";
-                            UserDialogs.Instance.HideLoading();
-                            if(String.IsNullOrEmpty(LoginResponse.UserData.PhotoURL))
-                            App.AppSetup.HomeViewModel.PictureSource = new UriImageSource
+                            if (String.IsNullOrEmpty(LoginResponse.UserData.PhotoURL))
                             {
-                                Uri = new Uri(LoginResponse.UserData.PhotoURL),
-                                CachingEnabled = true,
-                            };
-                            Device.BeginInvokeOnMainThread(() =>
-                            {
-                                App.Current.MainPage = new Views.HomeView();
-                            });
+                                //App.AppSetup.HomeViewModel.PictureSource = new UriImageSource
+                                //{
+                                //    Uri = new Uri(LoginResponse.UserData.PhotoURL),
+                                //    CachingEnabled = true,
+                                //};
+                            }
+                            App.AppSetup.CategoryViewModel.GetCotegaryCommand.Execute(null);
                         }
                         else
                         {
+                            UserDialogs.Instance.HideLoading();
                             UserDialogs.Instance.Alert(LoginResponse.Message, "Error", "OK");
-                        }
-                  
-                       // RaisePropertyChanged(() => LoginResponse);
-                        UserDialogs.Instance.HideLoading();
+                        } 
                     },
                        (requestFailedReason) =>
                        {

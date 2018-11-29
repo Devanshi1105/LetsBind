@@ -1,4 +1,5 @@
-﻿using Rg.Plugins.Popup.Services;
+﻿
+using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,9 @@ namespace LetsCookApp.Views
         {
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
+            var viewmodel = App.AppSetup.CategoryViewModel;
+            BindingContext = viewmodel;
+            categorieslist.ItemsSource = viewmodel.Categories;
         }
 
         private void SubCategories_Tapped(object sender, EventArgs e)
@@ -27,13 +31,13 @@ namespace LetsCookApp.Views
         {
             App.AppSetup.HomeViewModel.IsMenuListPresented = true;
         }
-        private  void Search_Tapped(object sender, EventArgs e)
+        private void Search_Tapped(object sender, EventArgs e)
         {
             var page = new SearchView();
 
-             PopupNavigation.PushAsync(page);
+            PopupNavigation.PushAsync(page);
         }
-
-
     }
+
+     
 }

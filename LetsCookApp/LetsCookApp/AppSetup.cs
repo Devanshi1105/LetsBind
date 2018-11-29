@@ -18,7 +18,7 @@ namespace LetsCookApp
             SimpleIoc.Default.Register<LoginViewModel>();
             SimpleIoc.Default.Register<HomeViewModel>();
             SimpleIoc.Default.Register<SignUpViewModel>();
-
+            SimpleIoc.Default.Register<CategoryViewModel>();
 
             // Services
             SimpleIoc.Default.Register<ISettingsManager, SettingsManager>();
@@ -28,13 +28,13 @@ namespace LetsCookApp
 
         public void Clear()
         {
-            SimpleIoc.Default.Unregister<LoginViewModel>();
-            //SimpleIoc.Default.Unregister<HomeViewModel>();
+            SimpleIoc.Default.Unregister<LoginViewModel>(); 
             SimpleIoc.Default.Unregister<SignUpViewModel>();
+            SimpleIoc.Default.Unregister<CategoryViewModel>();
 
-            SimpleIoc.Default.Register<LoginViewModel>();
-          
+            SimpleIoc.Default.Register<LoginViewModel>(); 
             SimpleIoc.Default.Register<SignUpViewModel>();
+            SimpleIoc.Default.Register<CategoryViewModel>();
 
         }
         public LoginViewModel LoginViewModel
@@ -57,6 +57,13 @@ namespace LetsCookApp
             get
             {
                 return SimpleIoc.Default.GetInstance<HomeViewModel>();
+            }
+        }
+        public CategoryViewModel CategoryViewModel
+        {
+            get
+            {
+                return SimpleIoc.Default.GetInstance<CategoryViewModel>();
             }
         }
     }

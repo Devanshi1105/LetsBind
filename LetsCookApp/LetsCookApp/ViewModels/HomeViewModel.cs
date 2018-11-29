@@ -318,7 +318,7 @@ namespace LetsCookApp.ViewModels
             obj.EmailId = Email;
             obj.UserId = UserId;
             UserDialogs.Instance.ShowLoading("Requesting..");
-            userManager.getProfile(obj, async () =>
+            userManager.getProfile(obj,  () =>
             {
                 var userProfileResponse = userManager.ProfileResponse;
 
@@ -344,9 +344,13 @@ namespace LetsCookApp.ViewModels
                     DateOfBirth = udata.DateOfBirth;
                     Gender = udata.Gender;
                     if (!string.IsNullOrEmpty(udata.PhotoURL))
-                    {
-                        PictureSource = udata.PhotoURL;
-                        ImageBase64 = await GetImageAsBase64Url(udata.PhotoURL);
+                    { 
+                        //PictureSource = new UriImageSource
+                        //{
+                        //    Uri = new Uri(udata.PhotoURL),
+                        //    CachingEnabled = true,
+                        //};
+                      ////  ImageBase64 = await GetImageAsBase64Url(udata.PhotoURL);
                     }
                     UserDialogs.Instance.HideLoading();
 

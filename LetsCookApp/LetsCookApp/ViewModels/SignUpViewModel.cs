@@ -382,7 +382,7 @@ namespace LetsCookApp.ViewModels
 
 
 
-                await Task.Run(() =>
+                await Task.Run(async () =>
                 {
                     UserDialogs.Instance.ShowLoading("Requesting..");
                     if (BtnText == "UPDATE")
@@ -404,13 +404,13 @@ namespace LetsCookApp.ViewModels
                             Password = Password,
                             PhoneNumber = PhoneNumber,
                             Postcode = postCode,
-                            PhotoUrl = ImageBase64,
+                            PhotoUrl = ImageBase64 == "" ? ImageBase64 = await GetImageAsBase64Url(Picture): ImageBase64,
                             DateOfBirth = DateOfBirth,
                             Gender = Gender,
-                             AboutMe=AboutMe,
-                              UserId = UserId
-                    };
-                        
+                            AboutMe = AboutMe,
+                            UserId = UserId
+                        };
+
                         userManager.SignUpUpdate(ProfileUpdateRequest, () =>
                         {
                             var SignupResponse = userManager.SignupResponse;
@@ -419,7 +419,7 @@ namespace LetsCookApp.ViewModels
                                 if (SignupResponse.StatusCode == 200)
                                 {
                                     UserDialogs.Instance.HideLoading();
-                                   
+
                                     //FullName = DateOfBirth = Ocupation = Email = UserName = Password = MobileNumber = AboutMe = "";
                                     //Address1 = Address2 = Address3 = City = State = Country = Postcode = Gender = Hobbies = PhoneNumber = "";
                                     UserDialogs.Instance.Alert(SignupResponse.Message, "Success", "OK");
@@ -489,7 +489,7 @@ namespace LetsCookApp.ViewModels
             obj.EmailId = Email;
             obj.UserId = UserId;
             UserDialogs.Instance.ShowLoading("Requesting..");
-            userManager.getProfile(obj, async () =>
+            userManager.getProfile(obj, () =>
             {
                 var userProfileResponse = userManager.ProfileResponse;
 
@@ -515,10 +515,15 @@ namespace LetsCookApp.ViewModels
                     DateOfBirth =  udata.DateOfBirth;
                     Gender = udata.Gender;
                     AboutMe = udata.AboutMe;
+                    ImageBase64 = "";
                     if (!string.IsNullOrEmpty(udata.PhotoURL))
                     {
-                        PictureSource = udata.PhotoURL;
-                       ImageBase64 = await GetImageAsBase64Url(udata.PhotoURL);
+                        //PictureSource  = new UriImageSource
+                        //{
+                        //    Uri = new Uri(udata.PhotoURL),
+                        //    CachingEnabled = false,
+                        //};
+                    // ImageBase64 = await GetImageAsBase64Url(udata.PhotoURL);
                     }
                     Xamarin.Forms.Device.BeginInvokeOnMainThread(async () =>
                     {
