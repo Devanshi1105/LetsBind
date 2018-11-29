@@ -176,12 +176,12 @@ namespace LetsCookApp.Views
         private void dobpickar_DateSelected(object sender, DateChangedEventArgs e)
         {
             var date = dobpickar.Date.ToString("dd/MM/yyyy");
-            if (DateTime.Parse(date).AddYears(15).Date >= DateTime.Now.Date)
-            {
-                UserDialogs.Instance.Alert("Date of birth should be gretter than 15 years.");
-                return;
-            }
-            else
+            //if (DateTime.Parse(date).AddYears(15).Date >= DateTime.Now.Date)
+            //{
+            //    UserDialogs.Instance.Alert("Date of birth should be gretter than 15 years.");
+            //    return;
+            //}
+            //else
             {
                 lbldob.Text = date;
                 App.AppSetup.SignUpViewModel.DateOfBirth = date;
