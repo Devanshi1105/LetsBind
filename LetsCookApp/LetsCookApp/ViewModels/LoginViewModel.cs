@@ -63,27 +63,30 @@ namespace LetsCookApp.ViewModels
                     userManager.Login(LoginRequest, () =>
                     {
                         var LoginResponse = userManager.LoginResponse;
-                        Device.BeginInvokeOnMainThread(() =>
+
+                        if (LoginResponse.StatusCode == 202)
                         {
-                            if (LoginResponse.StatusCode == 202)
+                            App.AppSetup.HomeViewModel.UserData = LoginResponse.UserData;
+                            App.AppSetup.SignUpViewModel.Email = App.AppSetup.HomeViewModel.Email = LoginResponse.UserData.EmailId;
+                            App.AppSetup.SignUpViewModel.UserId = App.AppSetup.HomeViewModel.UserId = LoginResponse.UserData.UserId;
+                            UserName = Password = "";
+                            UserDialogs.Instance.HideLoading();
+                            if(String.IsNullOrEmpty(LoginResponse.UserData.PhotoURL))
+                            App.AppSetup.HomeViewModel.PictureSource = new UriImageSource
                             {
-                                App.AppSetup.HomeViewModel.UserData = LoginResponse.UserData;
-                                App.AppSetup.SignUpViewModel.Email= App.AppSetup.HomeViewModel.Email = LoginResponse.UserData.EmailId;
-                                App.AppSetup.SignUpViewModel.UserId= App.AppSetup.HomeViewModel.UserId = LoginResponse.UserData.UserId;
-                                UserName = Password = "";
-                                UserDialogs.Instance.HideLoading();
-                                App.AppSetup.HomeViewModel.PictureSource = new UriImageSource
-                                {
-                                    Uri = new Uri(App.AppSetup.HomeViewModel.UserData.PhotoURL),
-                                    CachingEnabled = true, 
-                                };
+                                Uri = new Uri(LoginResponse.UserData.PhotoURL),
+                                CachingEnabled = true,
+                            };
+                            Device.BeginInvokeOnMainThread(() =>
+                            {
                                 App.Current.MainPage = new Views.HomeView();
-                            }
-                            else
-                            {
-                                UserDialogs.Instance.Alert( LoginResponse.Message, "Error", "OK");
-                            }
-                        });
+                            });
+                        }
+                        else
+                        {
+                            UserDialogs.Instance.Alert(LoginResponse.Message, "Error", "OK");
+                        }
+                  
                        // RaisePropertyChanged(() => LoginResponse);
                         UserDialogs.Instance.HideLoading();
                     },
