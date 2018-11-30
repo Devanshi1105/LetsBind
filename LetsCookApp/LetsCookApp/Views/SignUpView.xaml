@@ -22,7 +22,7 @@ HeightRequest="30" WidthRequest="30" VerticalOptions="Center"/>
 
             <ContentView HorizontalOptions="EndAndExpand" 
 VerticalOptions="Center" Padding="10,10,10,5">
-                <local:CustomLabelLight  Text="{Binding Title}" 
+                <local:CustomLabelLight  Text="Signin" 
 TextColor="#ffffff" FontSize="20" HorizontalOptions="EndAndExpand" 
 VerticalOptions="Center"  />
                 <ContentView.GestureRecognizers>

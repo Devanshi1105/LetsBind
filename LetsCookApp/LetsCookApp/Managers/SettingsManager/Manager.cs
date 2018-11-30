@@ -14,6 +14,7 @@ namespace LetsCookApp.Managers.SettingsManager
 
         public CategoryResponse CategoryResponse { get { return categoryResponse; } }
         public SubCategoryResponse SubCategoryResponse { get { return subCategoryResponse; } }
+        public DishViewResponse DishViewResponse { get { return dishViewResponse; } }
 
         public ProfileResponse ProfileResponse { get { return profileResponse; } } 
         public LoginResponse LoginResponse { get { return loginResponse; } }
@@ -38,6 +39,7 @@ namespace LetsCookApp.Managers.SettingsManager
         string error = "Please Check Internet Connection.";
         private CategoryResponse categoryResponse { get; set; }
         private SubCategoryResponse subCategoryResponse { get; set; }
+        private DishViewResponse dishViewResponse { get; set; }
         private ProfileResponse profileResponse { get; set; }
         private CountryResponse countryResponse { get; set; }
 
@@ -52,7 +54,7 @@ namespace LetsCookApp.Managers.SettingsManager
 
                 var url = string.Format("{0}getAllCategories.php", _settingsManager.ApiHost);
 
-                await Task.Run(async () =>
+                await Task.Run( () =>
                 {
                     Dictionary<string, string> head = GetHeaders();
                     var result =  _apiProvider.Get<CategoryResponse, CommonRequest>(url,  null).Result;
@@ -75,19 +77,18 @@ namespace LetsCookApp.Managers.SettingsManager
                 UserDialogs.Instance.HideLoading(); UserDialogs.Instance.Alert(error, null, "OK");
             }
         }
-
-        public async void getSubCategory(CommonRequest commonRequest, Action success, Action<SubCategoryResponse> failed)
+        public async void getSubCategory(SubCategoryRequest commonRequest, Action success, Action<SubCategoryResponse> failed)
         {
             bool IsNetwork = true;//await DependencyService.Get<IMediaService>().CheckNewworkConnectivity();
             if (IsNetwork)
             {
-
-                var url = string.Format("{0}getRecipesByCat.php?catId=1", _settingsManager.ApiHost);
+                string para = "catId=" + commonRequest.CatId ;
+                var url = string.Format("{0}getRecipesByCat.php?" + para, _settingsManager.ApiHost); 
 
                 await Task.Run(() =>
                 {
                     Dictionary<string, string> head = GetHeaders();
-                    var result = _apiProvider.Get<SubCategoryResponse, CommonRequest>(url, null).Result;
+                    var result = _apiProvider.Get<SubCategoryResponse, SubCategoryRequest>(url, null).Result;
                     if (result.IsSuccessful)
                     {
                         if (success != null)
@@ -107,6 +108,38 @@ namespace LetsCookApp.Managers.SettingsManager
                 UserDialogs.Instance.HideLoading(); UserDialogs.Instance.Alert(error, null, "OK");
             }
         }
+        public async void getDishView(DishViewRequest commonRequest, Action success, Action<DishViewResponse> failed)
+        {
+            bool IsNetwork = true;//await DependencyService.Get<IMediaService>().CheckNewworkConnectivity();
+            if (IsNetwork)
+            {
+                string para = "RecipeId=" + commonRequest.RecipeId;
+                var url = string.Format("{0}getRecipeById.php?" + para, _settingsManager.ApiHost);
+
+                await Task.Run(() =>
+                {
+                    Dictionary<string, string> head = GetHeaders();
+                    var result = _apiProvider.Get<DishViewResponse, DishViewRequest>(url, null).Result;
+                    if (result.IsSuccessful)
+                    {
+                        if (success != null)
+                        {
+                            dishViewResponse = result.Result;
+                            success.Invoke();
+                        }
+                    }
+                    else
+                    {
+                        failed.Invoke(result.Result);
+                    }
+                });
+            }
+            else
+            {
+                UserDialogs.Instance.HideLoading(); UserDialogs.Instance.Alert(error, null, "OK");
+            }
+        }
+
 
         public async void getProfile(GetProfileRequest commonRequest, Action success, Action<ProfileResponse> failed)
         {
@@ -305,6 +338,6 @@ namespace LetsCookApp.Managers.SettingsManager
             }
         }
 
-
+       
     }
 }

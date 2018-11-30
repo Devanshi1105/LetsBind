@@ -23,7 +23,7 @@ namespace LetsCookApp.Views
             var vm = App.AppSetup.SignUpViewModel;
             BindingContext = vm;
             imgPlus.IsVisible = true;
-            imgphoto.Source = App.AppSetup.SignUpViewModel.PictureSource; 
+           // imgphoto.Source = App.AppSetup.SignUpViewModel.Picture; 
             var lst = App.AppSetup.SignUpViewModel.CountryResponse;
             foreach (var item in lst.country)
             {

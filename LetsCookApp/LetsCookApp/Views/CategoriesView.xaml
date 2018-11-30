@@ -24,7 +24,7 @@
       </ContentView>
     </StackLayout>
 
-    <local:CustomListView x:Name="categorieslist" VerticalOptions="FillAndExpand" HasUnevenRows="True" HorizontalOptions="FillAndExpand" SeparatorVisibility="None"  BackgroundColor="Black">
+    <local:CustomListView x:Name="categorieslist" VerticalOptions="FillAndExpand" HasUnevenRows="True" HorizontalOptions="FillAndExpand" SeparatorVisibility="None"  BackgroundColor="Black" ItemSelected="categorieslist_ItemSelected">
       <local:CustomListView.ItemTemplate>
         <DataTemplate>
           <local:CustomListViewCell>
@@ -38,8 +38,10 @@
                   <RowDefinition Height="*"/>
                   <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <ff:CachedImage Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" Aspect="AspectFill" Source="{Binding Image}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" LoadingPlaceholder="icon.png" ErrorPlaceholder="error.png" DownsampleToViewSize="true" >
-                </ff:CachedImage>
+ <Image Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" Aspect="AspectFill" Source="{Binding Image}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" ></Image>
+                
+                <!--<ff:CachedImage Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" Aspect="AspectFill" Source="{Binding Image}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" LoadingPlaceholder="icon.png" ErrorPlaceholder="error.png" DownsampleToViewSize="true" >
+                </ff:CachedImage>-->
                 <StackLayout Grid.Column="0" Grid.Row="1" Orientation="Vertical" HorizontalOptions="Center" VerticalOptions="Center">
                   <local:CustomLabelLight Text="{Binding Title}" TextColor="#ffffff" FontAttributes="Bold" FontSize="34" HorizontalOptions="Center" VerticalOptions="Center"  />
                   <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
@@ -47,9 +49,9 @@
                     <local:CustomLabelLight Text="{Binding NoOfRecipes}" TextColor="#ffffff" FontAttributes="Bold" FontSize="14" HorizontalOptions="Center" VerticalOptions="Center"  />
                   </StackLayout>
                 </StackLayout>
-                <Grid.GestureRecognizers>
+                <!--<Grid.GestureRecognizers>
                   <TapGestureRecognizer Tapped="SubCategories_Tapped"/>
-                </Grid.GestureRecognizers>
+                </Grid.GestureRecognizers>-->
               </Grid>
             </local:CustomListViewCell.View>
           </local:CustomListViewCell>

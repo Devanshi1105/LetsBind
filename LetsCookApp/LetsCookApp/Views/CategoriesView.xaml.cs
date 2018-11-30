@@ -1,4 +1,5 @@
 ﻿
+using LetsCookApp.Models;
 using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
@@ -36,6 +37,17 @@ namespace LetsCookApp.Views
             var page = new SearchView();
 
             PopupNavigation.PushAsync(page);
+        }
+
+        private void categorieslist_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            if (e.SelectedItem == null) 
+                return; 
+
+            var v = e.SelectedItem as Category;
+            App.AppSetup.CategoryViewModel.CatId =Convert.ToInt32(v.Id);
+
+            App.AppSetup.CategoryViewModel.GetSubCotegaryCommand.Execute(null);
         }
     }
 

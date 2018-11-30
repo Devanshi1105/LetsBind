@@ -4,204 +4,135 @@
              xmlns:local="clr-namespace:LetsCookApp.CustomViews;assembly=LetsCookApp"
              x:Class="LetsCookApp.Views.DishView" >
 
-  <StackLayout x:Name="MainStack" Spacing="0"
-  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
-  Padding="0">
+    <StackLayout x:Name="MainStack" Spacing="0"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="0">
 
-    <Grid  BackgroundColor="Black" RowSpacing="0"
-HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" >
-      <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="*"/>
-      </Grid.ColumnDefinitions>
-      <Grid.RowDefinitions>
-        <RowDefinition Height="40"/>
-        <RowDefinition Height="Auto"/>
+        <Grid  BackgroundColor="Black" RowSpacing="0" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="Auto"/>
 
-      </Grid.RowDefinitions>
+            </Grid.RowDefinitions>
 
-      <StackLayout  Grid.Column="0"  Grid.Row="0"
-Orientation="Horizontal" HorizontalOptions="FillAndExpand"
-VerticalOptions="Start" BackgroundColor="Black">
-        <ContentView HorizontalOptions="Start"
-VerticalOptions="Center" Padding="10,10">
-          <Image Source="backarrow"
-HorizontalOptions="Center" VerticalOptions="Center"/>
-          <ContentView.GestureRecognizers>
-            <TapGestureRecognizer Tapped="Menu_Tapped"/>
-          </ContentView.GestureRecognizers>
-        </ContentView>
-        <local:CustomLabelLight Text="Cake Recipe"
-TextColor="#e74c3c" FontSize="20" HorizontalOptions="CenterAndExpand"
-VerticalOptions="CenterAndExpand"  />
-        <ContentView HorizontalOptions="End"
-VerticalOptions="Center" Padding="10,10">
-          <Image Source="search" HorizontalOptions="Center"
-VerticalOptions="Center"/>
+            <StackLayout  Grid.Column="0"  Grid.Row="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start" BackgroundColor="Black">
+                <ContentView HorizontalOptions="Start" VerticalOptions="Center" Padding="10,10">
+                    <Image Source="backarrow" HorizontalOptions="Center" VerticalOptions="Center"/>
+                    <ContentView.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Menu_Tapped"/>
+                    </ContentView.GestureRecognizers>
+                </ContentView>
+                <local:CustomLabelLight Text="{Binding RecipeDishView.Title}" TextColor="#e74c3c" FontSize="20" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"  />
+                <ContentView HorizontalOptions="End" VerticalOptions="Center" Padding="10,10">
+                    <Image Source="search" HorizontalOptions="Center" VerticalOptions="Center"/>
+                    <ContentView.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Search_Tapped"/>
+                    </ContentView.GestureRecognizers>
+                </ContentView>
+            </StackLayout>
 
-          <ContentView.GestureRecognizers>
-            <TapGestureRecognizer Tapped="Search_Tapped"/>
-          </ContentView.GestureRecognizers>
-        </ContentView>
-      </StackLayout>
+            <StackLayout Grid.Column="0" Grid.Row="1" HeightRequest="30" Spacing="10" Orientation="Horizontal" HorizontalOptions="Center"  BackgroundColor="Black" VerticalOptions="Start" >
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
+                    <Image Aspect="AspectFit" Source="time" HorizontalOptions="Center" VerticalOptions="Center" HeightRequest="20" WidthRequest="20"/>
+                    <local:CustomLabelLight Text="{Binding RecipeDishView.Prep_time}" TextColor="#ffffff" FontSize="12" HorizontalOptions="Center" VerticalOptions="Center"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center" >
+                    <Image Aspect="AspectFit" Source="serving" HorizontalOptions="Center" VerticalOptions="Center" HeightRequest="20" WidthRequest="20"/>
+                    <local:CustomLabelLight Text="{Binding RecipeDishView.Serving}" TextColor="#ffffff" FontSize="12" HorizontalOptions="Center" VerticalOptions="Center"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
+                    <Image Aspect="AspectFit" Source="ingredients" HorizontalOptions="Center" VerticalOptions="Center" HeightRequest="20" WidthRequest="20"/>
+                    <local:CustomLabelLight Text="{Binding RecipeDishView.Ingredients_Count}" TextColor="#ffffff" FontSize="12" HorizontalOptions="Center" VerticalOptions="Center"/>
+                </StackLayout>
+            </StackLayout>
 
-      <StackLayout Grid.Column="0" Grid.Row="1"
-HeightRequest="30" Spacing="10" Orientation="Horizontal"
-HorizontalOptions="Center"  BackgroundColor="Black"
-VerticalOptions="Start" >
-        <StackLayout Orientation="Horizontal"
-HorizontalOptions="Center" VerticalOptions="Center"  >
-          <Image Aspect="AspectFit" Source="time"
-HorizontalOptions="Center" VerticalOptions="Center" HeightRequest="20"
-WidthRequest="20"/>
-          <local:CustomLabelLight Text="15 min"
-TextColor="#ffffff" FontSize="12" HorizontalOptions="Center"
-VerticalOptions="Center"/>
-        </StackLayout>
-        <StackLayout Orientation="Horizontal"
-HorizontalOptions="Center" VerticalOptions="Center" >
-          <Image Aspect="AspectFit" Source="serving"
-HorizontalOptions="Center" VerticalOptions="Center" HeightRequest="20"
-WidthRequest="20"/>
-          <local:CustomLabelLight Text="4 Servings"
-TextColor="#ffffff" FontSize="12" HorizontalOptions="Center"
-VerticalOptions="Center"/>
-        </StackLayout>
-        <StackLayout Orientation="Horizontal"
-HorizontalOptions="Center" VerticalOptions="Center">
-          <Image Aspect="AspectFit" Source="ingredients"
-HorizontalOptions="Center" VerticalOptions="Center" HeightRequest="20"
-WidthRequest="20"/>
-          <local:CustomLabelLight Text="7 Ingrendients"
-TextColor="#ffffff" FontSize="12" HorizontalOptions="Center"
-VerticalOptions="Center"/>
-        </StackLayout>
-      </StackLayout>
+        </Grid>
 
-    </Grid>
+        <ScrollView  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Grid HorizontalOptions="FillAndExpand" BackgroundColor="White" VerticalOptions="FillAndExpand" RowSpacing="1" Padding="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="200" />
+                </Grid.RowDefinitions>
 
-    <ScrollView  HorizontalOptions="FillAndExpand"
-VerticalOptions="FillAndExpand">
-      <Grid HorizontalOptions="FillAndExpand"
-BackgroundColor="White" VerticalOptions="FillAndExpand" RowSpacing="1"
-Padding="0">
-        <Grid.RowDefinitions>
-          <RowDefinition Height="Auto" />
-          <RowDefinition Height="40" />
-          <RowDefinition Height="Auto" />
-          <RowDefinition Height="40" />
-          <RowDefinition Height="200" />
-        </Grid.RowDefinitions>
+                <Grid Grid.Row="0" RowSpacing="0" ColumnSpacing="0" BackgroundColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="150" />
+                        <RowDefinition Height="40" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="50" />
 
-        <Grid Grid.Row="0" RowSpacing="0" ColumnSpacing="0"
-BackgroundColor="White" HorizontalOptions="FillAndExpand"
-VerticalOptions="FillAndExpand">
-          <Grid.RowDefinitions>
-            <RowDefinition Height="150" />
-            <RowDefinition Height="40" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="50" />
-           
-          </Grid.RowDefinitions>
+                    </Grid.RowDefinitions>
 
 
-          <Image Grid.Row="0" HeightRequest="60"
-HorizontalOptions="FillAndExpand"  Source="cacke.png" Aspect="AspectFill" />
-          <Image  Grid.Row="0" TranslationY="-10"
-TranslationX="150"   VerticalOptions="End" HeightRequest="30"
-WidthRequest="30" Source="expand.png"  />
+                    <Image Grid.Row="0" HeightRequest="60" HorizontalOptions="FillAndExpand"  Source="{Binding RecipeDishView.ImageUrl}" Aspect="AspectFill" />
+                    <Image  Grid.Row="0" TranslationY="-10" TranslationX="150"   VerticalOptions="End" HeightRequest="30" WidthRequest="30" Source="expand.png"  />
 
-          <ContentView Grid.Row="1"
-BackgroundColor="#f0eff5"  HorizontalOptions="FillAndExpand"
-VerticalOptions="FillAndExpand" >
-            <Label  Text="INGREDIENTS" TextColor="#e74c3c"
-FontSize="16"  Margin="10,0,0,0" HorizontalTextAlignment="Center"
-VerticalTextAlignment="Center" VerticalOptions="FillAndExpand"
-HorizontalOptions="StartAndExpand"/>
-          </ContentView>
-          <local:CustomListView BackgroundColor="White"
-Grid.Row="2" x:Name="lst1" HasUnevenRows="True"
-ItemTapped="lst1_ItemTapped">
-            <local:CustomListView.ItemTemplate>
-              <DataTemplate>
-                <local:CustomListViewCell>
-                  <local:CustomListViewCell.View>
-                    <StackLayout Margin="10,0"
-Orientation="Horizontal" HorizontalOptions="Start"
-VerticalOptions="Center" HeightRequest="50" >
-                      <Image Source="{Binding 
-imgsource}" HeightRequest="25" WidthRequest="25"
-VerticalOptions="Center" HorizontalOptions="Start"/>
+                    <ContentView Grid.Row="1" BackgroundColor="#f0eff5"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                        <Label  Text="INGREDIENTS" TextColor="#e74c3c" FontSize="16"  Margin="10,0,0,0" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" VerticalOptions="FillAndExpand" HorizontalOptions="StartAndExpand"/>
+                    </ContentView>
+                    <local:CustomListView BackgroundColor="White" Grid.Row="2" x:Name="lst1" HasUnevenRows="True" ItemsSource="{Binding Ingredients}" ItemTapped="lst1_ItemTapped" VerticalOptions="Start" HorizontalOptions="FillAndExpand">
+                        <local:CustomListView.ItemTemplate>
+                            <DataTemplate>
+                                <local:CustomListViewCell>
+                                    <local:CustomListViewCell.View>
+                                        <StackLayout Margin="10,0" Orientation="Horizontal" HorizontalOptions="Start" VerticalOptions="Center" HeightRequest="50" >
+                                            <Image Source="checkmarkon" HeightRequest="25" WidthRequest="25" VerticalOptions="Center" HorizontalOptions="Start"/>
+                                            <local:CustomLabelRegular Text="{Binding Name}" TextColor="Black" Font="16" VerticalOptions="Center" HorizontalTextAlignment="Center"/>
+                                        </StackLayout>
+                                    </local:CustomListViewCell.View>
+                                </local:CustomListViewCell>
+                            </DataTemplate>
+                        </local:CustomListView.ItemTemplate>
+                    </local:CustomListView>
 
-                      <local:CustomLabelRegular Text="{Binding Name}" Font="16"
-VerticalOptions="Center" HorizontalTextAlignment="Center"/>
+                </Grid>
 
+                <local:CustomButtonRegular BorderRadius="5" Margin="10,0" Grid.Row="1" Text="ADD TO SHOPPING LIST" TextColor="White" BackgroundColor="#ca4334" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
 
+                <Grid Grid.Row="2" BackgroundColor="White"  Margin="0,10,0,0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <ContentView Grid.Row="0" BackgroundColor="#f0eff5"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                        <Label  Text="PREPARATION" TextColor="#e74c3c" FontSize="16"  Margin="10,0,10,0" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" VerticalOptions="FillAndExpand" HorizontalOptions="StartAndExpand"/>
+                    </ContentView>
+
+                    <WebView  x:Name="prewebView"/>
+
+                    <!--<ListView Grid.Row="1" x:Name="lst2" HasUnevenRows="True" ItemTapped="lst2_ItemTapped">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout Margin="10,0" Orientation="Horizontal" HorizontalOptions="Start" VerticalOptions="Center" HeightRequest="70" >
+                                        <Image Source="{Binding imgsource}" HeightRequest="25" WidthRequest="25" VerticalOptions="Center" HorizontalOptions="Start"/>
+                                        <local:CustomLabelRegular Text="{Binding Name}" Font="16" VerticalOptions="Center" HorizontalTextAlignment="Center"/>
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>-->
+                </Grid>
+
+                <StackLayout  Grid.Row="3" BackgroundColor="#f0eff5" Spacing="0">
+                    <StackLayout  Margin="10,0,10,15" Orientation="Horizontal" Spacing="5" >
+                        <local:CustomButtonRegular BorderRadius="5" HeightRequest="40" Text="EMAIL" TextColor="White" BackgroundColor="#ca4334" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand"/>
+                        <local:CustomButtonRegular BorderRadius="5" HeightRequest="40" Text="WATCH VEDIO" TextColor="White" BackgroundColor="#ca4334"  VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand"/>
                     </StackLayout>
-                  </local:CustomListViewCell.View>
-                </local:CustomListViewCell>
-              </DataTemplate>
-            </local:CustomListView.ItemTemplate>
-          </local:CustomListView>
+                </StackLayout>
+                <local:CustomImageGallery x:Name="videoView" Margin="0,5,0,15" Grid.Row="4" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
 
-        </Grid>
+            </Grid>
 
-        <local:CustomButtonRegular BorderRadius="5" Margin="10,0"    Grid.Row="1" Text="ADD TO 
-SHOPPING LIST" TextColor="White" BackgroundColor="#ca4334"
-VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
 
-        <Grid Grid.Row="2" BackgroundColor="White"  Margin="0,10,0,0"
-HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-          <Grid.RowDefinitions>
-            <RowDefinition Height="40" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
-          </Grid.RowDefinitions>
-
-          <ContentView Grid.Row="0"
-BackgroundColor="#f0eff5"  HorizontalOptions="FillAndExpand"
-VerticalOptions="FillAndExpand" >
-            <Label  Text="PREPARATION" TextColor="#e74c3c"
-FontSize="16"  Margin="10,0,10,0" HorizontalTextAlignment="Center"
-VerticalTextAlignment="Center" VerticalOptions="FillAndExpand"
-HorizontalOptions="StartAndExpand"/>
-          </ContentView>
-
-          <ListView Grid.Row="1" x:Name="lst2"
-HasUnevenRows="True" ItemTapped="lst2_ItemTapped">
-            <ListView.ItemTemplate>
-              <DataTemplate>
-                <ViewCell>
-                  <StackLayout Margin="10,0"
-Orientation="Horizontal" HorizontalOptions="Start"
-VerticalOptions="Center" HeightRequest="70" >
-                    <Image Source="{Binding 
-imgsource}" HeightRequest="25" WidthRequest="25"
-VerticalOptions="Center" HorizontalOptions="Start"/>
-                    <local:CustomLabelRegular Text="{Binding Name}" Font="16"
-VerticalOptions="Center" HorizontalTextAlignment="Center"/>
-
-                  </StackLayout>
-                </ViewCell>
-              </DataTemplate>
-            </ListView.ItemTemplate>
-          </ListView>
-        </Grid>
-
-        <StackLayout  Grid.Row="3" BackgroundColor="#f0eff5" Spacing="0">
-          <StackLayout  Margin="10,0,10,15" Orientation="Horizontal" Spacing="5" >
-            <local:CustomButtonRegular BorderRadius="5" HeightRequest="40" Text="EMAIL" TextColor="White"
-BackgroundColor="#ca4334" VerticalOptions="CenterAndExpand"
-HorizontalOptions="FillAndExpand"/>
-            <local:CustomButtonRegular BorderRadius="5" HeightRequest="40" Text="WATCH VEDIO" TextColor="White"
-BackgroundColor="#ca4334" VerticalOptions="CenterAndExpand"
-HorizontalOptions="FillAndExpand"/>
-          </StackLayout>
-        </StackLayout>
-        <local:CustomImageGallery x:Name="videoView" Margin="0,5,0,15" Grid.Row="4" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
-
-      </Grid>
-    </ScrollView>
-  </StackLayout>
+        </ScrollView> 
+    </StackLayout>
 </ContentPage>
-  

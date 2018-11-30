@@ -16,80 +16,20 @@ namespace LetsCookApp.Views
         {
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
-
-            lst1.ItemsSource = new List<Contacts>()
-            {
-    new Contacts() {
-            Name = "Umair Here, you can see that we", Num = "0456445450945", imgsource = "checkmarkon.png",
-        },
-        new Contacts() {
-            Name = "Cat Here, you can see that we", Num = "034456445905", imgsource = "checkmarkon.png",
-        },
-        new Contacts() {
-            Name = "Nature Here, you can see that we", Num = "56445905", imgsource = "checkmark.png",
-        },
-        new Contacts() {
-            Name = "Nature Here, you can see that we", Num = "56445905", imgsource = "checkmarkon.png",
-        },
-        new Contacts() {
-            Name = "Cat Here, you can see that we", Num = "034456445905", imgsource = "checkmarkon.png",
-        },
-        new Contacts() {
-            Name = "Nature Here, you can see that we", Num = "56445905", imgsource = "checkmark.png",
-        },
-        new Contacts() {
-            Name = "Nature Here, you can see that we", Num = "56445905", imgsource = "checkmark.png",
-        },
-        new Contacts() {
-            Name = "Nature Here, you can see that we", Num = "56445905", imgsource = "checkmarkon.png",
-        },
-        new Contacts() {
-            Name = "Cat Here, you can see that we", Num = "034456445905", imgsource = "checkmarkon.png",
-        },
-        new Contacts() {
-            Name = "Nature Here, you can see that we", Num = "56445905", imgsource = "checkmark.png",
-        },
-        new Contacts() {
-            Name = "Nature Here, you can see that we", Num = "56445905", imgsource = "checkmarkon.png",
-        },
-};
-
-
-            lst2.ItemsSource = new List<Contacts>()
-            {
-    new Contacts() {
-            Name = "Umair Here, you can see that we used the ImageCell and set Binding. We set Binding of ‘Text’ with ‘Name’, ", Num = "0456445450945", imgsource = "checkmark.png",
-        },
-        new Contacts() {
-            Name = "Cat Here, you can see that we used the ImageCell and set Binding. We set Binding of ‘Text’ with ‘Name’, ", Num = "034456445905", imgsource = "checkmark.png",
-        },
-        new Contacts() {
-            Name = "Nature Here, you can see that we used the ImageCell and set Binding. We set Binding of ‘Text’ with ‘Name’, ", Num = "56445905", imgsource = "checkmark.png",
-        },
-         new Contacts() {
-            Name = "Nature Here, you can see that we used the ImageCell and set Binding. We set Binding of ‘Text’ with ‘Name’, ", Num = "56445905", imgsource = "checkmark.png",
-        },
-                new Contacts() {
-            Name = "Cat Here, you can see that we used the ImageCell and set Binding. We set Binding of ‘Text’ with ‘Name’, ", Num = "034456445905", imgsource = "checkmark",
-        },
-        new Contacts() {
-            Name = "Nature Here, you can see that we used the ImageCell and set Binding. We set Binding of ‘Text’ with ‘Name’, ", Num = "56445905", imgsource = "checkmark.png",
-        },
-                new Contacts()
-                {
-                    Name = "Cat Here, you can see that we used the ImageCell and set Binding. We set Binding of ‘Text’ with ‘Name’, ", Num = "034456445905", imgsource = "checkmark.png",
-                },
-        new Contacts()
-        {
-            Name = "Nature Here, you can see that we used the ImageCell and set Binding. We set Binding of ‘Text’ with ‘Name’, ", Num = "56445905", imgsource = "checkmark.png",
-        },
-            };
-
+            var vm= App.AppSetup.CategoryViewModel;
+            BindingContext = vm;
 
             var Urls = new System.Collections.ObjectModel.ObservableCollection<string>();
-            Urls.Add("https://www.youtube.com/watch?v=O-RgquKVTPE");
+            Urls.Add(""+ vm.RecipeDishView.VideoUrl + "");
             videoView.BackgroundColor = Color.Black;
-            videoView.ItemsSource = Urls;
+            videoView.ItemsSource = Urls; 
+
+            HtmlWebViewSource personHtmlSource = new HtmlWebViewSource();
+            personHtmlSource.SetBinding(HtmlWebViewSource.HtmlProperty, "HTMLDesc");
+            personHtmlSource.Html = vm.RecipeDishView.Preparation; 
+            var browser = new WebView();
+            prewebView.Source = personHtmlSource;
+            
 
         }
 

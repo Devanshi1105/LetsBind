@@ -28,13 +28,13 @@
 
                 </Grid.RowDefinitions>
 
-              <!--<controls:CircleImage x:Name="imgphoto" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" BorderColor="Red" BorderThickness="1" Source="{Binding UserData.PhotoURL}" Aspect="AspectFit" HeightRequest="70" WidthRequest="70" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>-->
+              <controls:CircleImage x:Name="imgphoto" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" BorderColor="Red" BorderThickness="1" Source="{Binding UserData.PhotoURL}" Aspect="AspectFit" HeightRequest="70" WidthRequest="70" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
 
-                <forms:CachedImage x:Name="img"  Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" LoadingPlaceholder="man.png" Aspect="Fill" Source="{Binding UserData.PhotoURL}">
+                <!--<forms:CachedImage x:Name="img"  Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" LoadingPlaceholder="man.png" Aspect="Fill" Source="{Binding UserData.PhotoURL}">
                     <forms:CachedImage.Transformations>
                         <transformations:RoundedTransformation Radius="240" />
                     </forms:CachedImage.Transformations>
-                </forms:CachedImage>
+                </forms:CachedImage>-->
 
 
                 <StackLayout Orientation="Vertical" Grid.Row="0" Grid.RowSpan="2" Grid.Column="1"  HeightRequest="50" HorizontalOptions="StartAndExpand"  Spacing="0" VerticalOptions="CenterAndExpand" >

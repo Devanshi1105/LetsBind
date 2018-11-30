@@ -68,10 +68,13 @@
     <Compile Include="Models\CategoryResponse.cs" />
     <Compile Include="Models\CommonRequest.cs" />
     <Compile Include="Models\CountryResponse.cs" />
+    <Compile Include="Models\DishViewRequest.cs" />
+    <Compile Include="Models\DishViewResponse.cs" />
     <Compile Include="Models\LoginRequest.cs" />
     <Compile Include="Models\ProfileResponse.cs" />
     <Compile Include="Models\ProfileUpdateRequest.cs" />
     <Compile Include="Models\SignupRequest.cs" />
+    <Compile Include="Models\SubCategoryRequest.cs" />
     <Compile Include="Models\SubCategoryResponse.cs" />
     <Compile Include="ViewModels\SignUpViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

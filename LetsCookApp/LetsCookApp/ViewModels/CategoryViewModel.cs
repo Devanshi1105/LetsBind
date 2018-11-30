@@ -18,10 +18,12 @@ namespace LetsCookApp.ViewModels
 
         public ICommand GetCotegaryCommand { get; private set; }
         public ICommand GetSubCotegaryCommand { get; private set; }
+        public ICommand GetDishViewCommand { get; private set; }
         public CategoryViewModel()
         {
             GetCotegaryCommand = new Command(() => GetCotegaryExecute());
             GetSubCotegaryCommand = new Command(() => GetSubCotegaryExecute());
+            GetDishViewCommand = new Command(() => GetDishViewExecute());
         }
         #endregion
 
@@ -40,6 +42,43 @@ namespace LetsCookApp.ViewModels
         {
             get { return recipe; }
             set { recipe = value; RaisePropertyChanged(() => Recipes); }
+        }
+
+        private DishViewResponse dishViewResponse;
+        public DishViewResponse DishViewResponse
+        {
+            get { return dishViewResponse; }
+            set { dishViewResponse = value; RaisePropertyChanged(() => DishViewResponse); }
+        }
+
+        private RecipeDishView recipeDishView;
+        public RecipeDishView RecipeDishView
+        {
+            get { return recipeDishView; }
+            set { recipeDishView = value; RaisePropertyChanged(() => RecipeDishView); }
+        }
+
+        private List<Ingredient> ingredients;
+        public List<Ingredient> Ingredients
+        {
+            get { return ingredients; }
+            set { ingredients = value; RaisePropertyChanged(() => Ingredients); }
+        }
+
+        private int catId;
+
+        public int CatId
+        {
+            get { return catId; }
+            set { catId = value; RaisePropertyChanged(() => CatId); }
+        }
+
+        private int recipeId;
+
+        public int RecipeId
+        {
+            get { return recipeId; }
+            set { recipeId = value; RaisePropertyChanged(() => RecipeId); }
         }
 
 
@@ -63,7 +102,7 @@ namespace LetsCookApp.ViewModels
                 {
                     UserDialogs.Instance.HideLoading();
                     Categories = new List<Category>(categoryResponse.Categories);
-                    Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
+                    Device.BeginInvokeOnMainThread(() =>
                     {
                         App.Current.MainPage = new Views.HomeView();
                     });
@@ -72,7 +111,7 @@ namespace LetsCookApp.ViewModels
             },
              (requestFailedReason) =>
              {
-                 Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
+                Device.BeginInvokeOnMainThread(() =>
                  {
                      //  UserDialogs.Instance.Alert(requestFailedReason.Message, null, "OK");
                      UserDialogs.Instance.HideLoading();
@@ -81,36 +120,69 @@ namespace LetsCookApp.ViewModels
         }
 
         public void GetSubCotegaryExecute()
-        {
-            Xamarin.Forms.Device.BeginInvokeOnMainThread(async () =>
+        { 
+            var obj = new SubCategoryRequest()
             {
-                await ((MasterDetailPage)App.Current.MainPage).Detail.Navigation.PushAsync(new SubCategoryView());
-            });
-            //var obj = new CommonRequest();
-            //UserDialogs.Instance.ShowLoading("Requesting..");
-            //userManager.getSubCategory(obj, () =>
-            //{
+                CatId = 2
+            };
+            UserDialogs.Instance.ShowLoading("Requesting..");
+            userManager.getSubCategory(obj, () =>
+            { 
+                var subCategoryResponse = userManager.SubCategoryResponse;
+                if (subCategoryResponse.StatusCode == 200)
+                {
+                    UserDialogs.Instance.HideLoading();
+                    Recipes = new List<Recipe>(subCategoryResponse.Recipes);
+                    Device.BeginInvokeOnMainThread(async () =>
+                    {
+                        await ((MasterDetailPage)App.Current.MainPage).Detail.Navigation.PushAsync(new SubCategoryView());
+                    });
 
-            //    var subCategoryResponse = userManager.SubCategoryResponse;
-            //    if (subCategoryResponse.StatusCode == 200)
-            //    {
-            //        UserDialogs.Instance.HideLoading();
-            //        //Recipes = new List<Category>(subCategoryResponse.Recipes);
-            //        Xamarin.Forms.Device.BeginInvokeOnMainThread(async () =>
-            //        {
-            //           await ((MasterDetailPage)App.Current.MainPage).Detail.Navigation.PushAsync(new SubCategoryView());
-            //        });
+                }
+            },
+             (requestFailedReason) =>
+             {
+                 Device.BeginInvokeOnMainThread(() =>
+                 {
+                     UserDialogs.Instance.HideLoading();
+                     UserDialogs.Instance.Alert(requestFailedReason.Message==null?"Network Error": requestFailedReason.Message, null, "OK");
+                  
+                 });
+             });
+        }
 
-            //    }
-            //},
-            // (requestFailedReason) =>
-            // {
-            //     Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
-            //     {
-            //         //  UserDialogs.Instance.Alert(requestFailedReason.Message, null, "OK");
-            //         UserDialogs.Instance.HideLoading();
-            //     });
-            // });
+        public void GetDishViewExecute()
+        {
+            var obj = new DishViewRequest()
+            {
+                 RecipeId = 8
+            };
+            UserDialogs.Instance.ShowLoading("Requesting..");
+            userManager.getDishView(obj, () =>
+            {
+                var dishViewResponse = userManager.DishViewResponse;
+                if (dishViewResponse.StatusCode == 200)
+                {
+                    UserDialogs.Instance.HideLoading();
+                    dishViewResponse = new DishViewResponse() { Recipe= dishViewResponse.Recipe} ;
+                    RecipeDishView = dishViewResponse.Recipe;
+                    Ingredients = RecipeDishView.Ingredients;
+                    Device.BeginInvokeOnMainThread(async () =>
+                    {
+                        await ((MasterDetailPage)App.Current.MainPage).Detail.Navigation.PushAsync(new DishView());
+                    });
+
+                }
+            },
+             (requestFailedReason) =>
+             {
+                 Device.BeginInvokeOnMainThread(() =>
+                 {
+                     UserDialogs.Instance.HideLoading();
+                     UserDialogs.Instance.Alert(requestFailedReason.Message, null, "OK");
+
+                 });
+             });
         }
         #endregion
 

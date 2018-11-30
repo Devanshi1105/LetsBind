@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -30,7 +31,7 @@ namespace LetsCookApp.Views
             BindingContext = App.AppSetup.SignUpViewModel;
             imgPlus.IsVisible = true;
             var lst = App.AppSetup.SignUpViewModel.CountryResponse;
-            foreach (var item in lst.country)
+            foreach (var item in lst?.country)
             {
                 drpcountry.Items.Add(item.name);
             }
@@ -159,6 +160,11 @@ namespace LetsCookApp.Views
             App.AppSetup.SignUpViewModel.DateOfBirth = dobpickar.Date.ToString();
         }
 
+        bool IsValidEmail(string strIn)
+        {
+            // Return true if strIn is in valid e-mail format.
+            return Regex.IsMatch(strIn, @"^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$");
+        }
 
         private bool Validate()
         {
@@ -176,6 +182,13 @@ namespace LetsCookApp.Views
                 entEmail.Focus();
                 val = false;
             }
+            else if (!IsValidEmail(vm.Email))
+            {
+                UserDialogs.Instance.Alert("Please enter valid emailID.", null, "OK");
+                entEmail.Focus();
+                val = false;
+            }
+           
             else if (vm.Email != vm.RetypeEmail)
             {
                 UserDialogs.Instance.Alert("Emailid and retype-emailid should be equal.");
