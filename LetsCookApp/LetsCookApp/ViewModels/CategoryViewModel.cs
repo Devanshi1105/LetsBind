@@ -123,7 +123,7 @@ namespace LetsCookApp.ViewModels
         { 
             var obj = new SubCategoryRequest()
             {
-                CatId = 2
+                CatId = CatId
             };
             UserDialogs.Instance.ShowLoading("Requesting..");
             userManager.getSubCategory(obj, () =>
@@ -155,7 +155,7 @@ namespace LetsCookApp.ViewModels
         {
             var obj = new DishViewRequest()
             {
-                 RecipeId = 8
+                 RecipeId = RecipeId
             };
             UserDialogs.Instance.ShowLoading("Requesting..");
             userManager.getDishView(obj, () =>
