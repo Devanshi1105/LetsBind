@@ -146,7 +146,7 @@
                                 <RowDefinition Height="40"/>
                             </Grid.RowDefinitions>
 
-                            <local:CustomLabelRegular Grid.Row="0" Grid.Column="0"  Text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged." TextColor="Black" FontSize="16" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Start" Margin="10,0"/>
+                            <local:CustomLabelRegular Grid.Row="0" Grid.Column="0"  Text="{Binding AboutMe}" TextColor="Black" FontSize="16" HorizontalOptions="Start" VerticalOptions="Center" HorizontalTextAlignment="Start" Margin="10,0"/>
 
                             <StackLayout Grid.Row="1"  VerticalOptions="Center" BackgroundColor="#f9f9f9" HorizontalOptions="FillAndExpand" HeightRequest="40" Orientation="Horizontal">
 

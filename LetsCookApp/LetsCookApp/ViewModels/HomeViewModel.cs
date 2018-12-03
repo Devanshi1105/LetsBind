@@ -343,6 +343,7 @@ namespace LetsCookApp.ViewModels
                     Picture = udata.PhotoURL;
                     DateOfBirth = udata.DateOfBirth;
                     Gender = udata.Gender;
+                    AboutMe = udata.AboutMe;
                     if (!string.IsNullOrEmpty(udata.PhotoURL))
                     { 
                         //PictureSource = new UriImageSource

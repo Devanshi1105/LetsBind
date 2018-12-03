@@ -26,6 +26,7 @@ namespace LetsCookApp.Views
 
         private void SubCategories_Tapped(object sender, EventArgs e)
         {
+
             Navigation.PushAsync(new SubCategoryView());
         }
         private void Menu_Tapped(object sender, EventArgs e)
@@ -46,7 +47,7 @@ namespace LetsCookApp.Views
 
             var v = e.SelectedItem as Category;
             App.AppSetup.CategoryViewModel.CatId =Convert.ToInt32(v.Id);
-
+            App.AppSetup.CategoryViewModel.SubCategoryTitle = v.Title;
             App.AppSetup.CategoryViewModel.GetSubCotegaryCommand.Execute(null);
         }
     }

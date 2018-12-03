@@ -105,7 +105,8 @@ namespace LetsCookApp.Managers.SettingsManager
             }
             else
             {
-                UserDialogs.Instance.HideLoading(); UserDialogs.Instance.Alert(error, null, "OK");
+                UserDialogs.Instance.HideLoading();
+                UserDialogs.Instance.Alert(error, null, "OK");
             }
         }
         public async void getDishView(DishViewRequest commonRequest, Action success, Action<DishViewResponse> failed)

@@ -82,6 +82,15 @@ namespace LetsCookApp.ViewModels
         }
 
 
+        private string subCategoryTitle;
+
+        public string SubCategoryTitle
+        {
+            get { return subCategoryTitle; }
+            set { subCategoryTitle = value; RaisePropertyChanged(() => SubCategoryTitle); }
+        }
+
+
         #endregion
 
         #region Method
@@ -145,7 +154,7 @@ namespace LetsCookApp.ViewModels
                  Device.BeginInvokeOnMainThread(() =>
                  {
                      UserDialogs.Instance.HideLoading();
-                     UserDialogs.Instance.Alert(requestFailedReason.Message==null?"Network Error": requestFailedReason.Message, null, "OK");
+                     UserDialogs.Instance.Alert(requestFailedReason?.Message==null?"Network Error": requestFailedReason.Message, null, "OK");
                   
                  });
              });
