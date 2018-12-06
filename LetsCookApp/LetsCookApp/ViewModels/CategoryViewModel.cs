@@ -25,6 +25,13 @@ namespace LetsCookApp.ViewModels
             GetSubCotegaryCommand = new Command(() => GetSubCotegaryExecute());
             GetDishViewCommand = new Command(() => GetDishViewExecute());
         }
+		
+		
+		public void test()
+		{
+			
+			
+		}
         #endregion
 
         #region Property
