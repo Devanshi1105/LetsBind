@@ -22,14 +22,17 @@ namespace LetsCookApp.Views
             var Urls = new System.Collections.ObjectModel.ObservableCollection<string>();
             Urls.Add(""+ vm.RecipeDishView.VideoUrl + "");
             videoView.BackgroundColor = Color.Black;
-            videoView.ItemsSource = Urls; 
+            videoView.ItemsSource = Urls;
 
             HtmlWebViewSource personHtmlSource = new HtmlWebViewSource();
             personHtmlSource.SetBinding(HtmlWebViewSource.HtmlProperty, "HTMLDesc");
-            personHtmlSource.Html = vm.RecipeDishView.Preparation; 
-            var browser = new WebView();
+            personHtmlSource.Html = vm.RecipeDishView.Preparation;  
+
+            lst1.HeightRequest = vm.RecipeDishView.Ingredients.Count < 0 ? 50 : (vm.RecipeDishView.Ingredients.Count + 1) * 50; 
             prewebView.Source = personHtmlSource;
-            
+
+
+
 
         }
 

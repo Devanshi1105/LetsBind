@@ -36,6 +36,13 @@ namespace LetsCookApp.ViewModels
 
         #region Property
 
+        private HtmlWebViewSource htmlWebViewSource;
+
+        public HtmlWebViewSource HtmlWebViewSource
+        {
+            get { return htmlWebViewSource; }
+            set { htmlWebViewSource = value;RaisePropertyChanged(() => HtmlWebViewSource); }
+        }
 
         private List<Category> categories;
         public List<Category> Categories
@@ -183,6 +190,7 @@ namespace LetsCookApp.ViewModels
                     dishViewResponse = new DishViewResponse() { Recipe= dishViewResponse.Recipe} ;
                     RecipeDishView = dishViewResponse.Recipe;
                     Ingredients = RecipeDishView.Ingredients;
+                    
                     Device.BeginInvokeOnMainThread(async () =>
                     {
                         await ((MasterDetailPage)App.Current.MainPage).Detail.Navigation.PushAsync(new DishView());

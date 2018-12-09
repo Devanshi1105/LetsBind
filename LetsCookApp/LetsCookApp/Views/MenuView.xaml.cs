@@ -44,7 +44,8 @@ namespace LetsCookApp.Views
             }
             else if (menu.TargetType == typeof(NewlyAddedRecipes))
             {
-                ((MasterDetailPage)App.Current.MainPage).Detail.Navigation.PushAsync(new NewlyAddedRecipes());
+
+                App.AppSetup.NewlyAddedRecipeViewModel.GetNewlyAddedRecipeCommand.Execute(null);
             }
             else if (menu.TargetType == typeof(PopularReceipesView))
             {
