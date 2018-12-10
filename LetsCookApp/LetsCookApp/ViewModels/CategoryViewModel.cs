@@ -58,11 +58,12 @@ namespace LetsCookApp.ViewModels
             set { recipe = value; RaisePropertyChanged(() => Recipes); }
         }
 
-        private DishViewResponse dishViewResponse;
-        public DishViewResponse DishViewResponse
+
+        private int height=40;
+        public int TitleHeight
         {
-            get { return dishViewResponse; }
-            set { dishViewResponse = value; RaisePropertyChanged(() => DishViewResponse); }
+            get { return height; }
+            set { height = value; RaisePropertyChanged(() => TitleHeight); }
         }
 
         private RecipeDishView recipeDishView;

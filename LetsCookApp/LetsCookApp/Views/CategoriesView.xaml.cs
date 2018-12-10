@@ -48,6 +48,7 @@ namespace LetsCookApp.Views
             var v = e.SelectedItem as Category;
             App.AppSetup.CategoryViewModel.CatId =Convert.ToInt32(v.Id);
             App.AppSetup.CategoryViewModel.SubCategoryTitle = v.Title;
+            ((ListView)sender).SelectedItem = null; // de-select the row
             App.AppSetup.CategoryViewModel.GetSubCotegaryCommand.Execute(null);
         }
     }

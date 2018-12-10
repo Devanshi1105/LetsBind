@@ -17,8 +17,22 @@ namespace LetsCookApp.Views
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
             var vm= App.AppSetup.CategoryViewModel;
+            //vm.RecipeDishView.Title = "abcdefghijklmnopqrstuvwxyz abcdefghijklmnopqrstuvwxyz abcdefghijklmnopqrstuvwxyz";
             BindingContext = vm;
 
+            if(vm.RecipeDishView.Title.Length <=25)
+            {
+                vm.TitleHeight = 30;
+            }
+            else if(vm.RecipeDishView.Title.Length<=50)
+            {
+                vm.TitleHeight = 60;
+            }
+            else
+            {
+                vm.TitleHeight = 90;
+            }
+          
             var Urls = new System.Collections.ObjectModel.ObservableCollection<string>();
             Urls.Add(""+ vm.RecipeDishView.VideoUrl + "");
             videoView.BackgroundColor = Color.Black;

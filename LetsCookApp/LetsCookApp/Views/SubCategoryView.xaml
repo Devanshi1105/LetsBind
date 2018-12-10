@@ -40,7 +40,7 @@
                                     <RowDefinition Height="50"/>
 
                                 </Grid.RowDefinitions>
-                                <Image Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="3" Aspect="AspectFill" Source="{Binding foodIcon}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+                                <Image Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="3" Aspect="AspectFill" Source="{Binding Image}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
                                 <Image Grid.Column="1" Grid.Row="1"  Aspect="AspectFit" Source="favorite" HorizontalOptions="Center" VerticalOptions="EndAndExpand"/>
 
                                 <Grid Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" BackgroundColor="Black" Opacity="0.8">
@@ -52,7 +52,7 @@
                                         <RowDefinition Height="*"/>
                                         <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
-                                    <local:CustomLabelLight Grid.Column="0" Grid.Row="0" Text="{Binding Title}" FontAttributes="Bold" TextColor="#e74c3c" FontSize="14" HorizontalOptions="Start" VerticalOptions="Start" Margin="10,0"/>
+                                    <local:CustomLabelLight Grid.Column="0" Grid.Row="0" Text="{Binding Title}" FontAttributes="Bold" TextColor="#e74c3c" FontSize="14" HorizontalOptions="Start" VerticalOptions="Start" Margin="10,0"  LineBreakMode="TailTruncation"/>
 
                                     <StackLayout Grid.Column="0" Grid.Row="1" Orientation="Horizontal" HorizontalOptions="StartAndExpand" VerticalOptions="Center" Margin="10,0,0,5">
                                         <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">

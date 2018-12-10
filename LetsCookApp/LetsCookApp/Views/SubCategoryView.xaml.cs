@@ -36,7 +36,7 @@ namespace LetsCookApp.Views
 
             var v = e.SelectedItem as Recipe;
             App.AppSetup.CategoryViewModel.RecipeId = Convert.ToInt32(v.Id);
-
+            ((ListView)sender).SelectedItem = null;  
             App.AppSetup.CategoryViewModel.GetDishViewCommand.Execute(null); 
         }
 
