@@ -108,7 +108,7 @@
 
                     <StackLayout  Grid.Row="2" Margin="10,0,10,0" Orientation="Horizontal" Spacing="5" >
                         <local:CustomButtonRegular BorderRadius="5" HeightRequest="40" Text="EMAIL" TextColor="White" BackgroundColor="#ca4334" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand"/>
-                        <local:CustomButtonRegular BorderRadius="5" HeightRequest="40" Text="WATCH VEDIO" TextColor="White" BackgroundColor="#ca4334"  VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand"/> 
+                        <local:CustomButtonRegular BorderRadius="5" HeightRequest="40" Text="WATCH VIDEO" TextColor="White" BackgroundColor="#ca4334"  VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand"/> 
                     </StackLayout>
 
                     <local:CustomImageGallery  Grid.Row="3" x:Name="videoView" Margin="0,5,0,10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
