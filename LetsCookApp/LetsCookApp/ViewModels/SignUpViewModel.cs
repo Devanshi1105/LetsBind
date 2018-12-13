@@ -1,9 +1,11 @@
 ﻿using Acr.UserDialogs;
 using LetsCookApp.Models;
 using LetsCookApp.Views;
+using Plugin.Media;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -19,8 +21,12 @@ namespace LetsCookApp.ViewModels
 
         #region Constructor
 
+        public ICommand TakePicture { get; set; }
+        public ICommand SelectPicture { get; set; }
         public SignUpViewModel()
         {
+            TakePicture = new Command(async () => await TakePictureAsync());
+            SelectPicture = new Command(async () => await SelectPictureAsync());
             CountryResponse = new CountryResponse();
             FinishCommand = new Command(() => FinishCommandExecute());
            // GetCountry();
@@ -353,6 +359,86 @@ namespace LetsCookApp.ViewModels
         #endregion
 
         #region Command
+
+        public async Task TakePictureAsync()
+        {
+            //await CrossMedia.Current.Initialize();
+            //if (!CrossMedia.Current.IsPickPhotoSupported || CrossMedia.Current.IsCameraAvailable)
+            //{
+            //    Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
+            //    {
+            //        //UserDialogs.Instance.Alert("Photos Not Supported", ":( Permission not granted to photos.", "OK");
+            //        return;
+            //    });
+            //}
+            //var file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
+            //{
+            //    Directory = "TimePeace App",
+            //    Name = "Aes_" + DateTime.Now.ToString("yyyyMMdd") + ".jpg",
+            //    DefaultCamera = Plugin.Media.Abstractions.CameraDevice.Rear,
+            //    //SaveToAlbum = false
+            //});
+            //if (file == null) return;
+            /////Mohit
+            //var cropedBytes = await CrossXMethod.Current.CropImageFromOriginalToBytes(file.Path);
+            //if (cropedBytes != null)
+            //{
+            //    Picture = ImageSource.FromStream(() =>
+            //    {
+            //        file.Dispose();
+            //        var cropedImage = new MemoryStream(cropedBytes);
+            //        return cropedImage;
+            //    });
+            //    ImageBase64 = Convert.ToBase64String(cropedBytes);
+            //}
+            //else
+            //{
+            //    file.Dispose();
+            //    return;
+            //}
+            ////byte[] ReceiptData = DependencyService.Get<IMediaService>().ResizeImage(cropedBytes, 300, 400);
+            /////Mohit
+            ////byte[] ReceiptData = DependencyService.Get<IMediaService>().ResizeImage(DependencyService.Get<IMediaService>().GetMediaInBytes(file.Path), 450, 650);
+            ////ImageBase64 = Convert.ToBase64String(ReceiptData);
+            ////Picture = ImageSource.FromStream(() => new MemoryStream(ReceiptData));
+
+            //byte[] resizedImage = DependencyService.Get<IMediaService>().ResizeImage(cropedBytes, 400, 400);
+            //ImageBase64 = Convert.ToBase64String(resizedImage);
+            //Picture = ImageSource.FromStream(() => new MemoryStream(cropedBytes));
+        }
+        public async Task SelectPictureAsync()
+        {
+            //await CrossMedia.Current.Initialize();
+            //var file = await CrossMedia.Current.PickPhotoAsync(new Plugin.Media.Abstractions.PickMediaOptions
+            //{
+            //    PhotoSize = Plugin.Media.Abstractions.PhotoSize.Custom
+            //});
+            //if (file == null) return;
+            /////Mohit
+            //var cropedBytes = await CrossXMethod.Current.CropImageFromOriginalToBytes(file.Path);
+            //if (cropedBytes != null)
+            //{
+            //    Picture = ImageSource.FromStream(() =>
+            //    {
+            //        file.Dispose();
+            //        var cropedImage = new MemoryStream(cropedBytes);
+            //        return cropedImage;
+            //    });
+            //    ImageBase64 = Convert.ToBase64String(cropedBytes);
+            //}
+            //else
+            //{
+            //    file.Dispose();
+            //    return;
+            //}
+            /////Mohit
+            ////byte[] ReceiptData = DependencyService.Get<IMediaService>().ResizeImage(cropedBytes, 450, 650);
+            ////byte[] ReceiptData = DependencyService.Get<IMediaService>().ResizeImage(DependencyService.Get<IMediaService>().GetMediaInBytes(file.Path), 450, 650);
+            //byte[] resizedImage = DependencyService.Get<IMediaService>().ResizeImage(cropedBytes, 400, 400);
+            //ImageBase64 = Convert.ToBase64String(resizedImage);
+            ////ImageBase64 = Convert.ToBase64String(cropedBytes);
+            //Picture = ImageSource.FromStream(() => new MemoryStream(cropedBytes));
+        }
         public ICommand FinishCommand { get; private set; }
         private async void FinishCommandExecute()
         {
@@ -518,12 +604,12 @@ namespace LetsCookApp.ViewModels
                     ImageBase64 = "";
                     if (!string.IsNullOrEmpty(udata.PhotoURL))
                     {
-                        //PictureSource  = new UriImageSource
-                        //{
-                        //    Uri = new Uri(udata.PhotoURL),
-                        //    CachingEnabled = false,
-                        //};
-                    // ImageBase64 = await GetImageAsBase64Url(udata.PhotoURL);
+                        PictureSource = new UriImageSource
+                        {
+                            Uri = new Uri(udata.PhotoURL),
+                            CachingEnabled = true,
+                        };
+                        // ImageBase64 = await GetImageAsBase64Url(udata.PhotoURL);
                     }
                     Xamarin.Forms.Device.BeginInvokeOnMainThread(async () =>
                     {

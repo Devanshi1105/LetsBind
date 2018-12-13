@@ -40,15 +40,17 @@ namespace LetsCookApp.Views
             }
             else if (menu.TargetType == typeof(MyProfileView))
             {
-                 ((MasterDetailPage)App.Current.MainPage).Detail.Navigation.PushAsync(new MyProfileView());
+                App.AppSetup.HomeViewModel.GetProfile();
+              
             }
             else if (menu.TargetType == typeof(NewlyAddedRecipes))
             {
-                ((MasterDetailPage)App.Current.MainPage).Detail.Navigation.PushAsync(new NewlyAddedRecipes());
+                App.AppSetup.NewlyAddedRecipeViewModel.GetNewlyAddedRecipeCommand.Execute(null);
+                //((MasterDetailPage)App.Current.MainPage).Detail.Navigation.PushAsync(new NewlyAddedRecipes());
             }
             else if (menu.TargetType == typeof(PopularReceipesView))
             {
-                ((MasterDetailPage)App.Current.MainPage).Detail.Navigation.PushAsync(new PopularReceipesView());
+                App.AppSetup.PopularReceipesViewModel.GetPopularReceipeCommand.Execute(null); 
             }
             else if (menu.TargetType == typeof(MyFavouritesRecipesView))
             {

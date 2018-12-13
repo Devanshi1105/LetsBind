@@ -15,7 +15,8 @@ namespace LetsCookApp.Managers.SettingsManager
         public CategoryResponse CategoryResponse { get { return categoryResponse; } }
         public SubCategoryResponse SubCategoryResponse { get { return subCategoryResponse; } }
         public DishViewResponse DishViewResponse { get { return dishViewResponse; } }
-
+        public PopularRecipeResponse PopularRecipeResponse { get { return popularRecipeResponse; } }
+        public NewlyAddedRecipeResponse NewlyAddedRecipeResponse { get { return newlyAddedRecipeResponse; } }
         public ProfileResponse ProfileResponse { get { return profileResponse; } } 
         public LoginResponse LoginResponse { get { return loginResponse; } }
 
@@ -40,9 +41,11 @@ namespace LetsCookApp.Managers.SettingsManager
         private CategoryResponse categoryResponse { get; set; }
         private SubCategoryResponse subCategoryResponse { get; set; }
         private DishViewResponse dishViewResponse { get; set; }
+        private PopularRecipeResponse popularRecipeResponse { get; set; }
         private ProfileResponse profileResponse { get; set; }
         private CountryResponse countryResponse { get; set; }
 
+        private NewlyAddedRecipeResponse newlyAddedRecipeResponse { get; set; }
 
         private LoginResponse loginResponse { get; set; }
         private SignupResponse signupResponse { get; set; }
@@ -140,6 +143,37 @@ namespace LetsCookApp.Managers.SettingsManager
                 UserDialogs.Instance.HideLoading(); UserDialogs.Instance.Alert(error, null, "OK");
             }
         }
+          public async void getPopularRecipe(CommonRequest commonRequest, Action success, Action<PopularRecipeResponse> failed)
+        {
+            bool IsNetwork = true;//await DependencyService.Get<IMediaService>().CheckNewworkConnectivity();
+            if (IsNetwork)
+            {
+               // string para = "RecipeId=" + commonRequest.RecipeId;
+                var url = string.Format("{0}popularrecipe.php?", _settingsManager.ApiHost);
+
+                await Task.Run(() =>
+                {
+                    Dictionary<string, string> head = GetHeaders();
+                    var result = _apiProvider.Get<PopularRecipeResponse, CommonRequest>(url, null).Result;
+                    if (result.IsSuccessful)
+                    {
+                        if (success != null)
+                        {
+                            popularRecipeResponse = result.Result;
+                            success.Invoke();
+                        }
+                    }
+                    else
+                    {
+                        failed.Invoke(result.Result);
+                    }
+                });
+            }
+            else
+            {
+                UserDialogs.Instance.HideLoading(); UserDialogs.Instance.Alert(error, null, "OK");
+            }
+        }
 
 
         public async void getProfile(GetProfileRequest commonRequest, Action success, Action<ProfileResponse> failed)
@@ -175,6 +209,37 @@ namespace LetsCookApp.Managers.SettingsManager
                 UserDialogs.Instance.HideLoading(); UserDialogs.Instance.Alert(error, null, "OK");
             }
         }
+        public async void getNewlyAddedRecipe(CommonRequest commonRequest, Action success, Action<NewlyAddedRecipeResponse> failed)
+        {
+            bool IsNetwork = true;//await DependencyService.Get<IMediaService>().CheckNewworkConnectivity();
+            if (IsNetwork)
+            {
+                var url = string.Format("{0}getnewlyaddrecipe.php?", _settingsManager.ApiHost);
+
+                await Task.Run(() =>
+                {
+                    Dictionary<string, string> head = GetHeaders();
+                    var result = _apiProvider.Get<NewlyAddedRecipeResponse, CommonRequest>(url, null).Result;
+                    if (result.IsSuccessful)
+                    {
+                        if (success != null)
+                        {
+                            newlyAddedRecipeResponse = result.Result;
+                            success.Invoke();
+                        }
+                    }
+                    else
+                    {
+                        failed.Invoke(result.Result);
+                    }
+                });
+            }
+            else
+            {
+                UserDialogs.Instance.HideLoading(); UserDialogs.Instance.Alert(error, null, "OK");
+            }
+        }
+
 
         public async void getCountry(CommonRequest commonRequest, Action success)
         {

@@ -69,6 +69,11 @@ namespace LetsCookApp.ViewModels
                             App.AppSetup.HomeViewModel.UserData = LoginResponse.UserData;
                             App.AppSetup.SignUpViewModel.Email = App.AppSetup.HomeViewModel.Email = LoginResponse.UserData.EmailId;
                             App.AppSetup.SignUpViewModel.UserId = App.AppSetup.HomeViewModel.UserId = LoginResponse.UserData.UserId;
+                            App.AppSetup.HomeViewModel.PictureSource = new UriImageSource
+                            {
+                                Uri = new Uri(LoginResponse.UserData.PhotoURL),
+                                CachingEnabled = true,
+                            };
                             UserName = Password = ""; 
                             App.AppSetup.CategoryViewModel.GetCotegaryCommand.Execute(null);
                         }

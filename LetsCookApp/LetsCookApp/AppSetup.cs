@@ -19,6 +19,8 @@ namespace LetsCookApp
             SimpleIoc.Default.Register<HomeViewModel>();
             SimpleIoc.Default.Register<SignUpViewModel>();
             SimpleIoc.Default.Register<CategoryViewModel>();
+            SimpleIoc.Default.Register<PopularReceipesViewModel>();
+            SimpleIoc.Default.Register<NewlyAddedRecipeViewModel>();
 
             // Services
             SimpleIoc.Default.Register<ISettingsManager, SettingsManager>();
@@ -31,10 +33,14 @@ namespace LetsCookApp
             SimpleIoc.Default.Unregister<LoginViewModel>(); 
             SimpleIoc.Default.Unregister<SignUpViewModel>();
             SimpleIoc.Default.Unregister<CategoryViewModel>();
+            SimpleIoc.Default.Unregister<PopularReceipesViewModel>();
+            SimpleIoc.Default.Unregister<NewlyAddedRecipeViewModel>();
 
             SimpleIoc.Default.Register<LoginViewModel>(); 
             SimpleIoc.Default.Register<SignUpViewModel>();
             SimpleIoc.Default.Register<CategoryViewModel>();
+            SimpleIoc.Default.Register<PopularReceipesViewModel>();
+            SimpleIoc.Default.Register<NewlyAddedRecipeViewModel>();
 
         }
         public LoginViewModel LoginViewModel
@@ -64,6 +70,20 @@ namespace LetsCookApp
             get
             {
                 return SimpleIoc.Default.GetInstance<CategoryViewModel>();
+            }
+        }
+      public PopularReceipesViewModel PopularReceipesViewModel
+        {
+            get
+            {
+                return SimpleIoc.Default.GetInstance<PopularReceipesViewModel>();
+            }
+        }
+        public NewlyAddedRecipeViewModel NewlyAddedRecipeViewModel
+        {
+            get
+            {
+                return SimpleIoc.Default.GetInstance<NewlyAddedRecipeViewModel>();
             }
         }
     }

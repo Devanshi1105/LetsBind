@@ -45,6 +45,13 @@ namespace LetsCookApp.ViewModels
         }
 
 
+        private int height = 40;
+        public int TitleHeight
+        {
+            get { return height; }
+            set { height = value; RaisePropertyChanged(() => TitleHeight); }
+        }
+
         private string firstName;
         public string FirstName
         {
@@ -318,7 +325,7 @@ namespace LetsCookApp.ViewModels
             obj.EmailId = Email;
             obj.UserId = UserId;
             UserDialogs.Instance.ShowLoading("Requesting..");
-            userManager.getProfile(obj,  () =>
+            userManager.getProfile(obj,() =>
             {
                 var userProfileResponse = userManager.ProfileResponse;
 
@@ -345,15 +352,21 @@ namespace LetsCookApp.ViewModels
                     Gender = udata.Gender;
                     AboutMe = udata.AboutMe;
                     if (!string.IsNullOrEmpty(udata.PhotoURL))
-                    { 
-                        //PictureSource = new UriImageSource
-                        //{
-                        //    Uri = new Uri(udata.PhotoURL),
-                        //    CachingEnabled = true,
-                        //};
-                      ////  ImageBase64 = await GetImageAsBase64Url(udata.PhotoURL);
+                    {
+                        PictureSource = new UriImageSource
+                        {
+                            Uri = new Uri(udata.PhotoURL),
+                            CachingEnabled = true,
+                        };
+                        ////  ImageBase64 = await GetImageAsBase64Url(udata.PhotoURL);
                     }
-                    UserDialogs.Instance.HideLoading();
+                    Device.BeginInvokeOnMainThread(async () =>
+                    {
+                        UserDialogs.Instance.HideLoading();
+                        await ((MasterDetailPage)App.Current.MainPage).Detail.Navigation.PushAsync(new MyProfileView());
+                    });
+                   
+                  
 
                 }
             },

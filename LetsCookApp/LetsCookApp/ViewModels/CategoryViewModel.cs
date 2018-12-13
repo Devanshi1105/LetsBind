@@ -36,6 +36,12 @@ namespace LetsCookApp.ViewModels
 
         #region Property
 
+        private int height = 40;
+        public int TitleHeight
+        {
+            get { return height; }
+            set { height = value; RaisePropertyChanged(() => TitleHeight); }
+        }
 
         private List<Category> categories;
         public List<Category> Categories

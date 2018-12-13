@@ -24,9 +24,31 @@ namespace LetsCookApp.Views
             ALine.IsVisible = FLine.IsVisible = GLine.IsVisible = false;
             grdAboutme.IsVisible = listFriends.IsVisible = grdGallery.IsVisible = false;
             BindingContext = App.AppSetup.HomeViewModel;
-            App.AppSetup.HomeViewModel.GetProfile();
+            //App.AppSetup.HomeViewModel.GetProfile();
+
+            //App.AppSetup.HomeViewModel.AboutMe = "You can provide extra definitions to the linker to ensure the type, methods and/or fields are not eliminated from your application. In your own code the preferred way is to use the You can provide extra definitions to the linker to ensure the type, methods and/or fields are not eliminated from your application. In your own code the preferred way is to use the eliminated from your application. In your own code the preferred way is to use the eliminated from your application. In your own code the preferred way is to use the";
+            lblreadmore.Text = "Read All";
+            if (!string.IsNullOrEmpty(App.AppSetup.HomeViewModel.AboutMe))
+            {
+                lblaboutme.Text = LimitTo(App.AppSetup.HomeViewModel.AboutMe, 100);
+
+                if (lblaboutme.Text.Length > 97)
+                {
+                    lblaboutme.Text = lblaboutme.Text + "...";
+                }
+                isvisibleProfileBioReadMore();
+            }
         }
 
+        public static string LimitTo(string data, int length)
+        {
+            return (data == null || data.Length < length) ? data : data.Substring(0, length);
+        }
+        public void isvisibleProfileBioReadMore()
+        {
+            lblreadmore.IsVisible = imgdown.IsVisible= App.AppSetup.HomeViewModel.AboutMe.Length > 100;
+        }
+       
         private void Menu_Tapped(object sender, EventArgs e)
         {
             App.AppSetup.HomeViewModel.IsMenuListPresented = true;
@@ -69,6 +91,25 @@ namespace LetsCookApp.Views
             var page = new SearchView();
 
             Rg.Plugins.Popup.Services.PopupNavigation.PushAsync(page);
+        }
+
+        private void ReadMore_Tapped(object sender, EventArgs e)
+        {
+            if (lblreadmore.Text == "Read All")
+            {
+                lblaboutme.Text = LimitTo(App.AppSetup.HomeViewModel.AboutMe, App.AppSetup.HomeViewModel.AboutMe.Length);
+                lblreadmore.Text = "Read less"; imgdown.RotateTo(180,50,null);
+            }
+            else
+            {
+                lblaboutme.Text = LimitTo(App.AppSetup.HomeViewModel.AboutMe, 100);
+                if (lblaboutme.Text.Length > 97)
+                {
+                    lblaboutme.Text = lblaboutme.Text + "...";
+                }
+                lblreadmore.Text = "Read All";
+                imgdown.RotateTo(0, 50, null);
+            }
         }
     }
 
