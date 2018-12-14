@@ -36,7 +36,11 @@
                                     <RowDefinition Height="136"/>
                                     <RowDefinition Height="48"/>
                                 </Grid.RowDefinitions>
-                                <Image Grid.Column="0" Grid.Row="0"  Grid.RowSpan="2" Aspect="AspectFill" Source="{Binding Image}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+                                <Image Grid.Column="0" Grid.Row="0"  Grid.RowSpan="2" Aspect="AspectFill" Source="{Binding Image}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="Recipe_Tapped"/>
+                                    </Image.GestureRecognizers>
+                                </Image>
 
                                 <Grid  Grid.Row="1"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Opacity=".8" BackgroundColor="Black">
                                     <Grid.ColumnDefinitions>

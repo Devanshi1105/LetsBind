@@ -19,8 +19,7 @@ namespace LetsCookApp.Managers.SettingsManager
         void ForgetPassword(LoginRequest request, Action success, Action<BaseResponseModel> failed);
 
         void SignUp(SignupRequest commonRequest, Action success, Action<SignupResponse> failed);
-        void SignUpUpdate(ProfileUpdateRequest commonRequest, Action success, Action<SignupResponse> failed);
-
+        void SignUpUpdate(ProfileUpdateRequest commonRequest, Action success, Action<SignupResponse> failed); 
         void getCountry(CommonRequest commonRequest, Action success);
 
 
@@ -33,5 +32,9 @@ namespace LetsCookApp.Managers.SettingsManager
         SignupResponse SignupResponse { get; }
         ProfileResponse ProfileResponse { get; }
         CountryResponse CountryResponse { get; }
+
+        FriendResponse FriendResponse { get; }
+        void getFriends(FriendRequest friendRequest, Action success, Action<FriendResponse> failed);
+
     }
 }

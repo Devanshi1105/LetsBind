@@ -4,17 +4,20 @@ using LetsCookApp.Models;
 using LetsCookApp.Views;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace LetsCookApp.ViewModels
 {
     public class HomeViewModel : BaseViewModel
     {
+        public ICommand GetFriendCommand { get; private set; }
         public HomeViewModel()
         {
             IsMenuListPresented = false;
@@ -34,6 +37,8 @@ namespace LetsCookApp.ViewModels
                 new Menu {Title = "Signout", imagesource="logout.png", TargetType = typeof(SignInSignUpView)},
             };
             RaisePropertyChanged(() => MenuItemList);
+
+            GetFriendCommand = new Command(() => GetFriendExecute());
         }
 
         #region Property
@@ -262,6 +267,13 @@ namespace LetsCookApp.ViewModels
             }
         }
 
+        private ObservableCollection<FriendsData> friendsDataList;
+
+        public ObservableCollection<FriendsData> FriendsDataList
+        {
+            get { return friendsDataList; }
+            set { friendsDataList = value; RaisePropertyChanged(() => FriendsDataList); }
+        }
 
         private ImageSource pictureSource;
         public ImageSource PictureSource
@@ -279,6 +291,7 @@ namespace LetsCookApp.ViewModels
 
 
         #endregion
+
         #region Set Properties
 
         private UserData userData;
@@ -379,6 +392,45 @@ namespace LetsCookApp.ViewModels
                  });
              });
         }
+
+
+        
+        public void GetFriendExecute()
+        {
+
+            FriendRequest obj = new FriendRequest()
+            {
+                UserId = 214 //Convert.ToInt32(UserId)
+            };
+            
+            UserDialogs.Instance.ShowLoading("Requesting..");
+            userManager.getFriends(obj, () =>
+            {
+                var friendResponse = userManager.FriendResponse;
+
+                if (friendResponse.StatusCode == 200)
+                {
+                    UserDialogs.Instance.HideLoading();
+                    var udata = friendResponse.FriendsData;
+                    FriendsDataList = new ObservableCollection<FriendsData>(udata);
+
+                    //Device.BeginInvokeOnMainThread(async () =>
+                    //{
+
+                    //    await ((MasterDetailPage)App.Current.MainPage).Detail.Navigation.PushAsync(new MyProfileView());
+                    //}); 
+                }
+            },
+             (requestFailedReason) =>
+             {
+                 Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
+                 {
+                     //  UserDialogs.Instance.Alert(requestFailedReason.Message, null, "OK");
+                     UserDialogs.Instance.HideLoading();
+                 });
+             });
+        }
+
         public async static Task<string> GetImageAsBase64Url(string url)
         {
             var credentials = new NetworkCredential();

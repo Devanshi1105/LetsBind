@@ -23,6 +23,7 @@ namespace LetsCookApp.Managers.SettingsManager
         public SignupResponse SignupResponse { get { return signupResponse; } }
 
         public CountryResponse CountryResponse { get { return countryResponse; } }
+        public FriendResponse FriendResponse { get { return friendResponse; } }
         public Manager(IApiProvider apiProvider, ISettingsManager settingsManager)
         {
             _apiProvider = apiProvider;
@@ -46,6 +47,7 @@ namespace LetsCookApp.Managers.SettingsManager
         private CountryResponse countryResponse { get; set; }
 
         private NewlyAddedRecipeResponse newlyAddedRecipeResponse { get; set; }
+        private FriendResponse friendResponse { get; set; }
 
         private LoginResponse loginResponse { get; set; }
         private SignupResponse signupResponse { get; set; }
@@ -240,6 +242,38 @@ namespace LetsCookApp.Managers.SettingsManager
             }
         }
 
+
+        public async void getFriends(FriendRequest friendRequest, Action success, Action<FriendResponse> failed)
+        {
+            bool IsNetwork = true;//await DependencyService.Get<IMediaService>().CheckNewworkConnectivity();
+            if (IsNetwork)
+            {
+                string para = "userId=" + friendRequest.UserId;
+                var url = string.Format("{0}getFriendsByUserId.php?"+ para, _settingsManager.ApiHost);
+
+                await Task.Run(() =>
+                {
+                    Dictionary<string, string> head = GetHeaders();
+                    var result = _apiProvider.Get<FriendResponse, FriendRequest>(url, null).Result;
+                    if (result.IsSuccessful)
+                    {
+                        if (success != null)
+                        {
+                            friendResponse = result.Result;
+                            success.Invoke();
+                        }
+                    }
+                    else
+                    {
+                        failed.Invoke(result.Result);
+                    }
+                });
+            }
+            else
+            {
+                UserDialogs.Instance.HideLoading(); UserDialogs.Instance.Alert(error, null, "OK");
+            }
+        }
 
         public async void getCountry(CommonRequest commonRequest, Action success)
         {
