@@ -175,36 +175,44 @@ namespace LetsCookApp.ViewModels
 
         public void GetDishViewExecute()
         {
-            var obj = new DishViewRequest()
+            try
             {
-                 RecipeId = RecipeId
-            };
-            UserDialogs.Instance.ShowLoading("Requesting..");
-            userManager.getDishView(obj, () =>
-            {
-                var dishViewResponse = userManager.DishViewResponse;
-                if (dishViewResponse.StatusCode == 200)
+                var obj = new DishViewRequest()
                 {
-                    UserDialogs.Instance.HideLoading();
-                    dishViewResponse = new DishViewResponse() { Recipe= dishViewResponse.Recipe} ;
-                    RecipeDishView = dishViewResponse.Recipe;
-                    Ingredients = RecipeDishView.Ingredients;
-                    Device.BeginInvokeOnMainThread(async () =>
+                    RecipeId = RecipeId
+                };
+                UserDialogs.Instance.ShowLoading("Requesting..");
+                userManager.getDishView(obj, () =>
+                {
+                    var dishViewResponse = userManager.DishViewResponse;
+                    if (dishViewResponse.StatusCode == 200)
                     {
-                        await ((MasterDetailPage)App.Current.MainPage).Detail.Navigation.PushAsync(new DishView());
-                    });
+                        UserDialogs.Instance.HideLoading();
+                        dishViewResponse = new DishViewResponse() { Recipe = dishViewResponse.Recipe };
+                        RecipeDishView = dishViewResponse.Recipe;
+                        Ingredients = RecipeDishView.Ingredients;
+                        Device.BeginInvokeOnMainThread(async () =>
+                        {
+                            await ((MasterDetailPage)App.Current.MainPage).Detail.Navigation.PushAsync(new DishView());
+                        });
 
-                }
-            },
-             (requestFailedReason) =>
-             {
-                 Device.BeginInvokeOnMainThread(() =>
+                    }
+                },
+                 (requestFailedReason) =>
                  {
-                     UserDialogs.Instance.HideLoading();
-                     UserDialogs.Instance.Alert(requestFailedReason.Message, null, "OK");
+                     Device.BeginInvokeOnMainThread(() =>
+                     {
+                         UserDialogs.Instance.HideLoading();
+                         UserDialogs.Instance.Alert(requestFailedReason.Message, null, "OK");
 
+                     });
                  });
-             });
+            }
+            catch (Exception ex)
+            {
+                UserDialogs.Instance.HideLoading();
+                UserDialogs.Instance.Alert(ex.Message, null, "OK");
+            }
         }
         #endregion
 

@@ -16,8 +16,8 @@
         </Grid.RowDefinitions>
 
         <StackLayout  Grid.Column="0"  Grid.Row="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Black" Margin="10,0">
-            <ContentView HorizontalOptions="Start" VerticalOptions="Start"  Margin="0,10">
-                <Image Source="backarrow" HorizontalOptions="Center" VerticalOptions="Center"/>
+            <ContentView HorizontalOptions="Start" HeightRequest="40" VerticalOptions="Start"  Margin="0,10">
+                <Image Source="backarrow"  HorizontalOptions="Center" VerticalOptions="Center"/>
                 <ContentView.GestureRecognizers>
                     <TapGestureRecognizer Tapped="Menu_Tapped"/>
                 </ContentView.GestureRecognizers>

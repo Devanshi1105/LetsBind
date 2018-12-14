@@ -24,7 +24,7 @@ namespace LetsCookApp.Views
 
             if (vm.RecipeDishView.Title.Length <= 25)
             {
-                vm.TitleHeight = 30;
+                vm.TitleHeight = 40;
             }
             else if (vm.RecipeDishView.Title.Length <= 50)
             {
