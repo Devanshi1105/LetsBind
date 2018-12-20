@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LetsCookApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,18 +14,8 @@ namespace LetsCookApp.Views
         public PopularReceipesView()
         {
             InitializeComponent();
-            NavigationPage.SetHasNavigationBar(this, false);
-            List<SubCategory> _listAvailableAward = new List<SubCategory>()
-                {
-                    new SubCategory {foodIcon = "Chutney.png" ,  UserRating=2, DishName = "Coconut Chutney", likeIcon = "icon.png" ,timeIcon = "icon.png" ,Time = "9 MIn", servingIcon = "icon.png", Servings="6 Servings",ingrendIcon="icon.png" , Ingrendients="14 Ingredients" ,plusIcon="icon.png"},
-                     new SubCategory {foodIcon = "Paneer.png" , UserRating=2,DishName = "Kadai Paneer", likeIcon = "icon.png" ,timeIcon = "icon.png" ,Time = "30 MIn", servingIcon = "icon.png", Servings="4 Servings",ingrendIcon="icon.png" , Ingrendients="8 Ingredients" ,plusIcon="icon.png"},
-                    new SubCategory {foodIcon = "Snacks.png" , UserRating=2,DishName = "Bread Katori Chaat", likeIcon = "icon.png" ,timeIcon = "icon.png" ,Time = "15 MIn", servingIcon = "icon.png", Servings="4 Servings",ingrendIcon="icon.png" , Ingrendients="7 Ingredients" ,plusIcon="icon.png"},
-            };
-            //    listSubCatgory.ItemsSource = _listAvailableAward;
-
-            BindingContext = App.AppSetup.PopularReceipesViewModel;
-
-           
+            NavigationPage.SetHasNavigationBar(this, false); 
+            BindingContext = App.AppSetup.PopularReceipesViewModel;  
         }
         private void Menu_Tapped(object sender, EventArgs e)
         {
@@ -35,6 +26,14 @@ namespace LetsCookApp.Views
             var page = new SearchView();
 
             Rg.Plugins.Popup.Services.PopupNavigation.PushAsync(page);
+        }
+        private void Recipe_Tapped(object sender, EventArgs e)
+        {
+            var vm = App.AppSetup.CategoryViewModel;
+            var recipe = ((Image)sender).BindingContext as PopularRecipe;
+            vm.RecipeId = Convert.ToInt32(recipe.id);
+            vm.GetDishViewCommand.Execute(null);
+
         }
     }
 }

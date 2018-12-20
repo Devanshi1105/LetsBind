@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LetsCookApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,6 +26,15 @@ namespace LetsCookApp.Views
             var page = new SearchView();
 
             Rg.Plugins.Popup.Services.PopupNavigation.PushAsync(page);
+        }
+
+        private void Recipe_Tapped(object sender, EventArgs e)
+        {
+           var vm= App.AppSetup.CategoryViewModel;
+           var recipe  = ((Image)sender).BindingContext as NewlyAddedRecipe;
+            vm.RecipeId =Convert.ToInt32(recipe.Id);
+            vm.GetDishViewCommand.Execute(null);
+
         }
     }
 }

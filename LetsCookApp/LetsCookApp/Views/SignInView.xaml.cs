@@ -24,7 +24,7 @@ namespace LetsCookApp.Views
             var viewmodel= App.AppSetup.LoginViewModel;
             BindingContext = viewmodel;
             //viewmodel.UserName = "ksantosh.kundkar12@gmail.com";
-           // viewmodel.Password = "123456";
+            //viewmodel.Password = "123456";
 
 
         }

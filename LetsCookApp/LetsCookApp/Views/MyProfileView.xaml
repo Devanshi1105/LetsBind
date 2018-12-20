@@ -253,7 +253,7 @@
                     </Frame>
                 </Grid>
 
-                <local:CustomListView x:Name="listFriends" HeightRequest="600" HasUnevenRows="True"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" SeparatorVisibility="None"  >
+                    <local:CustomListView x:Name="listFriends" ItemsSource="{Binding FriendsDataList}" HeightRequest="600" HasUnevenRows="True"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" SeparatorVisibility="None" ItemSelected="listFriends_ItemSelected" >
                     <local:CustomListView.ItemTemplate>
                         <DataTemplate>
                             <local:CustomListViewCell>
@@ -269,15 +269,15 @@
 
                                         </Grid.RowDefinitions>
 
+                                            <controls:CircleImage Grid.Row="0" Grid.RowSpan="2" Grid.Column="0"   HeightRequest="70" WidthRequest="70" BorderColor="Red" BorderThickness="1" Source="{Binding PhotoUrl}" Aspect="AspectFit"  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"  />
 
-                                        <Image  Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Source="man.png" Aspect="AspectFit" HeightRequest="70" WidthRequest="70" HorizontalOptions="StartAndExpand" VerticalOptions="Center"/>
+                                            <!--<Image  Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Source="{Binding PhotoUrl}" Aspect="AspectFit" HeightRequest="70" WidthRequest="70" HorizontalOptions="StartAndExpand" VerticalOptions="Center"/>-->
 
                                         <StackLayout Orientation="Vertical" Grid.Row="0" Grid.RowSpan="2" Grid.Column="1"  HeightRequest="50" HorizontalOptions="StartAndExpand"  Spacing="0" VerticalOptions="Center" >
-                                            <local:CustomLabelRegular Text="{Binding DishName}" TextColor="Black" FontSize="15" FontAttributes ="Bold"  HorizontalOptions="StartAndExpand" VerticalOptions="Center">
+                                                <local:CustomLabelRegular Text="{Binding UserName}" TextColor="Black" FontSize="15" FontAttributes ="Bold"  HorizontalOptions="StartAndExpand" VerticalOptions="Center">
                                             </local:CustomLabelRegular>
-                                            <local:CustomLabelRegular Text="{Binding Ingrendients}" TextColor="Black" FontSize="12"    HorizontalOptions="StartAndExpand" VerticalOptions="Center">
-                                            </local:CustomLabelRegular>
-
+                                                <local:CustomLabelRegular Text="{Binding FirstName}" TextColor="Black" FontSize="12"    HorizontalOptions="StartAndExpand" VerticalOptions="Center">
+                                            </local:CustomLabelRegular> 
                                         </StackLayout>
 
 

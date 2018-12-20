@@ -19,11 +19,16 @@ namespace LetsCookApp.ViewModels
         public ICommand GetCotegaryCommand { get; private set; }
         public ICommand GetSubCotegaryCommand { get; private set; }
         public ICommand GetDishViewCommand { get; private set; }
+        public ICommand SavefavRecipeCommand { get; private set; }
+        public ICommand SaveShoppingCommand { get; private set; }
+
         public CategoryViewModel()
         {
             GetCotegaryCommand = new Command(() => GetCotegaryExecute());
             GetSubCotegaryCommand = new Command(() => GetSubCotegaryExecute());
             GetDishViewCommand = new Command(() => GetDishViewExecute());
+            SavefavRecipeCommand = new Command(() => SavefavRecipeExecute());
+            SaveShoppingCommand = new Command(() => SaveShoppingExecute());
         }
 		
 		
@@ -175,36 +180,125 @@ namespace LetsCookApp.ViewModels
 
         public void GetDishViewExecute()
         {
-            var obj = new DishViewRequest()
+            try
             {
-                 RecipeId = RecipeId
-            };
-            UserDialogs.Instance.ShowLoading("Requesting..");
-            userManager.getDishView(obj, () =>
+                var obj = new DishViewRequest()
+                {
+                    RecipeId = RecipeId
+                };
+                UserDialogs.Instance.ShowLoading("Requesting..");
+                userManager.getDishView(obj, () =>
+                {
+                    var dishViewResponse = userManager.DishViewResponse;
+                    if (dishViewResponse.StatusCode == 200)
+                    {
+                        UserDialogs.Instance.HideLoading();
+                        dishViewResponse = new DishViewResponse() { Recipe = dishViewResponse.Recipe };
+                        RecipeDishView = dishViewResponse.Recipe;
+                        Ingredients = RecipeDishView.Ingredients;
+                        Device.BeginInvokeOnMainThread(async () =>
+                        {
+                            await ((MasterDetailPage)App.Current.MainPage).Detail.Navigation.PushAsync(new DishView());
+                        });
+
+                    }
+                },
+                 (requestFailedReason) =>
+                 {
+                     Device.BeginInvokeOnMainThread(() =>
+                     {
+                         UserDialogs.Instance.HideLoading();
+                         UserDialogs.Instance.Alert(requestFailedReason.Message, null, "OK");
+
+                     });
+                 });
+            }
+            catch (Exception ex)
             {
-                var dishViewResponse = userManager.DishViewResponse;
-                if (dishViewResponse.StatusCode == 200)
+                UserDialogs.Instance.HideLoading();
+                UserDialogs.Instance.Alert(ex.Message, null, "OK");
+            }
+        }
+        public void SavefavRecipeExecute()
+        {
+            try
+            {
+                var obj = new SaveFavRecipeRequest()
+                {
+                    Recipe_Id = RecipeId,
+                    Comments = "This is nice recipe",
+                    Favorite="Yes",
+                    Member_Id = Convert.ToInt32(App.AppSetup.HomeViewModel.UserId)
+                };
+                UserDialogs.Instance.ShowLoading("Requesting..");
+                userManager.SavefaRrecipe(obj, () =>
                 {
                     UserDialogs.Instance.HideLoading();
-                    dishViewResponse = new DishViewResponse() { Recipe= dishViewResponse.Recipe} ;
-                    RecipeDishView = dishViewResponse.Recipe;
-                    Ingredients = RecipeDishView.Ingredients;
-                    Device.BeginInvokeOnMainThread(async () =>
+                    var savefaRrecipeResponse = userManager.SavefaRrecipeResponse;
+                    if (savefaRrecipeResponse.StatusCode == 200)
+                    {  
+                        UserDialogs.Instance.Alert(savefaRrecipeResponse.Message, null, "OK");
+                    }
+                    else
                     {
-                        await ((MasterDetailPage)App.Current.MainPage).Detail.Navigation.PushAsync(new DishView());
-                    });
-
-                }
-            },
-             (requestFailedReason) =>
-             {
-                 Device.BeginInvokeOnMainThread(() =>
+                        UserDialogs.Instance.Alert(savefaRrecipeResponse.Message, null, "OK");
+                    }
+                },
+                 (requestFailedReason) =>
                  {
-                     UserDialogs.Instance.HideLoading();
-                     UserDialogs.Instance.Alert(requestFailedReason.Message, null, "OK");
+                     Device.BeginInvokeOnMainThread(() =>
+                     {
+                         UserDialogs.Instance.HideLoading();
+                         UserDialogs.Instance.Alert(requestFailedReason.Message, null, "OK");
 
+                     });
                  });
-             });
+            }
+            catch (Exception ex)
+            {
+                UserDialogs.Instance.HideLoading();
+                UserDialogs.Instance.Alert(ex.Message, null, "OK");
+            }
+        }
+         public void SaveShoppingExecute()
+        {
+            try
+            {
+                var obj = new SaveShoppingRequest()
+                {
+                    Recipe_Id = RecipeId,
+                    Ingredient_Id = 5,
+                    Member_Id = Convert.ToInt32(App.AppSetup.HomeViewModel.UserId)
+                };
+                UserDialogs.Instance.ShowLoading("Requesting..");
+                userManager.SaveShopping(obj, () =>
+                {
+                    UserDialogs.Instance.HideLoading();
+                    var saveShoppingResponse = userManager.SaveShoppingResponse;
+                    if (saveShoppingResponse.StatusCode == 200)
+                    {  
+                        UserDialogs.Instance.Alert(saveShoppingResponse.Message, null, "OK");
+                    }
+                    else
+                    {
+                        UserDialogs.Instance.Alert(saveShoppingResponse.Message, null, "OK");
+                    }
+                },
+                 (requestFailedReason) =>
+                 {
+                     Device.BeginInvokeOnMainThread(() =>
+                     {
+                         UserDialogs.Instance.HideLoading();
+                         UserDialogs.Instance.Alert(requestFailedReason.Message, null, "OK");
+
+                     });
+                 });
+            }
+            catch (Exception ex)
+            {
+                UserDialogs.Instance.HideLoading();
+                UserDialogs.Instance.Alert(ex.Message, null, "OK");
+            }
         }
         #endregion
 

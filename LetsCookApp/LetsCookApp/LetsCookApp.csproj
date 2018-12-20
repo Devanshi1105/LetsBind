@@ -70,11 +70,14 @@
     <Compile Include="Models\CountryResponse.cs" />
     <Compile Include="Models\DishViewRequest.cs" />
     <Compile Include="Models\DishViewResponse.cs" />
+    <Compile Include="Models\FriendResponse.cs" />
     <Compile Include="Models\LoginRequest.cs" />
     <Compile Include="Models\NewlyAddedRecipeResponse.cs" />
     <Compile Include="Models\PopularRecipeResponse.cs" />
     <Compile Include="Models\ProfileResponse.cs" />
     <Compile Include="Models\ProfileUpdateRequest.cs" />
+    <Compile Include="Models\SaveFavRecipeRequest.cs" />
+    <Compile Include="Models\SaveShoppingRequest.cs" />
     <Compile Include="Models\SignupRequest.cs" />
     <Compile Include="Models\SubCategoryRequest.cs" />
     <Compile Include="Models\SubCategoryResponse.cs" />
@@ -234,7 +237,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Net.Http">
-      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\Xamarin.iOS\v1.0\System.Net.Http.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\ReferenceAssemblies\Microsoft\Framework\MonoAndroid\v1.0\System.Net.Http.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Forms.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Xamarin.Forms.2.3.0.107\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.Core.dll</HintPath>

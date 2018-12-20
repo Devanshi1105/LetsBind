@@ -13,10 +13,7 @@ namespace LetsCookApp.Views
     public partial class MyProfileView : ContentPage
     {
         public MyProfileView()
-        {
-           
-
-            
+        { 
             InitializeComponent();
             
             NavigationPage.SetHasNavigationBar(this, false);
@@ -24,9 +21,7 @@ namespace LetsCookApp.Views
             ALine.IsVisible = FLine.IsVisible = GLine.IsVisible = false;
             grdAboutme.IsVisible = listFriends.IsVisible = grdGallery.IsVisible = false;
             BindingContext = App.AppSetup.HomeViewModel;
-            //App.AppSetup.HomeViewModel.GetProfile();
-
-            //App.AppSetup.HomeViewModel.AboutMe = "You can provide extra definitions to the linker to ensure the type, methods and/or fields are not eliminated from your application. In your own code the preferred way is to use the You can provide extra definitions to the linker to ensure the type, methods and/or fields are not eliminated from your application. In your own code the preferred way is to use the eliminated from your application. In your own code the preferred way is to use the eliminated from your application. In your own code the preferred way is to use the";
+           
             lblreadmore.Text = "Read All";
             if (!string.IsNullOrEmpty(App.AppSetup.HomeViewModel.AboutMe))
             {
@@ -71,13 +66,8 @@ namespace LetsCookApp.Views
             FLine.IsVisible = listFriends.IsVisible= imgArrow.IsVisible = true;
             TLine.IsVisible = ALine.IsVisible = GLine.IsVisible = false;
             grdTimeline.IsVisible = grdAboutme.IsVisible = grdGallery.IsVisible = false;
-            List<SubCategory> _listAvailableAward = new List<SubCategory>()
-            {
-                new SubCategory {foodIcon = "cacke.png" ,DishName = "Santosh", likeIcon = "icon.png" ,timeIcon = "icon.png" ,Time = "9 MIn", servingIcon = "icon.png", Servings="6 Servings",ingrendIcon="icon.png" , Ingrendients="Team Lead" ,plusIcon="icon.png"},
-                new SubCategory {foodIcon = "donat.png" ,DishName = "Dipika", likeIcon = "icon.png" ,timeIcon = "icon.png" ,Time = "30 MIn", servingIcon = "icon.png", Servings="4 Servings",ingrendIcon="icon.png" , Ingrendients="Graphics Designer" ,plusIcon="icon.png"},
-                new SubCategory {foodIcon = "ruge.png" ,DishName = "John", likeIcon = "icon.png" ,timeIcon = "icon.png" ,Time = "15 MIn", servingIcon = "icon.png", Servings="4 Servings",ingrendIcon="icon.png" , Ingrendients="Tester" ,plusIcon="icon.png"},
-            };
-            listFriends.ItemsSource = _listAvailableAward;
+
+            App.AppSetup.HomeViewModel.GetFriendCommand.Execute(null);
 
         }
         private void Gallery_Tapped(object sender, EventArgs e)
@@ -110,6 +100,14 @@ namespace LetsCookApp.Views
                 lblreadmore.Text = "Read All";
                 imgdown.RotateTo(0, 50, null);
             }
+        }
+
+        private void listFriends_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            if (e.SelectedItem == null)
+                return;  
+
+            ((ListView)sender).SelectedItem = null;  
         }
     }
 
