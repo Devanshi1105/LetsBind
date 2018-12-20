@@ -13,10 +13,7 @@ namespace LetsCookApp.Views
     public partial class MyProfileView : ContentPage
     {
         public MyProfileView()
-        {
-           
-
-            
+        { 
             InitializeComponent();
             
             NavigationPage.SetHasNavigationBar(this, false);

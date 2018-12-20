@@ -400,7 +400,7 @@ namespace LetsCookApp.ViewModels
 
             FriendRequest obj = new FriendRequest()
             {
-                UserId = 214 //Convert.ToInt32(UserId)
+                UserId = Convert.ToInt32(UserId)
             };
             
             UserDialogs.Instance.ShowLoading("Requesting..");

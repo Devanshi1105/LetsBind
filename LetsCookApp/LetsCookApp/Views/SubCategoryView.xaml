@@ -45,7 +45,11 @@
                                         <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
                                     </Image.GestureRecognizers>-->
                                 </Image>
-                                <Image Grid.Column="1" Grid.Row="1"  Aspect="AspectFit" Source="favorite" HorizontalOptions="Center" VerticalOptions="EndAndExpand"/>
+                                <Image Grid.Column="1" Grid.Row="1"  Aspect="AspectFit" Source="favorite" HorizontalOptions="Center" VerticalOptions="EndAndExpand">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="favorite_Tapped"/>
+                                    </Image.GestureRecognizers>
+                                </Image>
 
                                 <Grid Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" BackgroundColor="Black" Opacity="0.8">
                                     <Grid.ColumnDefinitions>

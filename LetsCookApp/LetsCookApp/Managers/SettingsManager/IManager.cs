@@ -36,5 +36,11 @@ namespace LetsCookApp.Managers.SettingsManager
         FriendResponse FriendResponse { get; }
         void getFriends(FriendRequest friendRequest, Action success, Action<FriendResponse> failed);
 
+        void SavefaRrecipe(SaveFavRecipeRequest commonRequest, Action success, Action<BaseResponseModel> failed);
+        BaseResponseModel SavefaRrecipeResponse { get; }
+
+        void SaveShopping(SaveShoppingRequest commonRequest, Action success, Action<BaseResponseModel> failed);
+        BaseResponseModel SaveShoppingResponse { get; }
+
     }
 }

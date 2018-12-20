@@ -76,6 +76,8 @@
     <Compile Include="Models\PopularRecipeResponse.cs" />
     <Compile Include="Models\ProfileResponse.cs" />
     <Compile Include="Models\ProfileUpdateRequest.cs" />
+    <Compile Include="Models\SaveFavRecipeRequest.cs" />
+    <Compile Include="Models\SaveShoppingRequest.cs" />
     <Compile Include="Models\SignupRequest.cs" />
     <Compile Include="Models\SubCategoryRequest.cs" />
     <Compile Include="Models\SubCategoryResponse.cs" />

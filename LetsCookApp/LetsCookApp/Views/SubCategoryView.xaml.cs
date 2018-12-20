@@ -38,8 +38,15 @@ namespace LetsCookApp.Views
             App.AppSetup.CategoryViewModel.RecipeId = Convert.ToInt32(v.Id);
             ((ListView)sender).SelectedItem = null; // de-select the row
             App.AppSetup.CategoryViewModel.GetDishViewCommand.Execute(null); 
-        } 
-      
+        }
+
+        private void favorite_Tapped(object sender, EventArgs e)
+        {
+            var vm = App.AppSetup.CategoryViewModel;
+            var recipe = ((Image)sender).BindingContext as Recipe;
+            vm.RecipeId = Convert.ToInt32(recipe.Id);
+            vm.SavefavRecipeCommand.Execute(null);
+        }
     }
 
     public class SubCategory

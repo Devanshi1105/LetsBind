@@ -87,7 +87,7 @@
                         </ListView.ItemTemplate>
                     </ListView>
 
-                    <local:CustomButtonRegular Grid.Row="3" BorderRadius="5" Margin="10,0"  Text="ADD TO SHOPPING LIST" TextColor="White" BackgroundColor="#ca4334" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                    <local:CustomButtonRegular Grid.Row="3" BorderRadius="5" Margin="10,0"  Text="ADD TO SHOPPING LIST" TextColor="White" BackgroundColor="#ca4334" VerticalOptions="Center" HorizontalOptions="FillAndExpand"  Command="{Binding SaveShoppingCommand}"/>
                 </Grid>
 
 
