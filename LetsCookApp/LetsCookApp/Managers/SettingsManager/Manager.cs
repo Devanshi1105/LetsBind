@@ -16,6 +16,8 @@ namespace LetsCookApp.Managers.SettingsManager
         public SubCategoryResponse SubCategoryResponse { get { return subCategoryResponse; } }
         public DishViewResponse DishViewResponse { get { return dishViewResponse; } }
         public PopularRecipeResponse PopularRecipeResponse { get { return popularRecipeResponse; } }
+        public GetFavsByUserIdResponse GetFavsByUserIdResponse { get { return getFavsByUserIdResponse; } }
+        public GetShoppingListByUserIdResponse GetShoppingListByUserIdResponse { get { return getShoppingListByUserIdResponse; } }
         public NewlyAddedRecipeResponse NewlyAddedRecipeResponse { get { return newlyAddedRecipeResponse; } }
         public ProfileResponse ProfileResponse { get { return profileResponse; } } 
         public LoginResponse LoginResponse { get { return loginResponse; } }
@@ -45,6 +47,8 @@ namespace LetsCookApp.Managers.SettingsManager
         private SubCategoryResponse subCategoryResponse { get; set; }
         private DishViewResponse dishViewResponse { get; set; }
         private PopularRecipeResponse popularRecipeResponse { get; set; }
+        private GetFavsByUserIdResponse getFavsByUserIdResponse { get; set; }
+        private GetShoppingListByUserIdResponse getShoppingListByUserIdResponse { get; set; }
         private ProfileResponse profileResponse { get; set; }
         private CountryResponse countryResponse { get; set; }
 
@@ -166,6 +170,70 @@ namespace LetsCookApp.Managers.SettingsManager
                         if (success != null)
                         {
                             popularRecipeResponse = result.Result;
+                            success.Invoke();
+                        }
+                    }
+                    else
+                    {
+                        failed.Invoke(result.Result);
+                    }
+                });
+            }
+            else
+            {
+                UserDialogs.Instance.HideLoading(); UserDialogs.Instance.Alert(error, null, "OK");
+            }
+        }
+
+        public async void GetFavsByUserId(GetFavsByUserIdRequest commonRequest, Action success, Action<GetFavsByUserIdResponse> failed)
+        {
+            bool IsNetwork = true;//await DependencyService.Get<IMediaService>().CheckNewworkConnectivity();
+            if (IsNetwork)
+            {
+                 string para = "userId=" + commonRequest.UserId;
+                var url = string.Format("{0}getFavsByUserId.php?"+ para, _settingsManager.ApiHost);
+
+                await Task.Run(() =>
+                {
+                    Dictionary<string, string> head = GetHeaders();
+                    var result = _apiProvider.Get<GetFavsByUserIdResponse, GetFavsByUserIdRequest>(url, null).Result;
+                    if (result.IsSuccessful)
+                    {
+                        if (success != null)
+                        {
+                            getFavsByUserIdResponse = result.Result;
+                            success.Invoke();
+                        }
+                    }
+                    else
+                    {
+                        failed.Invoke(result.Result);
+                    }
+                });
+            }
+            else
+            {
+                UserDialogs.Instance.HideLoading(); UserDialogs.Instance.Alert(error, null, "OK");
+            }
+        }
+
+        public async void GetShoppingListByUserId(GetShoppingListByUserIdRequest request, Action success, Action<GetShoppingListByUserIdResponse> failed)
+        {
+            bool IsNetwork = true;//await DependencyService.Get<IMediaService>().CheckNewworkConnectivity();
+            if (IsNetwork)
+            {
+                string para = "userId=" + request.UserId;
+                var url = string.Format("{0}getShoppingListByUserId.php?" + para, _settingsManager.ApiHost);
+
+                await Task.Run(() =>
+                {
+                    Dictionary<string, string> head = GetHeaders();
+                    var result = _apiProvider.Get<GetShoppingListByUserIdResponse, GetShoppingListByUserIdRequest>(url, null).Result;
+                    if (result.IsSuccessful)
+                    {
+                        if (success != null)
+                        {
+                            getShoppingListByUserIdResponse = result.Result;
                             success.Invoke();
                         }
                     }

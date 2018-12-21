@@ -21,26 +21,32 @@ namespace LetsCookApp
             SimpleIoc.Default.Register<CategoryViewModel>();
             SimpleIoc.Default.Register<PopularReceipesViewModel>();
             SimpleIoc.Default.Register<NewlyAddedRecipeViewModel>();
+            SimpleIoc.Default.Register<MyFavouritesRecipesViewModel>();
+            SimpleIoc.Default.Register<ShoppingListViewModel>();
 
             // Services
             SimpleIoc.Default.Register<ISettingsManager, SettingsManager>();
-           SimpleIoc.Default.Register<IApiProvider, ApiProvider>();
+            SimpleIoc.Default.Register<IApiProvider, ApiProvider>();
             SimpleIoc.Default.Register<IManager, Manager>();
         }
 
         public void Clear()
         {
-            SimpleIoc.Default.Unregister<LoginViewModel>(); 
+            SimpleIoc.Default.Unregister<LoginViewModel>();
             SimpleIoc.Default.Unregister<SignUpViewModel>();
             SimpleIoc.Default.Unregister<CategoryViewModel>();
             SimpleIoc.Default.Unregister<PopularReceipesViewModel>();
             SimpleIoc.Default.Unregister<NewlyAddedRecipeViewModel>();
+            SimpleIoc.Default.Unregister<MyFavouritesRecipesViewModel>();
+            SimpleIoc.Default.Unregister<ShoppingListViewModel>();
 
-            SimpleIoc.Default.Register<LoginViewModel>(); 
+            SimpleIoc.Default.Register<LoginViewModel>();
             SimpleIoc.Default.Register<SignUpViewModel>();
             SimpleIoc.Default.Register<CategoryViewModel>();
             SimpleIoc.Default.Register<PopularReceipesViewModel>();
             SimpleIoc.Default.Register<NewlyAddedRecipeViewModel>();
+            SimpleIoc.Default.Register<MyFavouritesRecipesViewModel>();
+            SimpleIoc.Default.Register<ShoppingListViewModel>();
 
         }
         public LoginViewModel LoginViewModel
@@ -72,7 +78,7 @@ namespace LetsCookApp
                 return SimpleIoc.Default.GetInstance<CategoryViewModel>();
             }
         }
-      public PopularReceipesViewModel PopularReceipesViewModel
+        public PopularReceipesViewModel PopularReceipesViewModel
         {
             get
             {
@@ -84,6 +90,20 @@ namespace LetsCookApp
             get
             {
                 return SimpleIoc.Default.GetInstance<NewlyAddedRecipeViewModel>();
+            }
+        }
+        public MyFavouritesRecipesViewModel MyFavouritesRecipesViewModel
+        {
+            get
+            {
+                return SimpleIoc.Default.GetInstance<MyFavouritesRecipesViewModel>();
+            }
+        }
+        public ShoppingListViewModel ShoppingListViewModel
+        {
+            get
+            {
+                return SimpleIoc.Default.GetInstance<ShoppingListViewModel>();
             }
         }
     }

@@ -71,6 +71,8 @@
     <Compile Include="Models\DishViewRequest.cs" />
     <Compile Include="Models\DishViewResponse.cs" />
     <Compile Include="Models\FriendResponse.cs" />
+    <Compile Include="Models\GetFavsByUserIdResponse.cs" />
+    <Compile Include="Models\GetShoppingListByUserIdResponse.cs" />
     <Compile Include="Models\LoginRequest.cs" />
     <Compile Include="Models\NewlyAddedRecipeResponse.cs" />
     <Compile Include="Models\PopularRecipeResponse.cs" />
@@ -81,8 +83,10 @@
     <Compile Include="Models\SignupRequest.cs" />
     <Compile Include="Models\SubCategoryRequest.cs" />
     <Compile Include="Models\SubCategoryResponse.cs" />
+    <Compile Include="ViewModels\MyFavouritesRecipesViewModel.cs" />
     <Compile Include="ViewModels\NewlyAddedRecipeViewModel.cs" />
     <Compile Include="ViewModels\PopularReceipesViewModel.cs" />
+    <Compile Include="ViewModels\ShoppingListViewModel.cs" />
     <Compile Include="ViewModels\SignUpViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IDevice.cs" />

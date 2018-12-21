@@ -19,7 +19,7 @@ namespace LetsCookApp.Managers.SettingsManager
         void ForgetPassword(LoginRequest request, Action success, Action<BaseResponseModel> failed);
 
         void SignUp(SignupRequest commonRequest, Action success, Action<SignupResponse> failed);
-        void SignUpUpdate(ProfileUpdateRequest commonRequest, Action success, Action<SignupResponse> failed); 
+        void SignUpUpdate(ProfileUpdateRequest commonRequest, Action success, Action<SignupResponse> failed);
         void getCountry(CommonRequest commonRequest, Action success);
 
 
@@ -41,6 +41,11 @@ namespace LetsCookApp.Managers.SettingsManager
 
         void SaveShopping(SaveShoppingRequest commonRequest, Action success, Action<BaseResponseModel> failed);
         BaseResponseModel SaveShoppingResponse { get; }
+        void GetFavsByUserId(GetFavsByUserIdRequest commonRequest, Action success, Action<GetFavsByUserIdResponse> failed);
+        GetFavsByUserIdResponse GetFavsByUserIdResponse { get; }
+
+        void GetShoppingListByUserId(GetShoppingListByUserIdRequest commonRequest, Action success, Action<GetShoppingListByUserIdResponse> failed);
+        GetShoppingListByUserIdResponse GetShoppingListByUserIdResponse { get; }
 
     }
 }

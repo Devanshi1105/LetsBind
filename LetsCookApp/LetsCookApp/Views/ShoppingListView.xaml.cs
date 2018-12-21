@@ -14,6 +14,8 @@ namespace LetsCookApp.Views
         {
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
+            BindingContext = App.AppSetup.ShoppingListViewModel;
+
             masterMenuList.ItemsSource = new List<Contacts>()
             {
     new Contacts() {

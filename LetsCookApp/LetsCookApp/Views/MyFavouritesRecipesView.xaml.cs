@@ -11,20 +11,12 @@ namespace LetsCookApp.Views
     public partial class MyFavouritesRecipesView : ContentPage
     {
         public MyFavouritesRecipesView()
-        {
-            List<SubCategory> _listAvailableAward = new List<SubCategory>()
-            {
-                new SubCategory {foodIcon = "NoOnion.png" ,DishName = "Paneer Butter Masala", likeIcon = "icon.png" ,timeIcon = "icon.png" ,Time = "9 MIn", servingIcon = "icon.png", Servings="6 Servings",ingrendIcon="icon.png" , Ingrendients="14 Ingredients" ,plusIcon="icon.png"},
-                new SubCategory {foodIcon = "Breakfast.png" ,DishName = "Rava Utappa", likeIcon = "icon.png" ,timeIcon = "icon.png" ,Time = "30 MIn", servingIcon = "icon.png", Servings="4 Servings",ingrendIcon="icon.png" , Ingrendients="8 Ingredients" ,plusIcon="icon.png"},
-                new SubCategory {foodIcon = "Diabetic.png" ,DishName = "Oats For Diabetics", likeIcon = "icon.png" ,timeIcon = "icon.png" ,Time = "15 MIn", servingIcon = "icon.png", Servings="4 Servings",ingrendIcon="icon.png" , Ingrendients="7 Ingredients" ,plusIcon="icon.png"},
-            };
-
-            //RaisePropertyChanged(() => ListAvailableAward);
-
+        { 
             InitializeComponent();
-            listSubCatgory.ItemsSource = _listAvailableAward;
+           // listSubCatgory.ItemsSource = _listAvailableAward;
 
             NavigationPage.SetHasNavigationBar(this, false);
+            BindingContext = App.AppSetup.MyFavouritesRecipesViewModel;
         }
         private void Menu_Tapped(object sender, EventArgs e)
         {

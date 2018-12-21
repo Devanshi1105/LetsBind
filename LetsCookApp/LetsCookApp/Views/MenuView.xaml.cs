@@ -54,11 +54,13 @@ namespace LetsCookApp.Views
             }
             else if (menu.TargetType == typeof(MyFavouritesRecipesView))
             {
-                ((MasterDetailPage)App.Current.MainPage).Detail.Navigation.PushAsync(new MyFavouritesRecipesView());
+                App.AppSetup.MyFavouritesRecipesViewModel.GetFavsByUserIdCommand.Execute(null);
+                //((MasterDetailPage)App.Current.MainPage).Detail.Navigation.PushAsync(new MyFavouritesRecipesView());
             }
             else if (menu.TargetType == typeof(ShoppingListView))
             {
-                ((MasterDetailPage)App.Current.MainPage).Detail.Navigation.PushAsync(new ShoppingListView());
+                App.AppSetup.ShoppingListViewModel.GetShoppingListByUserIdCommand.Execute(null);
+                //((MasterDetailPage)App.Current.MainPage).Detail.Navigation.PushAsync(new ShoppingListView());
             }
             else if (menu.TargetType == typeof(SuggestRecipesView))
             {
